@@ -1,6 +1,8 @@
 import pygame
 from random import randint
 
+######################################################################## Class ##################################################################################################################################
+
 #création de l'objet Obstacle
 class Obstacle (pygame.sprite.Sprite):
 
@@ -46,7 +48,7 @@ class player () :
         self.rect.x = 100
         self.rect.y = 100
 
-        self.velocity = 6 #vitesse du joueur
+        self.velocity = 3 #vitesse du joueur
         self.attack = 10 #points d'attaque du joueur
         self.attack_speed = 1
         self.hp = 10
@@ -64,26 +66,34 @@ class player () :
     def moveRight (self) :
         self.rect.x = self.rect.x + self.velocity 
 
+######################################################################## Fonctions ##################################################################################################################################
 
+def blitage () :
+    '''fonction qui blit tout ce qu'il faut afficher, il faut mettre dans l'ordre d'affichage du plus au fond au plus devant'''
+    screen.blit(background, (0-imageCount, 0))
+    screen.blit(background, (1080-imageCount, 0))
+    screen.blit(joueur.image, joueur.rect)
 
 # générer la fenetre de notre jeu
 pygame.display.set_caption("Comet fall Game")
 screen = pygame.display.set_mode((1080, 720))
 
 #Génération de toutes les images de fond
-background = pygame.image.load('img/fondJour.png')
+background = pygame.image.load('img/fond.png')
 background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
-background2 = pygame.image.load('img/fondNuit.png')
-background2 = pygame.transform.scale(background2, (1080, 720))
 
 running = True
 joueur = player()
 
-myFont = pygame.font.SysFont("Times New Roman", 18) #Pour mettre une font et print une variable
-FPS = 60
+# myFont = pygame.font.SysFont("Arial", 18) #Pour mettre une font et print une variable
+FPS = 100
 fpsClock = pygame.time.Clock()
-counter = 0
-speed = 5 #Vitesse globale du jeu
+imageCount = 0 #compteur qui va servir à faire défiler les images
+globalCount = 0
+speed = 3 #Vitesse globale du jeu
+tabAnimWazo = [pygame.image.load('img/wazo.png'),pygame.image.load('img/wazo2.png')]
+
+######################################################################## Boucle Principale ################################################################################################################
 
 while running == True :
 
@@ -101,24 +111,33 @@ while running == True :
     if keys[pygame.K_RIGHT]:
       joueur.moveRight()
 
-    screen.blit(background, (0-counter, 0))
-    screen.blit(background2, (1080-counter, 0))
-    screen.blit(background, (2160-counter, 0))
-    screen.blit(joueur.image, joueur.rect)
+    blitage()
     
-    counter = counter + speed
-    if counter >= 1080*2:
-        counter = 0
-    text = myFont.render(str(counter), 1, (255,255,255))
-    fps = myFont.render(str(FPS), 1, (255,255,255))
-    screen.blit(text, (520, 30))
-    screen.blit(fps, (520, 60))
+    imageCount = imageCount + speed
+    if imageCount >= 1080:
+        imageCount = 0
+    # text = myFont.render(str(imageCount), 1, (255,255,255))
+    # fps = myFont.render(str(FPS), 1, (255,255,255))
+    # screen.blit(text, (520, 30))
+    # screen.blit(fps, (520, 60))
+
+    #Tentative d'animation sur l'oiseau, marche à moitié
+    if globalCount == 0 :
+        if joueur.image == tabAnimWazo[0]:
+            joueur.image = tabAnimWazo[1]
+        else : 
+            joueur.image = tabAnimWazo[0]
+
 
 
     pygame.display.flip()
     
+    fpsClock.tick(FPS)
+
+    globalCount = globalCount + 1  
+    print(globalCount) 
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            pygame.quit()
-    fpsClock.tick(FPS)       
+            pygame.quit() 
