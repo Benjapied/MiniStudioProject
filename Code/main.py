@@ -143,10 +143,8 @@ while running == True :
     #        game.player.image.blit(tabAnimWazo[0],(game.player.rect.x,game.player.rect.y))
             #game.player.image = tabAnimWazo[0]
 
-
-    text = myFont.render(str(globalCount), 1, (255,255,255))
     #Ca print du texte 
-    text = myFont.render(str(imageCount), 1, (255,255,255))
+    text = myFont.render(str(globalCount), 1, (255,255,255))
     fps = myFont.render(str(FPS), 1, (255,255,255))
     screen.blit(text, (520, 30))
     screen.blit(fps, (520, 60))
@@ -161,9 +159,7 @@ while running == True :
         speed += 1
     
     print(speed) 
-
-    globalCount = globalCount + 1  
-
+ 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
