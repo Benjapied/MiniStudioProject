@@ -160,7 +160,7 @@ while running == True :
 
     scoreCount = int(globalCount/10) # + point d'élimination
 
-    if globalCount % 1000 == 0:
+    if scoreCount % 1000 == 0:
         speed += 1
     
     print(speed) 
