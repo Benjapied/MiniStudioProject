@@ -68,6 +68,9 @@ class player (pygame.sprite.Sprite) :
     def moveRight (self) :
         self.rect.x = self.rect.x + self.velocity 
 
+    def changeVelocity (self,n):
+        self.velocity = self.velocity + n
+
 ######################################################################## Fonctions ##################################################################################################################################
 
 def blitage () :
@@ -124,7 +127,7 @@ while running == True :
     imageCount = imageCount + speed
     if imageCount >= 1080:
         imageCount = 0
-    text = myFont.render(str(imageCount), 1, (255,255,255))
+    text = myFont.render(str(globalCount), 1, (255,255,255))
     fps = myFont.render(str(FPS), 1, (255,255,255))
     screen.blit(text, (520, 30))
     screen.blit(fps, (520, 60))
@@ -133,8 +136,12 @@ while running == True :
     
     fpsClock.tick(FPS)
 
-    globalCount = globalCount + 1  
-    print(globalCount) 
+    globalCount = globalCount + 1 
+
+    if globalCount % 1000 == 0:
+        speed += 1
+    
+    print(speed) 
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
