@@ -48,7 +48,7 @@ class Game (object):
 
 
 #Classe du joueur principal
-class Player (pygame.sprite.Sprite) :    
+class Player () :    
     def __init__ (self):
         '''Methode d'initialisation'''
         self.image = pygame.image.load("img/wazo.png")
@@ -74,9 +74,6 @@ class Player (pygame.sprite.Sprite) :
     def moveRight (self) :
         self.rect.x = self.rect.x + self.velocity 
 
-#creer une classe qui va representer notre jeu
-
-
 ######################################################################## Fonctions ##################################################################################################################################
 
 def blitage () :
@@ -84,6 +81,13 @@ def blitage () :
     screen.blit(background, (0-imageCount, 0))
     screen.blit(background, (1080-imageCount, 0))
     screen.blit(game.player.image, game.player.rect)
+
+
+def collider (objectA,objectB) :
+    '''Fonction qui va renvoyer true si une collision est detectée entre l'objet A et B'''
+    if objectA.x < objectB.x + objectB.w and objectA.x + objectA.w > objectB.x and objectA.y < objectB.y + objectB.h and objectA.h + objectA.y > objectB.y :
+        return True
+
 
 # générer la fenetre de notre jeu
 pygame.display.set_caption("Comet fall Game")
@@ -99,13 +103,12 @@ running = True
 
 
 
-# myFont = pygame.font.SysFont("Arial", 18) #Pour mettre une font et print une variable
+myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
 FPS = 100
 fpsClock = pygame.time.Clock()
 imageCount = 0 #compteur qui va servir à faire défiler les images
 globalCount = 0
 speed = 3 #Vitesse globale du jeu
-tabAnimWazo = [pygame.image.load('img/wazo.png'),pygame.image.load('img/wazo2.png')]
 
 ######################################################################## Boucle Principale ################################################################################################################
 
@@ -130,10 +133,6 @@ while running == True :
     imageCount = imageCount + speed
     if imageCount >= 1080:
         imageCount = 0
-    # text = myFont.render(str(imageCount), 1, (255,255,255))
-    # fps = myFont.render(str(FPS), 1, (255,255,255))
-    # screen.blit(text, (520, 30))
-    # screen.blit(fps, (520, 60))
 
     #Tentative d'animation sur l'oiseau, marche à moitié
     #if globalCount == 0 :
@@ -145,13 +144,25 @@ while running == True :
             #game.player.image = tabAnimWazo[0]
 
 
+    text = myFont.render(str(globalCount), 1, (255,255,255))
+    #Ca print du texte 
+    text = myFont.render(str(imageCount), 1, (255,255,255))
+    fps = myFont.render(str(FPS), 1, (255,255,255))
+    screen.blit(text, (520, 30))
+    screen.blit(fps, (520, 60))
 
     pygame.display.flip()
     
     fpsClock.tick(FPS)
 
+    globalCount = globalCount + 1 
+
+    if globalCount % 1000 == 0:
+        speed += 1
+    
+    print(speed) 
+
     globalCount = globalCount + 1  
-    print(globalCount) 
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
