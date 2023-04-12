@@ -79,6 +79,7 @@ def blitage () :
     screen.blit(background, (1080-imageCount, 0))
     screen.blit(joueur.image, joueur.rect)
 
+
 def collider (objectA,objectB) :
     '''Fonction qui va renvoyer true si une collision est detectée entre l'objet A et B'''
     if objectA.x < objectB.x + objectB.w and objectA.x + objectA.w > objectB.x and objectA.y < objectB.y + objectB.h and objectA.h + objectA.y > objectB.y :
@@ -95,7 +96,6 @@ background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l
 
 running = True
 joueur = player()
-joueur2 = player()
 
 myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
 FPS = 100
@@ -123,11 +123,15 @@ while running == True :
       joueur.moveRight()
 
     blitage()
-    
+
+    #permet de faire la boucle pour faire défiler le fond
     imageCount = imageCount + speed
     if imageCount >= 1080:
         imageCount = 0
+
     text = myFont.render(str(globalCount), 1, (255,255,255))
+    #Ca print du texte 
+    text = myFont.render(str(imageCount), 1, (255,255,255))
     fps = myFont.render(str(FPS), 1, (255,255,255))
     screen.blit(text, (520, 30))
     screen.blit(fps, (520, 60))
@@ -142,6 +146,8 @@ while running == True :
         speed += 1
     
     print(speed) 
+
+    globalCount = globalCount + 1  
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
