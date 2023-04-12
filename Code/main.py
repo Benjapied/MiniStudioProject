@@ -23,19 +23,19 @@ class Obstacle (pygame.sprite.Sprite):
     def elementalForm(self):
         element = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 éléments
         if element == 1 :
-            self.element = "???"
+            self.element = "air"
             self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
         
         elif element == 2 :
-            self.element = "???"
+            self.element = "fire"
             self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
         
         elif element == 3 :
-            self.element = "???"
+            self.element = "earth"
             self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
         
         elif element == 4 :
-            self.element = "???"
+            self.element = "water"
             self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
 
 
