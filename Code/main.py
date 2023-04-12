@@ -1,8 +1,8 @@
 import pygame
 from random import randint
 
+pygame.init()
 ######################################################################## Class ##################################################################################################################################
-
 #création de l'objet Obstacle
 class Obstacle (pygame.sprite.Sprite):
 
@@ -39,14 +39,22 @@ class Obstacle (pygame.sprite.Sprite):
             self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
 
 
+class Game (object):
+
+    def __init__(self):
+        self.player = Player()
+        #stocker les touches activées par le joueur 
+        self.pressed = {}
+
+
 #Classe du joueur principal
-class player () :    
+class Player (pygame.sprite.Sprite) :    
     def __init__ (self):
         '''Methode d'initialisation'''
         self.image = pygame.image.load("img/wazo.png")
         self.rect = self.image.get_rect()
-        self.rect.x = 100
-        self.rect.y = 100
+        self.rect.x = 8
+        self.rect.y = 8
 
         self.velocity = 3 #vitesse du joueur
         self.attack = 10 #points d'attaque du joueur
@@ -66,13 +74,16 @@ class player () :
     def moveRight (self) :
         self.rect.x = self.rect.x + self.velocity 
 
+#creer une classe qui va representer notre jeu
+
+
 ######################################################################## Fonctions ##################################################################################################################################
 
 def blitage () :
     '''fonction qui blit tout ce qu'il faut afficher, il faut mettre dans l'ordre d'affichage du plus au fond au plus devant'''
     screen.blit(background, (0-imageCount, 0))
     screen.blit(background, (1080-imageCount, 0))
-    screen.blit(joueur.image, joueur.rect)
+    screen.blit(game.player.image, game.player.rect)
 
 # générer la fenetre de notre jeu
 pygame.display.set_caption("Comet fall Game")
@@ -82,8 +93,11 @@ screen = pygame.display.set_mode((1080, 720))
 background = pygame.image.load('img/fond.png')
 background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
 
+
+game=Game()
 running = True
-joueur = player()
+
+
 
 # myFont = pygame.font.SysFont("Arial", 18) #Pour mettre une font et print une variable
 FPS = 100
@@ -97,21 +111,21 @@ tabAnimWazo = [pygame.image.load('img/wazo.png'),pygame.image.load('img/wazo2.pn
 
 while running == True :
 
-    keys=pygame.key.get_pressed()
-
-    if keys[pygame.K_UP]:
-      joueur.moveUp()
-
-    if keys[pygame.K_DOWN]:
-      joueur.moveDown()
-
-    if keys[pygame.K_LEFT]:
-      joueur.moveLeft()
-
-    if keys[pygame.K_RIGHT]:
-      joueur.moveRight()
-
     blitage()
+
+    if game.pressed.get(pygame.K_UP) and game.player.rect.y > 0 :
+      game.player.moveUp()
+
+    if game.pressed.get(pygame.K_DOWN) and game.player.rect.y + game.player.rect.width < screen.get_height() :
+      game.player.moveDown()
+
+    if game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
+      game.player.moveLeft()
+
+    if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
+       game.player.moveRight()
+
+    #print(game.player.rect.y)
     
     imageCount = imageCount + speed
     if imageCount >= 1080:
@@ -122,11 +136,13 @@ while running == True :
     # screen.blit(fps, (520, 60))
 
     #Tentative d'animation sur l'oiseau, marche à moitié
-    if globalCount == 0 :
-        if joueur.image == tabAnimWazo[0]:
-            joueur.image = tabAnimWazo[1]
-        else : 
-            joueur.image = tabAnimWazo[0]
+    #if globalCount == 0 :
+    #    if game.player.image == tabAnimWazo[0]:
+    #        game.player.image.blit(tabAnimWazo[1],(game.player.rect.x,game.player.rect.y))
+            #game.player.image = tabAnimWazo[1]
+    #    else : 
+    #        game.player.image.blit(tabAnimWazo[0],(game.player.rect.x,game.player.rect.y))
+            #game.player.image = tabAnimWazo[0]
 
 
 
@@ -141,3 +157,9 @@ while running == True :
         if event.type == pygame.QUIT:
             running = False
             pygame.quit() 
+    
+        elif event.type == pygame.KEYDOWN:
+            game.pressed[event.key] = True
+
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
