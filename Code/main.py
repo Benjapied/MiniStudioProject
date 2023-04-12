@@ -108,6 +108,7 @@ FPS = 100
 fpsClock = pygame.time.Clock()
 imageCount = 0 #compteur qui va servir à faire défiler les images
 globalCount = 0
+scoreCount = 0
 speed = 3 #Vitesse globale du jeu
 
 ######################################################################## Boucle Principale ################################################################################################################
@@ -144,16 +145,20 @@ while running == True :
             #game.player.image = tabAnimWazo[0]
 
     #Ca print du texte 
-    text = myFont.render(str(globalCount), 1, (255,255,255))
+    distance = myFont.render(str(globalCount), 1, (255,255,255))
+    score = myFont.render(str(scoreCount), 1, (255,255,255))
     fps = myFont.render(str(FPS), 1, (255,255,255))
-    screen.blit(text, (520, 30))
-    screen.blit(fps, (520, 60))
+    screen.blit(distance, (520, 30))
+    screen.blit(score, (520, 60))
+    screen.blit(fps, (1040, 10))
 
     pygame.display.flip()
     
     fpsClock.tick(FPS)
 
     globalCount = globalCount + 1 
+
+    scoreCount = int(globalCount/10) # + point d'élimination
 
     if globalCount % 1000 == 0:
         speed += 1
