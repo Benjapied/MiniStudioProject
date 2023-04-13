@@ -93,7 +93,9 @@ class Player (pygame.sprite.Sprite) :
         self.rect.x = self.rect.x - self.velocity
 
     def moveRight (self) :
-        self.rect.x = self.rect.x + self.velocity 
+        #si le joueur n'est pas en collision
+        if not self.game.check_collision(self, self.game.all_monsters):
+            self.rect.x += self.velocity 
 
 
 
@@ -253,3 +255,4 @@ while running == True :
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
+
