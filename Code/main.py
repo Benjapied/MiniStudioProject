@@ -1,5 +1,6 @@
 import pygame
 from random import randint
+from monster import Monster
 
 pygame.init()
 ######################################################################## Class ##################################################################################################################################
@@ -42,15 +43,29 @@ class Obstacle (pygame.sprite.Sprite):
 class Game (object):
 
     def __init__(self):
-        self.player = Player()
+        self.all_players = pygame.sprite.Group()
+        self.player = Player(self)
+       
+        self.all_players.add(self.player)
+        self.all_monsters = pygame.sprite.Group()
+        self.spawn_monster()
+        
         #stocker les touches activées par le joueur 
         self.pressed = {}
 
+    def check_collision(self, sprite, group):
+        return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
+
+    def spawn_monster(self):
+        monster = Monster(self)
+        self.all_monsters.add(monster)
 
 #Classe du joueur principal
-class Player () :    
-    def __init__ (self):
-        '''Methode d'initialisation'''
+class Player (pygame.sprite.Sprite) :    
+    def __init__ (self, game):
+        super().__init__()
+        self.game = game
+        '''Methode d'ini tialisation'''
         self.image = pygame.image.load("img/wazo.png")
         self.rect = self.image.get_rect()
         self.rect.x = 8
@@ -61,6 +76,12 @@ class Player () :
         self.attack_speed = 1
         self.hp = 10
         self.shootingMode = "normal"
+        self.all_projectiles = pygame.sprite.Group()
+
+    def launch_projectile(self):
+        # créer une nouvelle instance de la classe projectile
+        self.all_projectiles.add(Projectile(self))
+
 
     def moveDown(self):
         self.rect.y = self.rect.y + self.velocity
@@ -73,6 +94,41 @@ class Player () :
 
     def moveRight (self) :
         self.rect.x = self.rect.x + self.velocity 
+
+
+
+# définir la classe qui va gérer le projectile de notre joueur 
+class Projectile(pygame.sprite.Sprite):
+
+    #définir le constructeur de cette classe
+    def __init__(self, player):
+        super().__init__()
+        self.velocity = 1
+        self.player = player
+        self.image = pygame.image.load('img/projectile.png')
+        self.image = pygame.transform.scale(self.image, (50, 50))
+        self.rect = self.image.get_rect()
+        self.rect.x = player.rect.x + 100
+        self.rect.y = player.rect.y + 25
+
+
+
+    def remove(self):
+        self.player.all_projectiles.remove(self)
+
+
+    def move(self):
+        self.rect.x += self.velocity
+
+        #vérifier si le projectile touche un ennemni
+        if self.player.game.check_collision(self, self.player.game.all_monsters):
+            self.remove()
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.x > 1080:
+            #supprimer le projectile
+            self.remove()
+            
 
 ######################################################################## Fonctions ##################################################################################################################################
 
@@ -116,6 +172,22 @@ speed = 3 #Vitesse globale du jeu
 while running == True :
 
     blitage()
+
+
+    #récupérer les projectiles du joueur
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
+    #recupérer les monstres de notre jeu
+    for monster in game.all_monsters:
+        monster.forward()
+
+
+    #appliquer les images de mon groupe de projectiles
+    game.player.all_projectiles.draw(screen)
+
+    #appliquer l'ensemble des images de mon groupe de monstres
+    game.all_monsters.draw(screen)
 
     if game.pressed.get(pygame.K_UP) and game.player.rect.y > 0 :
       game.player.moveUp()
@@ -173,6 +245,11 @@ while running == True :
     
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
+
+
+            #détecter si la touche espace est enclenchée pour lancer notre projectile
+            if event.key == pygame.K_SPACE:
+                game.player.launch_projectile()
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
