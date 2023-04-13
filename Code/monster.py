@@ -1,5 +1,5 @@
 import pygame
-
+import random
 # une classe monstre
 
 class Monster(pygame.sprite.Sprite) : 
@@ -7,15 +7,30 @@ class Monster(pygame.sprite.Sprite) :
     def __init__(self, game):
         super().__init__()
         self.game = game
-        self.health = 100
-        self.max_health = 100
+        self.health = 5
+        self.max_health = 5
         self.attack = 5
         self.point = 10
         self.image = pygame.image.load('img/mummy.png')
         self.rect = self.image.get_rect()
-        self.rect.x = 1000
-        self.rect.y = 540
-        self.velocity = 0.51
+        self.rect.x = 1000 + random.randint(0, 300)
+        self.rect.y = random.randint (10, 500)
+        self.velocity = 3
+
+    def damage(self, amount):
+        #infliger des dégats
+        self.health -= amount
+
+        #vérifier si le monstre est 0 
+        if self.health <=0:
+            #respawn le monstre
+            self.rect.x = 1000 + random.randint(0, 300)
+            self.rect.y = random.randint (10, 500)
+            self.health = self.max_health
+            
+
+
+        
 
     def forward(self):
         #le déplacement se fait que si il n'y a pas de collision
