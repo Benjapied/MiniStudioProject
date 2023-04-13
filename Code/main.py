@@ -6,50 +6,75 @@ pygame.init()
 #création de l'objet Obstacle
 class Obstacle (pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self,game):
+        pygame.sprite.Sprite.__init__(self)
         # mise en place des informations 
-        self.image = pygame.image.load("image_obstacle_???") # l'image de l'obstacle dépend du background
+        self.game = game
+        self.obstacle_number = randint (1,1)
+        self.text = "img/image_obstacle_" + str(self.obstacle_number)  # initialisation 
+        print(self.text)
+        self.image = pygame.image.load(self.text +".png") # l'image de l'obstacle dépend du background
+        self.image = pygame.transform.scale(self.image, (32, 32))
         self.hp = "?" # les hp de l'obstacle dépendent du type d'obstacle (à définir)
         self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
-        self.rect.x = 100
-        self.rect.y = 100
+        self.rect.x = 1080
+        self.rect.y = randint(0,712)
 
-        self.velocity = 1 + "distance" # augemente avec celle du joueur / distance
+        self.velocity = self.game.player.velocity # augemente avec celle du joueur / distance
         self.elemental = randint(0,1) # choisit aléatoirement si l'obstacle est infusé par une élément ou non
         self.element = "neutral" #dans tous les cas l'élément de base est neutre / "neutral"
         if self.elemental == 1: # si l'obstacle est infusé par un élément
             self.elementalForm() # alors on le modifie pour mettre en place l'infusion
     
     def elementalForm(self):
-        element = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 éléments
+        element = randint(2,2) #l'élément infusé est choisi aléatoirement entre les 4 éléments
         if element == 1 :
             self.element = "air"
-            self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
-        
+             
         elif element == 2 :
             self.element = "fire"
-            self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
         
         elif element == 3 :
             self.element = "earth"
-            self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
         
         elif element == 4 :
             self.element = "water"
-            self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
 
+        self.text += "_" + self.element
+        print(self.text) 
+        self.image = pygame.image.load(self.text + ".png") # chargement de l'image de tel obstacle infusé par tel élément
+        self.image = pygame.transform.scale(self.image, (32, 32))
+
+    def forward(self):
+        #le déplacement se fait que si il n'y a pas de collision
+        if not self.game.check_collision(self, self.game.all_players):
+            self.rect.x -= self.velocity
 
 class Game (object):
 
     def __init__(self):
-        self.player = Player()
+        self.all_players = pygame.sprite.Group()
+        self.player = Player(self)
+        self.all_players.add(self.player)
+        self.all_obstacles = pygame.sprite.Group()
+        self.spawn_obstacle()
         #stocker les touches activées par le joueur 
         self.pressed = {}
 
+    def check_collision(self, sprite, group):
+        return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
+
+    def spawn_obstacle(self):
+        obstacle = Obstacle(self)
+        self.all_obstacles.add(obstacle)
+
 
 #Classe du joueur principal
-class Player () :    
-    def __init__ (self):
+class Player (pygame.sprite.Sprite):    
+    
+    def __init__ (self, game):
+        super().__init__()
+        self.game = game
         '''Methode d'initialisation'''
         self.image = pygame.image.load("img/wazo.png")
         self.rect = self.image.get_rect()
@@ -98,7 +123,7 @@ background = pygame.image.load('img/fond.png')
 background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
 
 
-game=Game()
+game = Game()
 running = True
 
 
@@ -114,6 +139,9 @@ speed = 3 #Vitesse globale du jeu
 ######################################################################## Boucle Principale ################################################################################################################
 
 while running == True :
+
+    for obstacle in game.all_obstacles:
+        obstacle.forward()
 
     blitage()
 
@@ -131,6 +159,8 @@ while running == True :
 
     #print(game.player.rect.y)
     
+    game.all_obstacles.draw(screen)
+
     imageCount = imageCount + speed
     if imageCount >= 1080:
         imageCount = 0
@@ -164,7 +194,7 @@ while running == True :
         if speed < 50 :
             speed += 1
     
-    print(speed) 
+    #print(speed) 
  
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
