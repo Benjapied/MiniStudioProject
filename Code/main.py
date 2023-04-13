@@ -188,6 +188,29 @@ def collider (objectA,objectB) :
     if objectA.x < objectB.x + objectB.w and objectA.x + objectA.w > objectB.x and objectA.y < objectB.y + objectB.h and objectA.h + objectA.y > objectB.y :
         return True
 
+def settings () :
+  '''Fonction qui ouvre les settings'''
+  s = pygame.Surface((1080,720)) 
+  s.set_alpha(128)                
+  s.fill((0,0,0)) 
+  pause = pygame.image.load('img/pause.png')
+  while True :
+    blitage()
+    screen.blit(s, (0,0)) 
+    screen.blit(pause, (50,200))
+
+    pygame.display.flip()
+ 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit() 
+
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+
+              return  
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
 
 # générer la fenetre de notre jeu
 pygame.display.set_caption("Comet fall Game")
@@ -296,6 +319,8 @@ while running == True :
             #détecter si la touche espace est enclenchée pour lancer notre projectile
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
+            if event.key == pygame.K_ESCAPE:
+                settings()
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
