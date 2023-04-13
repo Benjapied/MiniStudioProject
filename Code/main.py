@@ -16,7 +16,6 @@ class Obstacle (pygame.sprite.Sprite):
         print(self.text)
         self.image = pygame.image.load(self.text +".png") # l'image de l'obstacle dépend du background
         self.image = pygame.transform.scale(self.image, (32, 32))
-        self.hp = "?" # les hp de l'obstacle dépendent du type d'obstacle (à définir)
         self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
         self.rect.x = 1080
         self.rect.y = randint(0,712)
@@ -50,6 +49,8 @@ class Obstacle (pygame.sprite.Sprite):
         #le déplacement se fait que si il n'y a pas de collision
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
+    
+
 
 class Game (object):
 
@@ -61,7 +62,7 @@ class Game (object):
         self.all_players.add(self.player)
         self.all_monsters = pygame.sprite.Group()
         self.spawn_monster()
-        self.spawn_monster(self)
+        self.spawn_monster()
         self.all_players.add(self.player)
         self.all_obstacles = pygame.sprite.Group()
         self.spawn_obstacle()
@@ -127,6 +128,7 @@ class Projectile(pygame.sprite.Sprite):
     #définir le constructeur de cette classe
     def __init__(self, player):
         super().__init__()
+        self.game = game
         self.velocity = 5
         self.player = player
         self.image = pygame.image.load('img/projectile.png')
@@ -148,6 +150,9 @@ class Projectile(pygame.sprite.Sprite):
         for monster in self.player.game.check_collision(self, self.player.game.all_monsters):
             self.remove()
             monster.damage(5)
+
+        for _ in self.game.check_collision(self, self.game.all_obstacles) :
+            self.remove()
 
         #vérifier si le projectile n'est plus dans l'écran
         if self.rect.x > 1080:
