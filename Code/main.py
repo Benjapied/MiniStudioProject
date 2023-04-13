@@ -49,6 +49,7 @@ class Game (object):
         self.all_players.add(self.player)
         self.all_monsters = pygame.sprite.Group()
         self.spawn_monster()
+        self.spawn_monster()
         
         #stocker les touches activées par le joueur 
         self.pressed = {}
@@ -105,7 +106,7 @@ class Projectile(pygame.sprite.Sprite):
     #définir le constructeur de cette classe
     def __init__(self, player):
         super().__init__()
-        self.velocity = 1
+        self.velocity = 5
         self.player = player
         self.image = pygame.image.load('img/projectile.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
@@ -123,8 +124,9 @@ class Projectile(pygame.sprite.Sprite):
         self.rect.x += self.velocity
 
         #vérifier si le projectile touche un ennemni
-        if self.player.game.check_collision(self, self.player.game.all_monsters):
+        for monster in self.player.game.check_collision(self, self.player.game.all_monsters):
             self.remove()
+            monster.damage(5)
 
         #vérifier si le projectile n'est plus dans l'écran
         if self.rect.x > 1080:
