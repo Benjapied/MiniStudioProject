@@ -1,15 +1,14 @@
 import pygame
 from random import randint
-import random
-
-
+from monster import Monster
 
 pygame.init()
 ######################################################################## Class ##################################################################################################################################
 #création de l'objet Obstacle
 class Obstacle (pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self,game):
+        pygame.sprite.Sprite.__init__(self)
         # mise en place des informations 
         self.game = game
         self.obstacle_number = randint (1,1)
@@ -18,32 +17,33 @@ class Obstacle (pygame.sprite.Sprite):
         self.image = pygame.image.load(self.text +".png") # l'image de l'obstacle dépend du background
         self.image = pygame.transform.scale(self.image, (32, 32))
         self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
-        self.rect.x = 100
-        self.rect.y = 100
+        self.rect.x = 1080
+        self.rect.y = randint(0,712)
 
-        self.velocity = 1 + "distance" # augemente avec celle du joueur / distance
+        self.velocity = self.game.player.velocity # augemente avec celle du joueur / distance
         self.elemental = randint(0,1) # choisit aléatoirement si l'obstacle est infusé par une élément ou non
         self.element = "neutral" #dans tous les cas l'élément de base est neutre / "neutral"
         if self.elemental == 1: # si l'obstacle est infusé par un élément
             self.elementalForm() # alors on le modifie pour mettre en place l'infusion
     
     def elementalForm(self):
-        element = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 éléments
+        element = randint(2,2) #l'élément infusé est choisi aléatoirement entre les 4 éléments
         if element == 1 :
             self.element = "air"
-            self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
-        
+             
         elif element == 2 :
             self.element = "fire"
-            self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
         
         elif element == 3 :
             self.element = "earth"
-            self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
         
         elif element == 4 :
             self.element = "water"
-            self.image = pygame.image.load("image_obstacle_???_???") # chargement de l'image de tel obstacle infusé par tel élément
+
+        self.text += "_" + self.element
+        print(self.text) 
+        self.image = pygame.image.load(self.text + ".png") # chargement de l'image de tel obstacle infusé par tel élément
+        self.image = pygame.transform.scale(self.image, (32, 32))
 
     def forward(self):
         #le déplacement se fait que si il n'y a pas de collision
@@ -55,6 +55,7 @@ class Obstacle (pygame.sprite.Sprite):
 class Game (object):
 
     def __init__(self):
+        self.all_players = pygame.sprite.Group()
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
        
@@ -76,12 +77,18 @@ class Game (object):
         monster = Monster(self)
         self.all_monsters.add(monster)
 
+    def spawn_obstacle(self):
+        obstacle = Obstacle(self)
+        self.all_obstacles.add(obstacle)
+
+
 #Classe du joueur principal
-class Player (pygame.sprite.Sprite) :    
+class Player (pygame.sprite.Sprite):    
+    
     def __init__ (self, game):
         super().__init__()
         self.game = game
-        '''Methode d'ini tialisation'''
+        '''Methode d'initialisation'''
         self.image = pygame.image.load("img/wazo.png")
         self.rect = self.image.get_rect()
         self.rect.x = 8
@@ -151,44 +158,6 @@ class Projectile(pygame.sprite.Sprite):
         if self.rect.x > 1080:
             #supprimer le projectile
             self.remove()
-
-
-
-
-class Monster(pygame.sprite.Sprite) : 
-
-    def __init__(self, game):
-        super().__init__()
-        self.game = game
-        self.health = 5
-        self.max_health = 5
-        self.attack = 5
-        self.point = 10000
-        self.image = pygame.image.load('img/mummy.png')
-        self.rect = self.image.get_rect()
-        self.rect.x = 1000 + random.randint(0, 300)
-        self.rect.y = random.randint (10, 500)
-        self.velocity = 3
-
-    def damage(self, amount):
-        #infliger des dégats
-        self.health -= amount
-        
-        #vérifier si le monstre est 0 
-        if self.health <=0:
-            
-            
-
-            #respawn le monstre
-            self.rect.x = 1000 + random.randint(0, 300)
-            self.rect.y = random.randint (10, 500)
-            self.health = self.max_health
-
-
-    def forward(self):
-        #le déplacement se fait que si il n'y a pas de collision
-        if not self.game.check_collision(self, self.game.all_players):
-            self.rect.x -= self.velocity
             
 
 ######################################################################## Fonctions ##################################################################################################################################
@@ -205,29 +174,6 @@ def collider (objectA,objectB) :
     if objectA.x < objectB.x + objectB.w and objectA.x + objectA.w > objectB.x and objectA.y < objectB.y + objectB.h and objectA.h + objectA.y > objectB.y :
         return True
 
-def settings () :
-  '''Fonction qui ouvre les settings'''
-  s = pygame.Surface((1080,720)) 
-  s.set_alpha(128)                
-  s.fill((0,0,0)) 
-  pause = pygame.image.load('img/pause.png')
-  while True :
-    blitage()
-    screen.blit(s, (0,0)) 
-    screen.blit(pause, (50,200))
-
-    pygame.display.flip()
- 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit() 
-
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-
-              return  
-        elif event.type == pygame.KEYUP:
-            game.pressed[event.key] = False
 
 # générer la fenetre de notre jeu
 pygame.display.set_caption("Comet fall Game")
@@ -238,7 +184,7 @@ background = pygame.image.load('img/fond.png')
 background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
 
 
-game=Game()
+game = Game()
 running = True
 
 
@@ -249,12 +195,14 @@ fpsClock = pygame.time.Clock()
 imageCount = 0 #compteur qui va servir à faire défiler les images
 globalCount = 0
 scoreCount = 0
-addScore = 0
 speed = 3 #Vitesse globale du jeu
 
 ######################################################################## Boucle Principale ################################################################################################################
 
 while running == True :
+
+    for obstacle in game.all_obstacles:
+        obstacle.forward()
 
     blitage()
 
@@ -288,6 +236,8 @@ while running == True :
 
     #print(game.player.rect.y)
     
+    game.all_obstacles.draw(screen)
+
     imageCount = imageCount + speed
     if imageCount >= 1080:
         imageCount = 0
@@ -315,14 +265,13 @@ while running == True :
 
     globalCount = globalCount + 1 
 
-    scoreCount = int(globalCount/10) 
-    print(speed) 
+    scoreCount = int(globalCount/10) # + point d'élimination
 
     if globalCount % 1000 == 0:
         if speed < 50 :
             speed += 1
- 
-    print(speed) 
+    
+    #print(speed) 
  
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -336,9 +285,6 @@ while running == True :
             #détecter si la touche espace est enclenchée pour lancer notre projectile
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
-            if event.key == pygame.K_ESCAPE:
-                settings()
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
-
