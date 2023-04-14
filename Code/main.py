@@ -239,6 +239,7 @@ while running == True :
     #recupérer les monstres de notre jeu
     for monster in game.all_monsters:
         monster.forward()
+        monster.respawn()
 
 
     #appliquer les images de mon groupe de projectiles
