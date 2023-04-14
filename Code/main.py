@@ -76,6 +76,7 @@ class Game (object):
         self.distance = 0
         self.distanceScore = 0
         self.totalScore = 0
+        self.speed = 3
         
         #stocker les touches activées par le joueur 
         self.pressed = {}
@@ -231,7 +232,6 @@ myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une var
 FPS = 100
 fpsClock = pygame.time.Clock()
 imageCount = 0 #compteur qui va servir à faire défiler les images
-speed = 3 #Vitesse globale du jeu
 
 ######################################################################## Boucle Principale ################################################################################################################
 
@@ -275,7 +275,7 @@ while running == True :
     
     game.all_obstacles.draw(screen)
 
-    imageCount = imageCount + speed
+    imageCount = imageCount + game.speed
     if imageCount >= 1080:
         imageCount = 0
 
@@ -301,20 +301,17 @@ while running == True :
     fpsClock.tick(FPS)
 
     lastDistance = game.distanceScore 
-
     game.distance = game.distance + 1 
-
-    game.distanceScore = int(game.distance/10)
-
+    game.distanceScore = int(game.distance)
     game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
 
-    if game.distance > 100:
-        if game.totalScore % 1000 == 0:
-            if speed < 50 :
-                speed += 1
-    
-    #print(speed) 
- 
+    multiplicator = int(game.totalScore/1000)
+
+    if game.speed < 50 :
+        game.speed = 3 + multiplicator
+
+    print(monster.velocity) 
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
