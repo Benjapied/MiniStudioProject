@@ -66,6 +66,9 @@ class Game (object):
         self.all_players.add(self.player)
         self.all_obstacles = pygame.sprite.Group()
         self.spawn_obstacle()
+        self.distance = 0
+        self.distanceScore = 0
+        self.totalScore = 0
         
         #stocker les touches activées par le joueur 
         self.pressed = {}
@@ -94,7 +97,7 @@ class Player (pygame.sprite.Sprite):
         self.rect.x = 8
         self.rect.y = 8
 
-        self.velocity = 3 #vitesse du joueur
+        self.velocity = 6 #vitesse du joueur
         self.attack = 10 #points d'attaque du joueur
         self.attack_speed = 1
         self.hp = 10
@@ -217,8 +220,6 @@ myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une var
 FPS = 100
 fpsClock = pygame.time.Clock()
 imageCount = 0 #compteur qui va servir à faire défiler les images
-globalCount = 0
-scoreCount = 0
 speed = 3 #Vitesse globale du jeu
 
 ######################################################################## Boucle Principale ################################################################################################################
@@ -276,8 +277,8 @@ while running == True :
             #game.player.image = tabAnimWazo[0]
 
     #Ca print du texte 
-    distance = myFont.render(str(globalCount), 1, (255,255,255))
-    score = myFont.render(str(scoreCount), 1, (255,255,255))
+    distance = myFont.render(str(game.distance), 1, (255,255,255))
+    score = myFont.render(str(game.totalScore), 1, (255,255,255))
     fps = myFont.render(str(FPS), 1, (255,255,255))
     screen.blit(distance, (520, 30))
     screen.blit(score, (520, 60))
@@ -287,13 +288,18 @@ while running == True :
     
     fpsClock.tick(FPS)
 
-    globalCount = globalCount + 1 
+    lastDistance = game.distanceScore 
 
-    scoreCount = int(globalCount/10) # + point d'élimination
+    game.distance = game.distance + 1 
 
-    if globalCount % 1000 == 0:
-        if speed < 50 :
-            speed += 1
+    game.distanceScore = int(game.distance/10)
+
+    game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
+
+    if game.distance > 100:
+        if game.totalScore % 1000 == 0:
+            if speed < 50 :
+                speed += 1
     
     #print(speed) 
  
