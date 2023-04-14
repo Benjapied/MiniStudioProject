@@ -55,33 +55,46 @@ class Obstacle (pygame.sprite.Sprite):
 
 
 class Game (object):
-
+    '''C'est la classe qui stock toutes les infos de la partie
+        elle se reset à chaque lancement du programme
+        elle contient: 
+        _une méthode pour faire spawner des ennemis
+        _une méthode pour faire spawn des obstacles
+        _une méthode pour vérifier les collisions
+    '''
     def __init__(self):
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
-       
         self.all_players.add(self.player)
+        
         self.all_monsters = pygame.sprite.Group()
         self.spawn_monster()
         self.spawn_monster()
+
         self.all_players.add(self.player)
         self.all_obstacles = pygame.sprite.Group()
         self.spawn_obstacle()
+        
         self.distance = 0
         self.distanceScore = 0
         self.totalScore = 0
+        self.speed = 3
         
         #stocker les touches activées par le joueur 
         self.pressed = {}
 
+
     def check_collision(self, sprite, group):
+        '''méthode qui check les collisions, return liste des sprites dans group qui touchent le 'sprite' '''
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
     def spawn_monster(self):
+        '''Instencie une objet monstre et le place dans une liste de tous les monstres'''
         monster = Monster(self)
         self.all_monsters.add(monster)
 
     def spawn_obstacle(self):
+        '''Instencie une objet obstacle et le place dans une liste de tous les obstacles'''
         obstacle = Obstacle(self)
         self.all_obstacles.add(obstacle)
 
@@ -234,7 +247,6 @@ myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une var
 FPS = 100
 fpsClock = pygame.time.Clock()
 imageCount = 0 #compteur qui va servir à faire défiler les images
-speed = 3 #Vitesse globale du jeu
 
 ######################################################################## Boucle Principale ################################################################################################################
 
@@ -253,6 +265,7 @@ while running == True :
     #recupérer les monstres de notre jeu
     for monster in game.all_monsters:
         monster.forward()
+        monster.respawn()
 
 
     #appliquer les images de mon groupe de projectiles
@@ -277,7 +290,7 @@ while running == True :
     
     game.all_obstacles.draw(screen)
 
-    imageCount = imageCount + speed
+    imageCount = imageCount + game.speed
     if imageCount >= 1080:
         imageCount = 0
 
@@ -303,20 +316,17 @@ while running == True :
     fpsClock.tick(FPS)
 
     lastDistance = game.distanceScore 
-
     game.distance = game.distance + 1 
-
-    game.distanceScore = int(game.distance/10)
-
+    game.distanceScore = int(game.distance)
     game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
 
-    if game.distance > 100:
-        if game.totalScore % 1000 == 0:
-            if speed < 50 :
-                speed += 1
-    
-    #print(speed) 
- 
+    multiplicator = int(game.totalScore/1000)
+
+    if game.speed < 50 :
+        game.speed = 3 + multiplicator
+
+    print(monster.velocity) 
+
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
