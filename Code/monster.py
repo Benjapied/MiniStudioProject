@@ -28,7 +28,10 @@ class Monster(pygame.sprite.Sprite) :
             self.rect.y = random.randint (10, 500)
             self.health = self.max_health
 
-
+    def respawn(self):
+        if self.rect.x < 0 :
+            self.rect.x = 1000 + random.randint(0, 300)
+            self.rect.y = random.randint (10, 500)
             
 
         
