@@ -50,12 +50,13 @@ class Obstacle (pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
     
+    def remove(self):
+        self.game.all_obstacles.remove(self)
 
 
 class Game (object):
 
     def __init__(self):
-        self.all_players = pygame.sprite.Group()
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
        
@@ -108,6 +109,15 @@ class Player (pygame.sprite.Sprite):
         # créer une nouvelle instance de la classe projectile
         self.all_projectiles.add(Projectile(self))
 
+    def launch_elemental(self,element):
+        projectile = Projectile(self)
+        projectile.element = element
+        text  = "img/projectile_" + element + ".png"
+        print(text)
+        projectile.image = pygame.image.load(text)
+        projectile.image = pygame.transform.scale(projectile.image, (50, 50))
+        self.all_projectiles.add(projectile)
+
 
     def moveDown(self):
         self.rect.y = self.rect.y + self.velocity
@@ -133,14 +143,14 @@ class Projectile(pygame.sprite.Sprite):
         super().__init__()
         self.game = game
         self.velocity = 5
+        self.cycle = {"water":"fire","fire":"air","air":"earth","earth":"water"}
         self.player = player
+        self.element = "neutral"
         self.image = pygame.image.load('img/projectile.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.x = player.rect.x + 100
         self.rect.y = player.rect.y + 25
-
-
 
     def remove(self):
         self.player.all_projectiles.remove(self)
@@ -154,8 +164,12 @@ class Projectile(pygame.sprite.Sprite):
             self.remove()
             monster.damage(5)
 
-        for _ in self.game.check_collision(self, self.game.all_obstacles) :
-            self.remove()
+        for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
+            if self.cycle[self.element] == obstacle.element :
+                self.remove()
+                obstacle.remove()
+            else:
+                self.remove()
 
         #vérifier si le projectile n'est plus dans l'écran
         if self.rect.x > 1080:
@@ -304,6 +318,7 @@ while running == True :
     #print(speed) 
  
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
             running = False
             pygame.quit() 
@@ -311,11 +326,22 @@ while running == True :
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
 
-
             #détecter si la touche espace est enclenchée pour lancer notre projectile
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
             
+            if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e) :
+                game.player.launch_elemental("fire")
+            
+            if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :
+                game.player.launch_elemental("water")
+
+            if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) :
+                game.player.launch_elemental("earth")
+
+            if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) :
+                game.player.launch_elemental("air")
+
             if event.key == pygame.K_ESCAPE:
                 settings()
 
