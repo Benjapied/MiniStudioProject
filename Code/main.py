@@ -49,9 +49,17 @@ class Obstacle (pygame.sprite.Sprite):
         #le déplacement se fait que si il n'y a pas de collision
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
+        else:
+            self.rect.x = 1080
+            self.rect.y = randint(0,712)
     
     def remove(self):
         self.game.all_obstacles.remove(self)
+
+    def respawn(self):
+        if self.rect.x < 0 :
+            self.rect.x = 1000 + randint(0, 300)
+            self.rect.y = randint (10, 500)   
 
 
 class Game (object):
@@ -71,9 +79,11 @@ class Game (object):
         self.spawn_monster()
         self.spawn_monster()
 
-        self.all_players.add(self.player)
         self.all_obstacles = pygame.sprite.Group()
         self.spawn_obstacle()
+
+        self.all_bonus = pygame.sprite.Group()
+        self.spawn_bonus()
         
         self.distance = 0
         self.distanceScore = 0
@@ -89,14 +99,19 @@ class Game (object):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
     def spawn_monster(self):
-        '''Instencie une objet monstre et le place dans une liste de tous les monstres'''
+        '''Instencie un objet monstre et le place dans une liste de tous les monstres'''
         monster = Monster(self)
         self.all_monsters.add(monster)
 
     def spawn_obstacle(self):
-        '''Instencie une objet obstacle et le place dans une liste de tous les obstacles'''
+        '''Instencie un objet obstacle et le place dans une liste de tous les obstacles'''
         obstacle = Obstacle(self)
         self.all_obstacles.add(obstacle)
+
+    def spawn_bonus(self):
+        '''Instencie un objet bonus et le place dans une liste de tous les bonus'''
+        bonus = Bonus(self)
+        self.all_bonus.add(bonus)
 
 
 #Classe du joueur principal
@@ -117,6 +132,7 @@ class Player (pygame.sprite.Sprite):
         self.hp = 10
         self.shootingMode = "normal"
         self.all_projectiles = pygame.sprite.Group()
+        self.all_bonus = pygame.sprite.Group()
 
     def launch_projectile(self):
         # créer une nouvelle instance de la classe projectile
@@ -188,6 +204,42 @@ class Projectile(pygame.sprite.Sprite):
         if self.rect.x > 1080:
             #supprimer le projectile
             self.remove()
+
+class Bonus(pygame.sprite.Sprite):
+    
+    def __init__(self,game):
+        pygame.sprite.Sprite.__init__(self)
+        # mise en place des informations 
+        self.game = game
+        self.bonus_number = randint (1,1)
+        self.text = "img/image_bonus_" + str(self.bonus_number)  # initialisation 
+        print(self.text)
+        self.image = pygame.image.load(self.text +".png") # l'image du bonus
+        self.image = pygame.transform.scale(self.image, (32, 32))
+        self.rect = self.image.get_rect() #on définit la taille du bonus
+        self.rect.x = 1080
+        self.rect.y = randint(0,712)
+
+        self.velocity = self.game.player.velocity # augemente avec celle du joueur / distance
+
+    def forward(self):
+        #le déplacement se fait que si il n'y a pas de collision
+        if not self.game.check_collision(self, self.game.all_players):
+            self.rect.x -= self.velocity
+        else:
+            self.rect.x = 1080
+            self.rect.y = randint(0,712)
+            self.game.player.all_bonus.add(self)
+    
+    def remove(self):
+        self.game.all_bonus.remove(self)
+
+    def respawn(self):
+        if self.rect.x < 0 :
+            self.rect.x = 1000 + randint(0, 300)
+            self.rect.y = randint (10, 500)  
+    
+
             
 
 ######################################################################## Fonctions ##################################################################################################################################
@@ -254,6 +306,11 @@ while running == True :
 
     for obstacle in game.all_obstacles:
         obstacle.forward()
+        obstacle.respawn()
+
+    for bonus in game.all_bonus:
+        bonus.forward()
+        bonus.respawn()
 
     blitage()
 
@@ -290,6 +347,9 @@ while running == True :
     
     game.all_obstacles.draw(screen)
 
+    game.all_bonus.draw(screen)
+
+
     imageCount = imageCount + game.speed
     if imageCount >= 1080:
         imageCount = 0
@@ -322,10 +382,10 @@ while running == True :
 
     multiplicator = int(game.totalScore/1000)
 
+    print(game.player.all_bonus)
+
     if game.speed < 50 :
         game.speed = 3 + multiplicator
-
-    print(monster.velocity) 
 
     for event in pygame.event.get():
 
