@@ -27,7 +27,7 @@ class Obstacle (pygame.sprite.Sprite):
             self.elementalForm() # alors on le modifie pour mettre en place l'infusion
     
     def elementalForm(self):
-        element = randint(2,2) #l'élément infusé est choisi aléatoirement entre les 4 éléments
+        element = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 éléments
         if element == 1 :
             self.element = "air"
              
