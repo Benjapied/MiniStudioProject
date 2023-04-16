@@ -192,7 +192,7 @@ class Projectile(pygame.sprite.Sprite):
             monster.damage(5)
 
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
-            if self.cycle[self.element] == obstacle.element :
+            if obstacle.element != "neutral" and self.element != "neutral" and self.cycle[self.element] == obstacle.element :
                 self.remove()
                 obstacle.remove()
             else:
