@@ -31,8 +31,8 @@ class Monster(pygame.sprite.Sprite) :
 
     def respawn(self):
         if self.rect.x < 0 :
-            self.rect.x = 1000 + random.randint(0, 300)
-            self.rect.y = random.randint (10, 500)        
+            self.game.all_monsters.remove(self)
+            self.game.spawn_monster()       
 
     def forward(self):
         #le déplacement se fait que si il n'y a pas de collision

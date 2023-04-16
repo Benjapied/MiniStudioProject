@@ -49,17 +49,15 @@ class Obstacle (pygame.sprite.Sprite):
         #le déplacement se fait que si il n'y a pas de collision
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
-        else:
-            self.rect.x = 1080
-            self.rect.y = randint(0,712)
+
     
     def remove(self):
         self.game.all_obstacles.remove(self)
+        self.game.spawn_obstacle()
 
     def respawn(self):
         if self.rect.x < 0 :
-            self.rect.x = 1000 + randint(0, 300)
-            self.rect.y = randint (10, 500)   
+            self.remove() 
 
 
 class Game (object):
@@ -227,12 +225,12 @@ class Bonus(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
         else:
-            self.rect.x = 1080
-            self.rect.y = randint(0,712)
             self.game.player.all_bonus.add(self)
+            self.remove()
     
     def remove(self):
         self.game.all_bonus.remove(self)
+        self.game.spawn_bonus()
 
     def respawn(self):
         if self.rect.x < 0 :
@@ -377,13 +375,14 @@ while running == True :
 
     lastDistance = game.distanceScore 
     game.distance = game.distance + 1 
-    game.distanceScore = int(game.distance)
+    game.distanceScore = int(game.distance/10)
     game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
 
     multiplicator = int(game.totalScore/1000)
 
-    print(game.player.all_bonus)
-
+    #print(game.player.all_bonus)
+    print(game.all_obstacles)
+ 
     if game.speed < 50 :
         game.speed = 3 + multiplicator
 
