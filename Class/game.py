@@ -31,6 +31,8 @@ class Game (object):
         self.distanceScore = 0
         self.totalScore = 0
         self.speed = 3
+
+        self.clock = 0 #Timer global du jeu  
         
         #stocker les touches activées par le joueur 
         self.pressed = {}
@@ -39,6 +41,10 @@ class Game (object):
     def check_collision(self, sprite, group):
         '''méthode qui check les collisions, return liste des sprites dans group qui touchent le 'sprite' '''
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
+    
+    def print_clock (self):
+        '''méthode qui return le timer de la game'''
+        return self.clock //1000
 
     def spawn_monster(self):
         '''Instencie un objet monstre et le place dans une liste de tous les monstres'''
@@ -56,4 +62,5 @@ class Game (object):
         self.all_bonus.add(bonus)
 
     def spawn_monster_random (self) :
-        pass
+        '''Methode pour faire spawn une ruée de monstre de maniere aléatoire, 
+        cette fonction peut etre considérée comme un patern de mob'''

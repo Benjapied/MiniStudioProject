@@ -76,6 +76,7 @@ while running == True :
 
     blitage()
 
+    game.clock = pygame.time.get_ticks()
 
     #récupérer les projectiles du joueur
     for projectile in game.player.all_projectiles:
@@ -116,20 +117,13 @@ while running == True :
     if imageCount >= 1080:
         imageCount = 0
 
-    #Tentative d'animation sur l'oiseau, marche à moitié
-    #if globalCount == 0 :
-    #    if game.player.image == tabAnimWazo[0]:
-    #        game.player.image.blit(tabAnimWazo[1],(game.player.rect.x,game.player.rect.y))
-            #game.player.image = tabAnimWazo[1]
-    #    else : 
-    #        game.player.image.blit(tabAnimWazo[0],(game.player.rect.x,game.player.rect.y))
-            #game.player.image = tabAnimWazo[0]
-
     #Ca print du texte 
     distance = myFont.render(str(game.distance), 1, (255,255,255))
+    clock = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
     score = myFont.render(str(game.totalScore), 1, (255,255,255))
     fps = myFont.render(str(FPS), 1, (255,255,255))
     screen.blit(distance, (520, 30))
+    screen.blit(clock, (200, 30))
     screen.blit(score, (520, 60))
     screen.blit(fps, (1040, 10))
 
@@ -145,7 +139,6 @@ while running == True :
     multiplicator = int(game.totalScore/1000)
 
     #print(game.player.all_bonus)
-    print(game.all_obstacles)
  
     if game.speed < 50 :
         game.speed = 3 + multiplicator
