@@ -52,9 +52,8 @@ background = pygame.image.load('img/fond.png')
 background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
 
 
-game = Game()
+game = Game()  #On instancie un objet de la classe Game
 running = True
-
 
 
 myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
@@ -66,34 +65,39 @@ imageCount = 0 #compteur qui va servir à faire défiler les images
 
 while running == True :
 
+    #On va prendre tous les éléments du jeu et les mettre à jour
+
+    #Obstacles
     for obstacle in game.all_obstacles:
         obstacle.forward()
         obstacle.respawn()
+    game.all_obstacles.draw(screen)
 
+    #Bonus
     for bonus in game.all_bonus:
         bonus.forward()
         bonus.respawn()
+    game.all_bonus.draw(screen)
+
+    #Projectiles
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+        #appliquer les images de mon groupe de projectiles
+    game.player.all_projectiles.draw(screen)
+
+    #Monstres
+    for monster in game.all_monsters:
+        monster.forward()
+        monster.respawn()
+    #appliquer l'ensemble des images de mon groupe de monstres
+    game.all_monsters.draw(screen)
 
     blitage()
 
     game.clock = pygame.time.get_ticks()
 
-    #récupérer les projectiles du joueur
-    for projectile in game.player.all_projectiles:
-        projectile.move()
 
-    #recupérer les monstres de notre jeu
-    for monster in game.all_monsters:
-        monster.forward()
-        monster.respawn()
-
-
-    #appliquer les images de mon groupe de projectiles
-    game.player.all_projectiles.draw(screen)
-
-    #appliquer l'ensemble des images de mon groupe de monstres
-    game.all_monsters.draw(screen)
-
+    #CONTROLS
     if game.pressed.get(pygame.K_UP) and game.player.rect.y > 0 :
       game.player.moveUp()
 
@@ -105,17 +109,23 @@ while running == True :
 
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
        game.player.moveRight()
-
-    #print(game.player.rect.y)
     
-    game.all_obstacles.draw(screen)
-
-    game.all_bonus.draw(screen)
-
+    #Calculs dans la boucle
 
     imageCount = imageCount + game.speed
     if imageCount >= 1080:
         imageCount = 0
+
+    lastDistance = game.distanceScore 
+    game.distance = game.distance + 1 
+    game.distanceScore = int(game.distance/10)
+    game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
+
+    multiplicator = int(game.totalScore/1000)
+
+ 
+    if game.speed < 50 :
+        game.speed = 3 + multiplicator
 
     #Ca print du texte 
     distance = myFont.render(str(game.distance), 1, (255,255,255))
@@ -131,17 +141,6 @@ while running == True :
     
     fpsClock.tick(FPS)
 
-    lastDistance = game.distanceScore 
-    game.distance = game.distance + 1 
-    game.distanceScore = int(game.distance/10)
-    game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
-
-    multiplicator = int(game.totalScore/1000)
-
-    #print(game.player.all_bonus)
- 
-    if game.speed < 50 :
-        game.speed = 3 + multiplicator
 
     for event in pygame.event.get():
 
