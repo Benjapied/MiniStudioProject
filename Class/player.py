@@ -1,5 +1,5 @@
 import pygame
-from projectile import Projectile
+from Class.projectile import Projectile
 
 class Player (pygame.sprite.Sprite):    
     '''classe qui créer le joueur principal'''
@@ -22,11 +22,11 @@ class Player (pygame.sprite.Sprite):
 
     def launch_projectile(self):
         '''créer une nouvelle instance de la classe projectile et la met dans la liste des projectiles'''
-        self.all_projectiles.add(Projectile(self))
+        self.all_projectiles.add(Projectile(self, self.game))
 
     def launch_elemental(self,element):
         '''On va créer un projectile et lui mettre l'élément passé en parametre'''
-        projectile = Projectile(self)
+        projectile = Projectile(self, self.game)
         projectile.element = element
         text  = "img/projectile_" + element + ".png"
         projectile.image = pygame.image.load(text)

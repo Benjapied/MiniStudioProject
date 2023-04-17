@@ -1,7 +1,8 @@
 import pygame
-from monster import Monster
-from player import Player
-from bonus import Bonus
+from Class.monster import Monster
+from Class.player import Player
+from Class.bonus import Bonus
+from Class.obstacle import Obstacle
 
 class Game (object):
     '''C'est la classe qui stock toutes les infos de la partie

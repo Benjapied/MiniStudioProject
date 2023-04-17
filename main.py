@@ -1,6 +1,6 @@
 import pygame
-from random import randint
-from Class.monster import Monster
+from Class.game import Game
+
 
 pygame.init()
     
