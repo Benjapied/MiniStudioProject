@@ -3,6 +3,7 @@ from Class.monster import Monster
 from Class.player import Player
 from Class.bonus import Bonus
 from Class.obstacle import Obstacle
+from Class.boss import Boss
 
 class Game (object):
     '''C'est la classe qui stock toutes les infos de la partie
