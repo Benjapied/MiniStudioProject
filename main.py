@@ -54,7 +54,7 @@ background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l
 
 game = Game()  #On instancie un objet de la classe Game
 running = True
-
+globalCount = 0
 
 myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
 FPS = 100
@@ -65,6 +65,7 @@ imageCount = 0 #compteur qui va servir à faire défiler les images
 
 while running == True :
 
+    game.spawn_monster_random(globalCount)
     #On va prendre tous les éléments du jeu et les mettre à jour
 
     blitage()
@@ -130,9 +131,9 @@ while running == True :
         game.speed = 3 + multiplicator
 
     #Ca print du texte 
-    distance = myFont.render(str(game.distance), 1, (255,255,255))
+    distance = myFont.render("distance: "+str(game.distanceScore), 1, (255,255,255))
     clock = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
-    score = myFont.render(str(game.totalScore), 1, (255,255,255))
+    score = myFont.render(str(globalCount), 1, (255,255,255))
     fps = myFont.render(str(FPS), 1, (255,255,255))
     screen.blit(distance, (520, 30))
     screen.blit(clock, (200, 30))
@@ -142,6 +143,7 @@ while running == True :
     pygame.display.flip()
     
     fpsClock.tick(FPS)
+    globalCount = globalCount + 1
 
 
     for event in pygame.event.get():

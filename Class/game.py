@@ -1,4 +1,5 @@
 import pygame
+from random import randint
 from Class.monster import Monster
 from Class.player import Player
 from Class.bonus import Bonus
@@ -14,13 +15,14 @@ class Game (object):
         _une méthode pour vérifier les collisions
     '''
     def __init__(self):
+
+        #On définit les differentes listes qui vont contenir les entités
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
         self.all_players.add(self.player)
         
+
         self.all_monsters = pygame.sprite.Group()
-        self.spawn_monster()
-        self.spawn_monster()
 
         self.all_obstacles = pygame.sprite.Group()
         self.spawn_obstacle()
@@ -70,6 +72,10 @@ class Game (object):
         boss = Boss(self)
         self.all_boss.add(boss)
 
-    def spawn_monster_random (self) :
+    def spawn_monster_random (self,counter) :
         '''Methode pour faire spawn une ruée de monstre de maniere aléatoire, 
-        cette fonction peut etre considérée comme un patern de mob'''
+        cette fonction peut etre considérée comme un patern de mob
+        IL FAUT REDUIRE CE QU'IL Y A APRES LE MODULO POUR AUGMENTER LA CADENCE D'APPARITION DES ENNEMIS'''
+        if counter%100 == 0 :
+            if randint(1,2) == 1:
+                self.spawn_monster()
