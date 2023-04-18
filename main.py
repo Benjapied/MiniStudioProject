@@ -162,16 +162,16 @@ while running == True :
                 game.player.launch_projectile()
             
             if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e) :
-                game.player.launch_elemental("fire")
+                game.player.launch_special("fire")
             
             if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :
-                game.player.launch_elemental("water")
+                game.player.launch_special("water")
 
             if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) :
-                game.player.launch_elemental("earth")
+                game.player.launch_special("earth")
 
             if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) :
-                game.player.launch_elemental("air")
+                game.player.launch_special("air")
 
             if event.key == pygame.K_ESCAPE:
                 settings()

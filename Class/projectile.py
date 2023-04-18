@@ -7,7 +7,6 @@ class Projectile(pygame.sprite.Sprite):
         super().__init__() #définit que la classe hérite d'une autre
         self.game = game
         self.velocity = 5
-        self.cycle = {"water":"fire","fire":"air","air":"earth","earth":"water"} #Dictionnaire qui répertorie les counter ({Element : sur quoi il est fort})
         self.player = player
         self.element = "neutral"
         #Image et position
@@ -31,7 +30,7 @@ class Projectile(pygame.sprite.Sprite):
             monster.damage(5)
 
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
-            if obstacle.element != "neutral" and self.element != "neutral" and self.cycle[self.element] == obstacle.element :
+            if obstacle.element != "neutral" and self.element != "neutral" and self.element == obstacle.element :
                 self.remove()
                 obstacle.remove()
             else:

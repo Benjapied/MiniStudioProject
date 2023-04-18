@@ -35,11 +35,11 @@ class Player (pygame.sprite.Sprite):
         '''créer une nouvelle instance de la classe projectile et la met dans la liste des projectiles'''
         self.all_projectiles.add(Projectile(self, self.game))
 
-    def launch_elemental(self,element):
+    def launch_special(self,color):
         '''On va créer un projectile et lui mettre l'élément passé en parametre'''
         projectile = Projectile(self, self.game)
-        projectile.element = element
-        text  = "img/projectile_" + element + ".png"
+        projectile.element = color
+        text  = "img/projectile_" + color + ".png"
         projectile.image = pygame.image.load(text)
         projectile.image = pygame.transform.scale(projectile.image, (50, 50))
         self.all_projectiles.add(projectile)
@@ -70,3 +70,13 @@ class Player (pygame.sprite.Sprite):
                 self.animeStat = self.animeStat+1
             
         self.image = self.listSprite[self.animeStat]
+
+    def contact(self):
+        #vérifier si le projectile touche un ennemni
+        for monster in self.game.check_collision(self, self.game.all_monsters):
+            self.remove()
+            monster.remove()
+
+        for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
+            #self.
+            obstacle.remove()

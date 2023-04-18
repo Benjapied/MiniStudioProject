@@ -9,7 +9,6 @@ class Obstacle (pygame.sprite.Sprite):
         self.game = game
         self.obstacle_number = randint (1,1)
         self.text = "img/image_obstacle_" + str(self.obstacle_number)  # initialisation 
-        print(self.text)
         self.image = pygame.image.load(self.text +".png") # l'image de l'obstacle dépend du background
         self.image = pygame.transform.scale(self.image, (32, 32))
         self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
@@ -44,7 +43,10 @@ class Obstacle (pygame.sprite.Sprite):
         #le déplacement se fait que si il n'y a pas de collision
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
-
+        #sinon (s'il y a une collision)
+        else :
+            self.remove()
+            #self.game.player.contact()
     
     def remove(self):
         self.game.all_obstacles.remove(self)
