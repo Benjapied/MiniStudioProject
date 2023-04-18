@@ -6,16 +6,18 @@ class Boss (pygame.sprite.Sprite) :
     def __init__ (self,game):
         super().__init__()
         self.game = game
-        self.image = pygame.image.load("img/bird_boss.png")
-        self.rect = self.image.get_rect()
-        self.rect.x = 1200
-        self.rect.y = 500
-
         self.velocity = 1
         self.hp = 200
         self.maxHp = 200
         self.shooting_mode = "normal"
         self.point = 500
+
+        #Image et position
+        self.image = pygame.image.load("img/bird_boss.png")
+        self.rect = self.image.get_rect()
+        self.rect.x = 1200
+        self.rect.y = 500
+
     #définition des fonctions permettant au boss d'attaque
     def attack_pattern1(self):
         self.imageAttack = pygame.image.load("images")
@@ -42,3 +44,7 @@ class Boss (pygame.sprite.Sprite) :
         if self.health <=0:
             #respawn le monstre
             self.game.totalScore +=  self.point
+    
+    def bossDemarche (self) :
+        '''le boss va avancer jusqu'à sa place'''
+        self.rect.x = self.rect.x - 5

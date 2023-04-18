@@ -38,6 +38,7 @@ class Game (object):
         self.totalScore = 0
         self.speed = 3
 
+        self.phase = 'normal' #Peut etre normal ou boss ou plus si on ajoute d'autres phases
         self.clock = 0 #Timer global du jeu  
         
         #stocker les touches activées par le joueur 
