@@ -67,6 +67,8 @@ while running == True :
 
     #On va prendre tous les éléments du jeu et les mettre à jour
 
+    blitage()
+
     #Obstacles
     for obstacle in game.all_obstacles:
         obstacle.forward()
@@ -92,7 +94,7 @@ while running == True :
     #appliquer l'ensemble des images de mon groupe de monstres
     game.all_monsters.draw(screen)
 
-    blitage()
+    
 
     game.clock = pygame.time.get_ticks()
 
