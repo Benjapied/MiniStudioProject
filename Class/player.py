@@ -1,5 +1,5 @@
 import pygame
-import projectile
+from Class.projectile import Projectile
 
 class Player (pygame.sprite.Sprite):    
     '''classe qui créer le joueur principal'''
