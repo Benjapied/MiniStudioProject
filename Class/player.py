@@ -15,10 +15,21 @@ class Player (pygame.sprite.Sprite):
         self.all_bonus = pygame.sprite.Group()
 
         #Image et position
-        self.image = pygame.image.load("img/wazo.png")
+        self.animeStat = 0 #Numero du sprite de l'animation
+        image = pygame.image.load("img/wazo_anim.png")
+        self.listSprite = []
+        self.listSprite.append(image.subsurface(89,39,228,200))
+        self.listSprite.append(image.subsurface(317,34,228,200))
+        self.listSprite.append(image.subsurface(556,38,228,200))
+        self.listSprite.append(image.subsurface(791,39,239,200))
+        for i in range(4):
+            self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
+        self.image = self.listSprite[self.animeStat]
+
         self.rect = self.image.get_rect()
         self.rect.x = 8
         self.rect.y = 8
+
 
     def launch_projectile(self):
         '''créer une nouvelle instance de la classe projectile et la met dans la liste des projectiles'''
@@ -50,3 +61,12 @@ class Player (pygame.sprite.Sprite):
         '''déplace vers la droite, augmente le x'''
         if not self.game.check_collision(self, self.game.all_monsters):
             self.rect.x += self.velocity 
+
+    def animation(self, counter):
+        if counter%50 == 49:
+            if self.animeStat == 3:
+                self.animeStat = 0
+            else :
+                self.animeStat = self.animeStat+1
+            
+        self.image = self.listSprite[self.animeStat]

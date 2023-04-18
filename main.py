@@ -66,6 +66,8 @@ imageCount = 0 #compteur qui va servir à faire défiler les images
 while running == True :
 
     game.spawn_monster_random(globalCount)
+
+    game.player.animation(globalCount)
     #On va prendre tous les éléments du jeu et les mettre à jour
 
     blitage()
