@@ -3,14 +3,14 @@ import pygame
 class Projectile(pygame.sprite.Sprite):
     '''Class qui crée un projectile à partir de la pos du joueur
     ce projectile peut être d'un certain élément'''
-    def __init__(self, player,game):
+    def __init__(self, player,game, color="neutral"):
         super().__init__() #définit que la classe hérite d'une autre
         self.game = game
         self.velocity = 5
         self.player = player
-        self.element = "neutral"
+        self.color = color
         #Image et position
-        self.image = pygame.image.load('img/projectile.png')
+        self.image = pygame.image.load('img/projectile_'+ self.color+'.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.x = player.rect.x + 85
@@ -30,7 +30,7 @@ class Projectile(pygame.sprite.Sprite):
             monster.damage(5)
 
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
-            if obstacle.element != "neutral" and self.element != "neutral" and self.element == obstacle.element :
+            if obstacle.color != "neutral" and self.color != "neutral" and self.color == obstacle.color :
                 self.remove()
                 obstacle.remove()
             else:
@@ -49,7 +49,7 @@ class Ennemi_projectile(pygame.sprite.Sprite):
         self.game = game
         self.velocity = 5
         self.player = player
-        self.element = "neutral"
+        self.color = "neutral"
         #Image et position
         self.image = pygame.image.load('img/projectile.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
@@ -71,7 +71,7 @@ class Ennemi_projectile(pygame.sprite.Sprite):
             monster.damage(5)
 
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
-            if obstacle.element != "neutral" and self.element != "neutral" and self.element == obstacle.element :
+            if obstacle.color != "neutral" and self.color != "neutral" and self.color == obstacle.color :
                 self.remove()
                 obstacle.remove()
             else:

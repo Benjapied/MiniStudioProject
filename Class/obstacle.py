@@ -16,26 +16,26 @@ class Obstacle (pygame.sprite.Sprite):
         self.rect.y = randint(0,712)
 
         self.velocity = self.game.player.velocity # augemente avec celle du joueur / distance
-        self.elemental = randint(0,1) # choisit aléatoirement si l'obstacle est infusé par une élément ou non
-        self.element = "neutral" #dans tous les cas l'élément de base est neutre / "neutral"
-        if self.elemental == 1: # si l'obstacle est infusé par un élément
-            self.elementalForm() # alors on le modifie pour mettre en place l'infusion
+        self.coloral = randint(0,1) # choisit aléatoirement si l'obstacle est infusé par une élément ou non
+        self.color = "neutral" #dans tous les cas l'élément de base est neutre / "neutral"
+        if self.coloral == 1: # si l'obstacle est infusé par un élément
+            self.coloralForm() # alors on le modifie pour mettre en place l'infusion
     
-    def elementalForm(self):
-        element = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 éléments
-        if element == 1 :
-            self.element = "air"
+    def coloralForm(self):
+        color = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 éléments
+        if color == 1 :
+            self.color = "air"
              
-        elif element == 2 :
-            self.element = "fire"
+        elif color == 2 :
+            self.color = "fire"
         
-        elif element == 3 :
-            self.element = "earth"
+        elif color == 3 :
+            self.color = "earth"
         
-        elif element == 4 :
-            self.element = "water"
+        elif color == 4 :
+            self.color = "water"
 
-        self.text += "_" + self.element
+        self.text += "_" + self.color
         self.image = pygame.image.load(self.text + ".png") # chargement de l'image de tel obstacle infusé par tel élément
         self.image = pygame.transform.scale(self.image, (32, 32))
 

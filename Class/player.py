@@ -37,12 +37,7 @@ class Player (pygame.sprite.Sprite):
 
     def launch_special(self,color):
         '''On va créer un projectile et lui mettre l'élément passé en parametre'''
-        projectile = Projectile(self, self.game)
-        projectile.element = color
-        text  = "img/projectile_" + color + ".png"
-        projectile.image = pygame.image.load(text)
-        projectile.image = pygame.transform.scale(projectile.image, (50, 50))
-        self.all_projectiles.add(projectile)
+        self.all_projectiles.add(Projectile(self,self.game, color))
 
 
     def moveDown(self):
