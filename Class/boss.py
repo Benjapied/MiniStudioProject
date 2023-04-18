@@ -1,3 +1,4 @@
+import pygame
 #création de la classe boss
 class Boss (pygame.sprite.Sprite) :    
     #définition de sa taille, sa position, ...
