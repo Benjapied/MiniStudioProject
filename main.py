@@ -113,7 +113,6 @@ while running == True :
 
     if game.phase == 'normal' :
         print('ouuuuuuuuuuuu')
-        game.all_monsters = []
         game.spawn_monster_random(globalCount)
 
     if game.phase == 'boss':
@@ -181,7 +180,7 @@ while running == True :
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
             
-            if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e) :
+            if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e) and event.key == pygame.K_SPACE: 
                 game.player.launch_special("fire")
             
             if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :

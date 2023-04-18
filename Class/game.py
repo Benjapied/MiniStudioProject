@@ -1,6 +1,10 @@
 import pygame
 from random import randint
-from Class.monster import Monster
+from Class.monster import Piaf
+from Class.monster import Piomber
+from Class.monster import Piank
+from Class.monster import Piasher
+from Class.monster import Piafle
 from Class.player import Player
 from Class.bonus import Bonus
 from Class.obstacle import Obstacle
@@ -55,8 +59,8 @@ class Game (object):
 
     def spawn_monster(self):
         '''Instencie un objet monstre et le place dans une liste de tous les monstres'''
-        monster = Monster(self)
-        self.all_monsters.add(monster)
+        piaf = Piaf(self)
+        self.all_monsters.add(piaf)
 
     def spawn_obstacle(self):
         '''Instencie un objet obstacle et le place dans une liste de tous les obstacles'''
