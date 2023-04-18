@@ -42,35 +42,9 @@ def settings () :
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
 
-
-# générer la fenetre de notre jeu
-pygame.display.set_caption("Comet fall Game")
-screen = pygame.display.set_mode((1080, 720))
-
-#Génération de toutes les images de fond
-background = pygame.image.load('img/fond.png')
-background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
-
-
-game = Game()  #On instancie un objet de la classe Game
-running = True
-globalCount = 0
-
-myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
-FPS = 100
-fpsClock = pygame.time.Clock()
-imageCount = 0 #compteur qui va servir à faire défiler les images
-
-######################################################################## Boucle Principale ################################################################################################################
-
-while running == True :
-
+def updateGameplayNormal () :
+    '''Fonction qui regroupe toutes les updates des entitées au cour de la partie'''
     game.spawn_monster_random(globalCount)
-
-    game.player.animation(globalCount)
-    #On va prendre tous les éléments du jeu et les mettre à jour
-
-    blitage()
 
     #Obstacles
     for obstacle in game.all_obstacles:
@@ -97,7 +71,53 @@ while running == True :
     #appliquer l'ensemble des images de mon groupe de monstres
     game.all_monsters.draw(screen)
 
-    
+def updateGameplayBoss():
+    '''Focntion qui update toutes les entitées pendant la phase du boss'''
+    #Projectiles
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+        #appliquer les images de mon groupe de projectiles
+    game.player.all_projectiles.draw(screen)
+
+
+
+# générer la fenetre de notre jeu
+pygame.display.set_caption("Comet fall Game")
+screen = pygame.display.set_mode((1080, 720))
+
+#Génération de toutes les images de fond
+background = pygame.image.load('img/fond.png')
+background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
+
+
+game = Game()  #On instancie un objet de la classe Game
+running = True
+globalCount = 0
+
+
+
+myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
+FPS = 100
+fpsClock = pygame.time.Clock()
+imageCount = 0 #compteur qui va servir à faire défiler les images
+
+######################################################################## Boucle Principale ################################################################################################################
+
+while running == True :
+
+    #Affichage du fond et du pigeon en animation
+    game.player.animation(globalCount)
+    blitage()
+
+    updateGameplayNormal()
+
+    if game.phase == 'normal' :
+        print('ouuuuuuuuuuuu')
+        game.all_monsters = []
+        game.spawn_monster_random(globalCount)
+
+    if game.phase == 'boss':
+        updateGameplayBoss()
 
     game.clock = pygame.time.get_ticks()
 
@@ -175,6 +195,10 @@ while running == True :
 
             if event.key == pygame.K_ESCAPE:
                 settings()
+
+            if game.pressed.get(pygame.K_m) :
+                game.phase = 'boss'
+                print('oue')
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
