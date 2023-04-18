@@ -1,5 +1,8 @@
 import pygame
+<<<<<<< HEAD
 import random
+=======
+>>>>>>> 9e1a4b8606812063a76e77ec78386e57c2ffda1b
 #création de la classe boss
 class Boss (pygame.sprite.Sprite) :    
     #définition de sa taille, sa position, ...
@@ -34,6 +37,7 @@ class Boss (pygame.sprite.Sprite) :
         self.attack3 = 5
         self.attackSpeed3 = 0.5
         self.speedAttack3 = 20
+<<<<<<< HEAD
     def damage(self, amount):
         #infliger des dégats
         self.health -= amount
@@ -41,3 +45,5 @@ class Boss (pygame.sprite.Sprite) :
         if self.health <=0:
             #respawn le monstre
             self.game.totalScore +=  self.point
+=======
+>>>>>>> 9e1a4b8606812063a76e77ec78386e57c2ffda1b
