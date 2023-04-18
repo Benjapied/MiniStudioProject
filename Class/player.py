@@ -63,7 +63,7 @@ class Player (pygame.sprite.Sprite):
             self.rect.x += self.velocity 
 
     def animation(self, counter):
-        if counter%50 == 49:
+        if counter%20 == 19:
             if self.animeStat == 3:
                 self.animeStat = 0
             else :

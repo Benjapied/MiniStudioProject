@@ -14,8 +14,8 @@ class Projectile(pygame.sprite.Sprite):
         self.image = pygame.image.load('img/projectile.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
-        self.rect.x = player.rect.x + 100
-        self.rect.y = player.rect.y + 25
+        self.rect.x = player.rect.x + 85
+        self.rect.y = player.rect.y + 5
 
     def remove(self):
         '''retire l'objet de la liste des projectiles'''
