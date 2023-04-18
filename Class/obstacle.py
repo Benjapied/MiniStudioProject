@@ -36,8 +36,7 @@ class Obstacle (pygame.sprite.Sprite):
         elif element == 4 :
             self.element = "water"
 
-        self.text += "_" + self.element
-        print(self.text) 
+        self.text += "_" + self.elements
         self.image = pygame.image.load(self.text + ".png") # chargement de l'image de tel obstacle infusé par tel élément
         self.image = pygame.transform.scale(self.image, (32, 32))
 
