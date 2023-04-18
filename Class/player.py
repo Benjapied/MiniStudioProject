@@ -74,7 +74,7 @@ class Player (pygame.sprite.Sprite):
     def contact(self):
         #vérifier si le projectile touche un ennemni
         for monster in self.game.check_collision(self, self.game.all_monsters):
-            self.remove()
+            #self.remove()
             monster.remove()
 
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
