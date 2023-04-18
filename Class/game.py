@@ -1,8 +1,8 @@
 import pygame
-from Class.monster import Monster
-from Class.player import Player
-from Class.bonus import Bonus
-from Class.obstacle import Obstacle
+import enemy
+import player
+import bonus
+import obstacle
 
 class Game (object):
     '''C'est la classe qui stock toutes les infos de la partie
@@ -48,7 +48,7 @@ class Game (object):
 
     def spawn_monster(self):
         '''Instencie un objet monstre et le place dans une liste de tous les monstres'''
-        monster = Monster(self)
+        monster = Piaf(self)
         self.all_monsters.add(monster)
 
     def spawn_obstacle(self):
