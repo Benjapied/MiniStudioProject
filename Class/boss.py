@@ -14,9 +14,10 @@ class Boss (pygame.sprite.Sprite) :
 
         #Image et position
         self.image = pygame.image.load("img/bird_boss.png")
+        self.image = pygame.transform.scale(self.image, (400, 400))
         self.rect = self.image.get_rect()
         self.rect.x = 1200
-        self.rect.y = 500
+        self.rect.y = 100
 
     #définition des fonctions permettant au boss d'attaque
     def attack_pattern1(self):
