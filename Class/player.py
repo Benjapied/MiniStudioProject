@@ -83,8 +83,9 @@ class Player (pygame.sprite.Sprite):
 
     def damage(self, amount):
  
-        if self.hp > 0 :
+        if self.hp - amount > amount :
             self.hp -= amount
+
 
         else :
             self.game.game_over()

@@ -28,6 +28,7 @@ class Piaf(pygame.sprite.Sprite) :
             #On delete le monstre de la liste des monstres
             self.game.totalScore +=  self.point
             self.delete()
+            self.game.player.damage(5)
 
     def delete(self):
         self.game.all_monsters.remove(self) 
@@ -42,6 +43,7 @@ class Piaf(pygame.sprite.Sprite) :
             self.rect.x -= self.velocity
         elif self.game.check_collision(self, self.game.all_players):
             self.delete()
+            self.game.player.damage(10)
 
 # une classe qui represente un ennemi qui explose 
 class Piomber(pygame.sprite.Sprite) : 
@@ -84,6 +86,7 @@ class Piomber(pygame.sprite.Sprite) :
             self.rect.x -= self.velocity
         elif self.game.check_collision(self, self.game.all_players):
             self.delete()
+            self.game.player.damage(10)
 
 # une classe qui represente un ennemi plus resistant
 class Piank(pygame.sprite.Sprite) : 
@@ -125,6 +128,8 @@ class Piank(pygame.sprite.Sprite) :
             self.rect.x -= self.velocity
         elif self.game.check_collision(self, self.game.all_players):
             self.delete()
+            self.game.player.damage(10)
+            
 
 # une classe qui represente un ennemi plus rapide
 class Piasher(pygame.sprite.Sprite) : 
@@ -166,6 +171,7 @@ class Piasher(pygame.sprite.Sprite) :
             self.rect.x -= self.velocity
         elif self.game.check_collision(self, self.game.all_players):
             self.delete()
+            self.game.player.damage(10)
 
 # une classe qui represente un ennemi qui tire plus rapidement
 class Piafle(pygame.sprite.Sprite) : 
@@ -209,3 +215,4 @@ class Piafle(pygame.sprite.Sprite) :
             self.rect.x -= self.velocity
         elif self.game.check_collision(self, self.game.all_players):
             self.delete()
+            self.game.player.damage(10)
