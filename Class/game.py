@@ -36,7 +36,7 @@ class Game (object):
         self.all_bonus = pygame.sprite.Group()
         self.spawn_bonus()
         self.all_boss = pygame.sprite.Group()
-        self.spawn_boss()
+        self.mainBoss = None
 
 
         self.distance = 0
@@ -78,6 +78,7 @@ class Game (object):
         '''Instencie un objet boss et le place dans une liste de tous les boss'''
         boss = Boss(self)
         self.all_boss.add(boss)
+        self.mainBoss = boss
 
     def spawn_monster_random (self,counter) :
         '''Methode pour faire spawn une ruée de monstre de maniere aléatoire, 
