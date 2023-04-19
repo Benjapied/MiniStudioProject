@@ -20,6 +20,8 @@ class Game (object):
     '''
     def __init__(self):
 
+        #définir si note jeu a commencé ou non
+        self.is_playing = False
         #On définit les differentes listes qui vont contenir les entités
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)

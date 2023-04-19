@@ -90,6 +90,23 @@ background = pygame.image.load('img/fond.png')
 background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
 
 
+
+
+#importer charger notre bannière
+banner = pygame.image.load('img/banner.png')
+banner = pygame.transform.scale(banner, (500, 500))
+banner_rect = banner.get_rect()
+banner_rect.x = screen.get_width() / 4
+
+#charger notre bouton
+play_button = pygame.image.load('img/button.png')
+play_button = pygame.transform.scale(play_button, (400, 150))
+play_button_rect = play_button.get_rect()
+play_button_rect.x = screen.get_width() / 3.33
+play_button_rect.y = screen.get_height() / 2
+
+
+
 game = Game()  #On instancie un objet de la classe Game
 running = True
 globalCount = 0
@@ -105,99 +122,115 @@ imageCount = 0 #compteur qui va servir à faire défiler les images
 
 while running == True :
 
-    #Affichage du fond et du pigeon en animation
-    game.player.animation(globalCount)
-    blitage()
+    if game.is_playing :
 
-    updateGameplayNormal()
+        #Affichage du fond et du pigeon en animation
+        game.player.animation(globalCount)
+        blitage()
 
-    if game.phase == 'normal' :
-        print('ouuuuuuuuuuuu')
-        game.spawn_monster_random(globalCount)
+        updateGameplayNormal()
 
-    if game.phase == 'boss':
-        updateGameplayBoss()
+        if game.phase == 'normal' :
+            print('ouuuuuuuuuuuu')
+            game.spawn_monster_random(globalCount)
 
-    game.clock = pygame.time.get_ticks()
+        if game.phase == 'boss':
+            updateGameplayBoss()
+
+        game.clock = pygame.time.get_ticks()
 
 
-    #CONTROLS
-    if game.pressed.get(pygame.K_UP) and game.player.rect.y > 0 :
-      game.player.moveUp()
+        #CONTROLS
+        if game.pressed.get(pygame.K_UP) and game.player.rect.y > 0 :
+            game.player.moveUp()
 
-    if game.pressed.get(pygame.K_DOWN) and game.player.rect.y + game.player.rect.width < screen.get_height() :
-      game.player.moveDown()
+        if game.pressed.get(pygame.K_DOWN) and game.player.rect.y + game.player.rect.width < screen.get_height() :
+            game.player.moveDown()
 
-    if game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-      game.player.moveLeft()
+        if game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
+            game.player.moveLeft()
 
-    if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
-       game.player.moveRight()
+        if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
+            game.player.moveRight()
+        
+        #Calculs dans la boucle
+
+        imageCount = imageCount + game.speed
+        if imageCount >= 1080:
+            imageCount = 0
+
+        lastDistance = game.distanceScore 
+        game.distance = game.distance + 1 
+        game.distanceScore = int(game.distance/10)
+        game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
+
+        multiplicator = int(game.totalScore/1000)
+
     
-    #Calculs dans la boucle
+        if game.speed < 50 :
+            game.speed = 3 + multiplicator
 
-    imageCount = imageCount + game.speed
-    if imageCount >= 1080:
-        imageCount = 0
+        #Ca print du texte 
+        distance = myFont.render("distance: "+str(game.distanceScore), 1, (255,255,255))
+        clock = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
+        score = myFont.render(str(globalCount), 1, (255,255,255))
+        fps = myFont.render(str(FPS), 1, (255,255,255))
+        screen.blit(distance, (520, 30))
+        screen.blit(clock, (200, 30))
+        screen.blit(score, (520, 60))
+        screen.blit(fps, (1040, 10))
 
-    lastDistance = game.distanceScore 
-    game.distance = game.distance + 1 
-    game.distanceScore = int(game.distance/10)
-    game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
+        pygame.display.flip()
+        
+        fpsClock.tick(FPS)
+        globalCount = globalCount + 1
 
-    multiplicator = int(game.totalScore/1000)
-
- 
-    if game.speed < 50 :
-        game.speed = 3 + multiplicator
-
-    #Ca print du texte 
-    distance = myFont.render("distance: "+str(game.distanceScore), 1, (255,255,255))
-    clock = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
-    score = myFont.render(str(globalCount), 1, (255,255,255))
-    fps = myFont.render(str(FPS), 1, (255,255,255))
-    screen.blit(distance, (520, 30))
-    screen.blit(clock, (200, 30))
-    screen.blit(score, (520, 60))
-    screen.blit(fps, (1040, 10))
-
-    pygame.display.flip()
-    
-    fpsClock.tick(FPS)
-    globalCount = globalCount + 1
+    #vérifier si le jeu n'a pas commencé
+    else :
+        screen.blit(play_button, play_button_rect)
+        screen.blit(banner, banner_rect)
+        pygame.display.flip()
 
 
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
-            running = False
-            pygame.quit() 
-    
+                running = False
+                pygame.quit() 
+        
         elif event.type == pygame.KEYDOWN:
-            game.pressed[event.key] = True
+                game.pressed[event.key] = True
 
-            #détecter si la touche espace est enclenchée pour lancer notre projectile
-            if event.key == pygame.K_SPACE:
-                game.player.launch_projectile()
-            
-            if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e) and event.key == pygame.K_SPACE: 
-                game.player.launch_special("fire")
-            
-            if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :
-                game.player.launch_special("water")
+                #détecter si la touche espace est enclenchée pour lancer notre projectile
+                if event.key == pygame.K_SPACE:
+                    game.player.launch_projectile()
+                
+                if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e) and event.key == pygame.K_SPACE: 
+                    game.player.launch_special("fire")
+                
+                if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :
+                    game.player.launch_special("water")
 
-            if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) :
-                game.player.launch_special("earth")
+                if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) :
+                    game.player.launch_special("earth")
 
-            if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) :
-                game.player.launch_special("air")
+                if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) :
+                    game.player.launch_special("air")
 
-            if event.key == pygame.K_ESCAPE:
-                settings()
+                if event.key == pygame.K_ESCAPE:
+                    settings()
 
-            if game.pressed.get(pygame.K_m) :
-                game.phase = 'boss'
-                print('oue')
+                if game.pressed.get(pygame.K_m) :
+                    game.phase = 'boss'
+                    print('oue')
 
         elif event.type == pygame.KEYUP:
-            game.pressed[event.key] = False
+                game.pressed[event.key] = False
+
+        elif event.type == pygame.MOUSEBUTTONDOWN :
+            #vérification si la souris touche le bouton
+            if play_button_rect.collidepoint(event.pos):
+                #lancer le jeu
+                game.is_playing = True
+
+    
