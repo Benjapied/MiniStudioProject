@@ -44,7 +44,6 @@ def settings () :
 
 def updateGameplayNormal () :
     '''Fonction qui regroupe toutes les updates des entitées au cour de la partie'''
-    game.spawn_monster_random(globalCount)
 
     #Obstacles
     for obstacle in game.all_obstacles:
@@ -71,13 +70,20 @@ def updateGameplayNormal () :
     #appliquer l'ensemble des images de mon groupe de monstres
     game.all_monsters.draw(screen)
 
-def updateGameplayBoss():
+def updateGameplayBoss(globalCount):
     '''Focntion qui update toutes les entitées pendant la phase du boss'''
-    #Projectiles
-    for projectile in game.player.all_projectiles:
-        projectile.move()
-        #appliquer les images de mon groupe de projectiles
-    game.player.all_projectiles.draw(screen)
+    #Monstres
+    #appliquer l'ensemble des images de mon groupe de monstres
+    game.all_boss.draw(screen)
+
+    #Pour faire avancer le boss jusqu'à sa position dès qu'il arrive
+    if game.mainBoss.rect.x >= 600:
+        game.mainBoss.bossDemarche()
+
+    if globalCount%1000 == 0:
+        #mettre la fonction qui lance l'attaque  du boss 
+        pass
+    
 
 
 
@@ -102,10 +108,10 @@ play_button_rect = play_button.get_rect()
 play_button_rect.x = screen.get_width() / 3.33
 play_button_rect.y = screen.get_height() / 2
 
+
 game = Game()  #On instancie un objet de la classe Game
 running = True
 globalCount = 0
-
 
 
 myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
@@ -126,11 +132,12 @@ while running == True :
         updateGameplayNormal()
 
         if game.phase == 'normal' :
-            print('ouuuuuuuuuuuu')
             game.spawn_monster_random(globalCount)
 
         if game.phase == 'boss':
-            updateGameplayBoss()
+            updateGameplayBoss(globalCount)
+            
+            
 
         game.clock = pygame.time.get_ticks()
 
@@ -217,7 +224,7 @@ while running == True :
 
                 if game.pressed.get(pygame.K_m) :
                     game.phase = 'boss'
-                    print('oue')
+                    game.spawn_boss()
 
         elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
