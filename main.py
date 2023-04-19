@@ -122,6 +122,8 @@ imageCount = 0 #compteur qui va servir à faire défiler les images
 
 while running == True :
 
+    print(game.player.hp)
+
     if game.is_playing :
 
         #Affichage du fond et du pigeon en animation

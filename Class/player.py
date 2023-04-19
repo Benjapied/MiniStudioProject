@@ -55,7 +55,10 @@ class Player (pygame.sprite.Sprite):
     def moveRight (self) :
         '''déplace vers la droite, augmente le x'''
         if not self.game.check_collision(self, self.game.all_monsters):
-            self.rect.x += self.velocity 
+            self.rect.x += self.velocity
+
+        
+            
 
     def animation(self, counter):
         if counter%20 == 19:
@@ -71,7 +74,17 @@ class Player (pygame.sprite.Sprite):
         for monster in self.game.check_collision(self, self.game.all_monsters):
             #self.remove()
             monster.remove()
+            
 
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
             #self.
             obstacle.remove()
+
+
+    def damage(self, amount):
+ 
+        if self.hp > 0 :
+            self.hp -= amount
+
+        else :
+            self.game.game_over()

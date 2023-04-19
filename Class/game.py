@@ -86,3 +86,9 @@ class Game (object):
         if counter%100 == 0 :
             if randint(1,2) == 1:
                 self.spawn_monster()
+
+    def game_over(self):
+        #remettre le jeu au début
+        
+        self.player.hp = 10
+        self.is_playing = False
