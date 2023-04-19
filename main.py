@@ -76,7 +76,7 @@ def updateGameplayNormal () :
     game.all_monsters.draw(screen)
 
 
-def updateGameplayBoss(globalCount):
+def updateGameplayBoss():
     '''Focntion qui update toutes les entitées pendant la phase du boss'''
     #Monstres
     #appliquer l'ensemble des images de mon groupe de monstres
@@ -86,9 +86,6 @@ def updateGameplayBoss(globalCount):
     if game.mainBoss.rect.x >= 600:
         game.mainBoss.bossDemarche()
 
-    if globalCount%1000 == 0:
-        #mettre la fonction qui lance l'attaque  du boss 
-        pass
 
     
     
@@ -119,11 +116,10 @@ play_button_rect.y = screen.get_height() / 2
 
 game = Game()  #On instancie un objet de la classe Game
 running = True
-globalCount = 0
-
+deltaTime = 0
 
 myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
-FPS = 100
+FPS = 50
 fpsClock = pygame.time.Clock()
 imageCount = 0 #compteur qui va servir à faire défiler les images
 
@@ -131,23 +127,24 @@ imageCount = 0 #compteur qui va servir à faire défiler les images
 
 while running == True :
 
+    startTime = pygame.time.get_ticks()
+
     if game.is_playing :
 
         #Affichage du fond et du pigeon en animation
-        game.player.animation(globalCount)
+        game.player.animation()
         blitage()
 
         updateGameplayNormal()
 
         if game.phase == 'normal' :
-            game.spawn_monster_random(globalCount)
+            # game.spawn_monster_random()
+            pass
 
         if game.phase == 'boss':
-            updateGameplayBoss(globalCount)
+            updateGameplayBoss()
             
             
-
-        game.clock = pygame.time.get_ticks()
 
 
         #CONTROLS
@@ -183,17 +180,16 @@ while running == True :
         #Ca print du texte 
         distance = myFont.render("distance: "+str(game.distanceScore), 1, (255,255,255))
         clock = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
-        score = myFont.render(str(globalCount), 1, (255,255,255))
-        fps = myFont.render(str(FPS), 1, (255,255,255))
+        score = myFont.render(str(game.clock), 1, (255,255,255))
+        fps = myFont.render("FPS: "+str(1000//deltaTime), 1, (255,255,255))
         screen.blit(distance, (520, 30))
         screen.blit(clock, (200, 30))
         screen.blit(score, (520, 60))
-        screen.blit(fps, (1040, 10))
+        screen.blit(fps, (800, 10))
 
         pygame.display.flip()
         
         fpsClock.tick(FPS)
-        globalCount = globalCount + 1
 
     #vérifier si le jeu n'a pas commencé
     else :
@@ -235,7 +231,7 @@ while running == True :
                     game.spawn_boss()
                 
                 if game.pressed.get(pygame.K_o):
-                    game.mainBoss.attack_pattern1(globalCount)
+                    game.mainBoss.attack_pattern1()
 
         elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
@@ -245,3 +241,7 @@ while running == True :
             if play_button_rect.collidepoint(event.pos):
                 #lancer le jeu
                 game.is_playing = True
+
+    deltaTime = pygame.time.get_ticks() - startTime
+    game.clock += deltaTime
+    

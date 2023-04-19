@@ -13,6 +13,7 @@ class Player (pygame.sprite.Sprite):
         self.shootingMode = "normal"
         self.all_projectiles = pygame.sprite.Group()
         self.all_bonus = pygame.sprite.Group()
+        self.animationDuration = 1000 #Le temps de l'animation de vol en mili seconde
 
         #Image et position
         self.animeStat = 0 #Numero du sprite de l'animation
@@ -57,13 +58,9 @@ class Player (pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_monsters):
             self.rect.x += self.velocity 
 
-    def animation(self, counter):
-        if counter%20 == 19:
-            if self.animeStat == 3:
-                self.animeStat = 0
-            else :
-                self.animeStat = self.animeStat+1
-            
+    def animation(self):
+        '''fonction qui anime le joueur principal'''
+        self.animeStat = int((self.game.clock%self.animationDuration)/self.animationDuration*4) #Définition de l'image à afficher en fonction de la clock du jeu (si vous comprenez pas demandez à peter)
         self.image = self.listSprite[self.animeStat]
 
     def contact(self):

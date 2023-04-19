@@ -26,7 +26,7 @@ class Boss (pygame.sprite.Sprite) :
         self.game.all_boss.remove(self)
 
     
-    def attack_pattern1(self, globalCount):
+    def attack_pattern1(self):
         '''Pattern d'attaque 1'''
         self.attack1 = 10
         self.attackSpeed1 = 0.2

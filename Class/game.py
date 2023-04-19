@@ -57,8 +57,8 @@ class Game (object):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
     
     def print_clock (self):
-        '''méthode qui return le timer de la game'''
-        return self.clock //1000
+        '''méthode qui return le timer de la game, en seconde et affiche les centièmes'''
+        return self.clock //10 / 100
 
     def spawn_monster(self):
         '''Instencie un objet monstre et le place dans une liste de tous les monstres'''
@@ -81,10 +81,9 @@ class Game (object):
         self.all_boss.add(boss)
         self.mainBoss = boss
 
-    def spawn_monster_random (self,counter) :
+    def spawn_monster_random (self) :
         '''Methode pour faire spawn une ruée de monstre de maniere aléatoire, 
         cette fonction peut etre considérée comme un patern de mob
         IL FAUT REDUIRE CE QU'IL Y A APRES LE MODULO POUR AUGMENTER LA CADENCE D'APPARITION DES ENNEMIS'''
-        if counter%100 == 0 :
-            if randint(1,2) == 1:
-                self.spawn_monster()
+        pass #Il faut trouver comment faire spawn des monstres à un interval régulier en utilisant self.clock et sans avoir un algo de bourrin
+        self.spawn_monster()
