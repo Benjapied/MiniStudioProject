@@ -27,17 +27,18 @@ class Game (object):
         self.player = Player(self)
         self.all_players.add(self.player)
         
+        self.all_projectiles = pygame.sprite.Group() #Prend en compte tous les projectiles des ennemis
 
-        self.all_monsters = pygame.sprite.Group()
+        self.all_monsters = pygame.sprite.Group() #Liste de tous les monstres
 
-        self.all_obstacles = pygame.sprite.Group()
-        self.spawn_obstacle()
+        self.all_obstacles = pygame.sprite.Group()#Liste de tous les obstacles
+        self.spawn_obstacle()#A supprimer 
 
-        self.all_bonus = pygame.sprite.Group()
-        self.spawn_bonus()
-        self.all_boss = pygame.sprite.Group()
-        self.mainBoss = None
+        self.all_bonus = pygame.sprite.Group()#Liste des bonus 
+        self.spawn_bonus()#A supprimer
 
+        self.all_boss = pygame.sprite.Group()#Liste des boss (au cas ou il y en a plusieurs)
+        self.mainBoss = None #Variable qui prend en compte le seul boss du niveau
 
         self.distance = 0
         self.distanceScore = 0

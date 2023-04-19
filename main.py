@@ -63,12 +63,18 @@ def updateGameplayNormal () :
         #appliquer les images de mon groupe de projectiles
     game.player.all_projectiles.draw(screen)
 
+    #Projectiles des monstres
+    for projectile in game.all_projectiles:
+        projectile.move()
+    game.all_projectiles.draw(screen)
+
     #Monstres
     for monster in game.all_monsters:
         monster.forward()
         monster.respawn()
     #appliquer l'ensemble des images de mon groupe de monstres
     game.all_monsters.draw(screen)
+
 
 def updateGameplayBoss(globalCount):
     '''Focntion qui update toutes les entitées pendant la phase du boss'''
@@ -83,6 +89,8 @@ def updateGameplayBoss(globalCount):
     if globalCount%1000 == 0:
         #mettre la fonction qui lance l'attaque  du boss 
         pass
+
+    
     
 
 
@@ -225,6 +233,9 @@ while running == True :
                 if game.pressed.get(pygame.K_m) :
                     game.phase = 'boss'
                     game.spawn_boss()
+                
+                if game.pressed.get(pygame.K_o):
+                    game.mainBoss.attack_pattern1(globalCount)
 
         elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False

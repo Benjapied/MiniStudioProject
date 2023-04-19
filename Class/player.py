@@ -75,3 +75,7 @@ class Player (pygame.sprite.Sprite):
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
             #self.
             obstacle.remove()
+        
+    def damage(self):
+        '''le joueur doit prendre des dommages dans cette focntion'''
+        pass
