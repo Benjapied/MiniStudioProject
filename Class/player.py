@@ -76,6 +76,4 @@ class Player (pygame.sprite.Sprite):
             #self.
             obstacle.remove()
         
-    def damage(self):
-        '''le joueur doit prendre des dommages dans cette focntion'''
-        pass
+    
