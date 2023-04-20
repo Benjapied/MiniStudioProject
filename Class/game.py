@@ -86,4 +86,5 @@ class Game (object):
         cette fonction peut etre considérée comme un patern de mob
         IL FAUT REDUIRE CE QU'IL Y A APRES LE MODULO POUR AUGMENTER LA CADENCE D'APPARITION DES ENNEMIS'''
         pass #Il faut trouver comment faire spawn des monstres à un interval régulier en utilisant self.clock et sans avoir un algo de bourrin
-        self.spawn_monster()
+        if self.clock%200 == 0:
+            self.spawn_monster()

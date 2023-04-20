@@ -138,7 +138,7 @@ while running == True :
         updateGameplayNormal()
 
         if game.phase == 'normal' :
-            # game.spawn_monster_random()
+            game.spawn_monster_random()
             pass
 
         if game.phase == 'boss':
