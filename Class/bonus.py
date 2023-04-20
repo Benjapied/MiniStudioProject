@@ -9,6 +9,7 @@ class Bonus(pygame.sprite.Sprite):
         self.game = game
         self.bonus_number = randint (1,1)
         self.text = "img/image_bonus_" + str(self.bonus_number)  # initialisation 
+
         #Image et position
         self.image = pygame.image.load(self.text +".png") # l'image du bonus
         self.image = pygame.transform.scale(self.image, (32, 32))
@@ -16,7 +17,7 @@ class Bonus(pygame.sprite.Sprite):
         self.rect.x = 1080
         self.rect.y = randint(0,712)
 
-        self.velocity = self.game.player.velocity # augemente avec celle du joueur / distance
+        self.velocity = self.game.player.velocity # augemente avec celle du joueur / distance (il y a plusieur genre de bonus donc faudrat y que l'on retravaille dessus)
 
     def forward(self):
         #le déplacement se fait que si il n'y a pas de collision
@@ -24,7 +25,7 @@ class Bonus(pygame.sprite.Sprite):
             self.rect.x -= self.velocity
         else:
             self.game.player.all_bonus.add(self)
-            self.game.player.velocity = self.game.player.velocity + 5
+            self.game.player.velocity = self.game.player.velocity + 1
             self.remove()
     
     def remove(self):
