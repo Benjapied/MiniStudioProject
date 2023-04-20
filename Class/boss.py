@@ -31,7 +31,9 @@ class Boss (pygame.sprite.Sprite) :
         self.attack1 = 10
         self.attackSpeed1 = 0.2
         self.speedAttack1 = 10
-
+        self.attackSequence = 0
+        
+        
         projectile = Ennemi_projectile(self,self.game)#Je crée un missile à partir du boss 
         projectile.lunch_projec()# et le range dans la liste des projectiles ennemis
     

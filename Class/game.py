@@ -84,8 +84,7 @@ class Game (object):
 
     def spawn_monster_random (self) :
         '''Methode pour faire spawn une ruée de monstre de maniere aléatoire, 
-        cette fonction peut etre considérée comme un patern de mob
-        IL FAUT REDUIRE CE QU'IL Y A APRES LE MODULO POUR AUGMENTER LA CADENCE D'APPARITION DES ENNEMIS'''
+        cette fonction peut etre considérée comme un patern de mob'''
         
         if self.clockV2 > 2000:
             self.spawn_monster()
