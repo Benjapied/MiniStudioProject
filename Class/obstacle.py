@@ -46,7 +46,7 @@ class Obstacle (pygame.sprite.Sprite):
         #sinon (s'il y a une collision)
         else :
             self.remove()
-            #self.game.player.contact()
+            self.game.player.damage(10)
     
     def remove(self):
         self.game.all_obstacles.remove(self)
