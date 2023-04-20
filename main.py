@@ -85,11 +85,8 @@ def updateGameplayBoss():
     #Pour faire avancer le boss jusqu'à sa position dès qu'il arrive
     if game.mainBoss.rect.x >= 600:
         game.mainBoss.bossDemarche()
-
-
     
     
-
 
 
 # générer la fenetre de notre jeu
@@ -123,7 +120,7 @@ running = True
 deltaTime = 0
 
 myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
-FPS = 50
+FPS = 100
 fpsClock = pygame.time.Clock()
 imageCount = 0 #compteur qui va servir à faire défiler les images
 
@@ -187,7 +184,8 @@ while running == True :
         score = myFont.render("Score "+str(game.totalScore), 1, (255,255,255))
         fps = myFont.render("FPS: "+str(1000//deltaTime), 1, (255,255,255))
         screen.blit(distance, (520, 30))
-        screen.blit(cadre,(180, 20))
+
+        screen.blit(cadre,(175, 15))
         screen.blit(clock, (200, 30))
 
         screen.blit(score, (520, 60))
