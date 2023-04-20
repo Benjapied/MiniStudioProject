@@ -47,6 +47,7 @@ class Game (object):
 
         self.phase = 'normal' #Peut etre normal ou boss ou plus si on ajoute d'autres phases
         self.clock = 0 #Timer global du jeu  
+        self.clockV2 = 0 #POur faire l'algo des monstres jpp je sais pas comment faire autrement 
         
         #stocker les touches activées par le joueur 
         self.pressed = {}
@@ -85,5 +86,7 @@ class Game (object):
         '''Methode pour faire spawn une ruée de monstre de maniere aléatoire, 
         cette fonction peut etre considérée comme un patern de mob
         IL FAUT REDUIRE CE QU'IL Y A APRES LE MODULO POUR AUGMENTER LA CADENCE D'APPARITION DES ENNEMIS'''
-        pass #Il faut trouver comment faire spawn des monstres à un interval régulier en utilisant self.clock et sans avoir un algo de bourrin
-        self.spawn_monster()
+        
+        if self.clockV2 > 2000:
+            self.spawn_monster()
+            self.clockV2 = 0
