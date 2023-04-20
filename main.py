@@ -139,7 +139,7 @@ while running == True :
 
         if game.phase == 'normal' :
             game.spawn_monster_random()
-            pass
+            
 
         if game.phase == 'boss':
             updateGameplayBoss()
@@ -180,7 +180,7 @@ while running == True :
         #Ca print du texte 
         distance = myFont.render("distance: "+str(game.distanceScore), 1, (255,255,255))
         clock = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
-        score = myFont.render(str(game.clock), 1, (255,255,255))
+        score = myFont.render("horloge "+str(game.clockV2), 1, (255,255,255))
         fps = myFont.render("FPS: "+str(1000//deltaTime), 1, (255,255,255))
         screen.blit(distance, (520, 30))
         screen.blit(clock, (200, 30))
@@ -244,4 +244,5 @@ while running == True :
 
     deltaTime = pygame.time.get_ticks() - startTime
     game.clock += deltaTime
+    game.clockV2 += deltaTime
     

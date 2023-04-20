@@ -12,7 +12,7 @@ class Ennemie(pygame.sprite.Sprite):
 
         #Image et position
         self.rect = self.image.get_rect()
-        self.rect.x = 1000 + random.randint(0, 300)
+        self.rect.x = 1000 + random.randint(80, 200)
         self.rect.y = random.randint (10, 500)
 
     def damage(self, amount):
