@@ -72,5 +72,13 @@ class Player (pygame.sprite.Sprite):
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
             #self.
             obstacle.remove()
+
+    def damage(self, amount):
+ 
+        if self.hp - amount > amount :
+            self.hp -= amount
+
+        else :
+            self.game.game_over()
         
     

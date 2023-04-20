@@ -37,6 +37,9 @@ class Ennemie(pygame.sprite.Sprite):
             self.rect.x -= self.velocity
         elif self.game.check_collision(self, self.game.all_players):
             self.delete()
+            self.game.player.damage(10)
+            
+            
     
 class Piaf(Ennemie): 
 

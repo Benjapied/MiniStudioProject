@@ -90,3 +90,9 @@ class Game (object):
         if self.clockV2 > 2000:
             self.spawn_monster()
             self.clockV2 = 0
+
+
+    def game_over(self):
+        
+        self.player.hp = 10
+        self.is_playing = False
