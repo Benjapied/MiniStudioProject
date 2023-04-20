@@ -51,8 +51,9 @@ class Ennemi_projectile(Projectile):
     def __inti__(self):
         Projectile().__init__()
         self.color = 'neutral'
+        self.target = self.game.player
         self.rect.x = self.player.rect.x - 50 
-        self.rect.y = self.player.rect.y + 400
+        self.rect.y = self.player.rect.y + 800
 
     def remove_ennemi(self):
         '''retire l'objet de la liste des projectiles'''
@@ -61,11 +62,9 @@ class Ennemi_projectile(Projectile):
     def move(self):
         self.rect.x -= self.velocity
 
-        #vérifier si le projectile touche un ennemni
-        for entity in self.game.check_collision(self, self.game.all_players):
+        if self.game.check_collision(self, self.game.all_players):
             self.remove_ennemi()
-            entity.damage()
-
+            self.game.player.damage(10)
 
         #vérifier si le projectile n'est plus dans l'écran
         if self.rect.x < 0:
