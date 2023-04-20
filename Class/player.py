@@ -18,8 +18,8 @@ class Player (pygame.sprite.Sprite):
         #Image et position
         self.animeStat = 0 #Numero du sprite de l'animation
         image = pygame.image.load("img/wazo_anim.png")
-        self.listSprite = []
-        self.listSprite.append(image.subsurface(89,39,228,200))
+        self.listSprite = [] #Liste qui va contenir toutes les frames de l'animation
+        self.listSprite.append(image.subsurface(89,39,228,200)) #Subsurface va prendre une partie de la sprite sheet
         self.listSprite.append(image.subsurface(317,34,228,200))
         self.listSprite.append(image.subsurface(556,38,228,200))
         self.listSprite.append(image.subsurface(791,39,239,200))

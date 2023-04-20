@@ -93,12 +93,16 @@ def updateGameplayBoss():
 
 
 # générer la fenetre de notre jeu
-pygame.display.set_caption("Comet fall Game")
+pygame.display.set_caption("FLY OR DIE: Pigeon's last stand")
 screen = pygame.display.set_mode((1080, 720))
 
 #Génération de toutes les images de fond
 background = pygame.image.load('img/fond.png')
 background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
+
+#On génere le cadre pour mettre les infos dedans
+cadre = pygame.image.load('img/frame.png')
+cadre = pygame.transform.scale(cadre, (120, 50)) 
 
 #importer charger notre bannière
 banner = pygame.image.load('img/banner.png')
@@ -111,7 +115,7 @@ play_button = pygame.image.load('img/button.png')
 play_button = pygame.transform.scale(play_button, (400, 150))
 play_button_rect = play_button.get_rect()
 play_button_rect.x = screen.get_width() / 3.33
-play_button_rect.y = screen.get_height() / 2
+play_button_rect.y = screen.get_height() * (2/3)
 
 
 game = Game()  #On instancie un objet de la classe Game
@@ -180,10 +184,12 @@ while running == True :
         #Ca print du texte 
         distance = myFont.render("distance: "+str(game.distanceScore), 1, (255,255,255))
         clock = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
-        score = myFont.render("horloge "+str(game.clockV2), 1, (255,255,255))
+        score = myFont.render("Score "+str(game.totalScore), 1, (255,255,255))
         fps = myFont.render("FPS: "+str(1000//deltaTime), 1, (255,255,255))
         screen.blit(distance, (520, 30))
+        screen.blit(cadre,(180, 20))
         screen.blit(clock, (200, 30))
+
         screen.blit(score, (520, 60))
         screen.blit(fps, (800, 10))
 
