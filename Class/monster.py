@@ -60,8 +60,8 @@ class Piaf(Ennemie):
         self.max_health = 5
         self.point = 100
         self.velocity = 3
-        self.attack_speed = 100
-        self.att_speed = 100
+        self.attack_speed = 100 # cadence de l'attaque
+        self.att_speed = 100 # cadence max 
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -77,6 +77,8 @@ class Piomber(Ennemie) :
         self.attack = 100
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 1000 # cadence de l'attaque
+        self.att_speed = 1000 # cadence max
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -90,6 +92,8 @@ class Piank(Ennemie) :
         self.max_health = 15
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 150 # cadence de l'attaque
+        self.att_speed = 150 # cadence max 
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -103,6 +107,8 @@ class Piasher(Ennemie) :
         self.max_health = 5
         self.point = 100
         self.velocity = 13
+        self.attack_speed = 1000 # cadence de l'attaque
+        self.att_speed = 1000 # cadence max
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -118,6 +124,8 @@ class Piafle(Ennemie) :
         self.attack_speed = 3
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 50 # cadence de l'attaque
+        self.att_speed = 50 # cadence max 
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -132,6 +140,8 @@ class Piaper(Ennemie) :
         self.attack = 100
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 200 # cadence de l'attaque
+        self.att_speed = 200 # cadence max 
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -146,6 +156,8 @@ class Piacon(Ennemie) :
         self.attack = 0
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 1000 # cadence de l'attaque
+        self.att_speed = 1000 # cadence max
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -160,6 +172,8 @@ class Piapiaf(Ennemie) :
         self.attack = 100
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 150 # cadence de l'attaque
+        self.att_speed = 150 # cadence max 
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -174,6 +188,8 @@ class Piagenieur(Ennemie) :
         self.attack = 100
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 150 # cadence de l'attaque
+        self.att_speed = 150 # cadence max 
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -188,6 +204,8 @@ class Piagicien(Ennemie) :
         self.attack = 100
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 150 # cadence de l'attaque
+        self.att_speed = 150 # cadence max
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')
@@ -202,6 +220,8 @@ class Piade(Ennemie) :
         self.attack = 100
         self.point = 100
         self.velocity = 3 
+        self.attack_speed = 150 # cadence de l'attaque
+        self.att_speed = 150 # cadence max 
 
         #Image et position
         self.image = pygame.image.load('img/mummy.png')

@@ -52,7 +52,7 @@ class Ennemi_projectile(Projectile):
         Projectile().__init__()
         self.color = 'neutral'
         self.target = self.game.player
-        self.rect.x = self.player.rect.x - 50 
+        self.rect.x = self.player.rect.x - 50
         self.rect.y = self.player.rect.y + 800
 
     def remove_ennemi(self):
