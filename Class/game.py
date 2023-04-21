@@ -28,8 +28,7 @@ class Game (object):
 
         self.list_monsters = [Piaf(self), Piomber(self), Piank(self), Piasher(self), Piafle(self), Piaper(self), Piacon(self), Piapiaf(self), Piagenieur(self), Piagicien(self), Piade(self)]
 
-        self.all_obstacles = pygame.sprite.Group()#Liste de tous les obstacles
-        self.spawn_obstacle()#A supprimer 
+        self.all_obstacles = pygame.sprite.Group()#Liste de tous les obstacles 
 
         self.all_bonus = pygame.sprite.Group()#Liste des bonus 
         self.spawn_bonus()#A supprimer
@@ -42,9 +41,8 @@ class Game (object):
         self.totalScore = 0
         self.speed = 3
 
-        self.phase = 'normal' #Peut etre normal ou boss ou plus si on ajoute d'autres phases
+        self.phase = 'intro' #Peut etre normal ou boss ou plus si on ajoute d'autres phases
         self.clock = 0 #Timer global du jeu  
-        self.clockV2 = 0 #POur faire l'algo des monstres jpp je sais pas comment faire autrement 
         
         #stocker les touches activées par le joueur 
         self.pressed = {}
@@ -81,15 +79,6 @@ class Game (object):
         boss = Boss(self)
         self.all_boss.add(boss)
         self.mainBoss = boss
-
-    def spawn_monster_random (self) :
-        '''Methode pour faire spawn une ruée de monstre de maniere aléatoire, 
-        cette fonction peut etre considérée comme un patern de mob'''
-        
-        if self.clockV2 > 2000:
-            self.spawn_monster()
-            self.clockV2 = 0
-
 
     def game_over(self):
         

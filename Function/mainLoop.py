@@ -5,7 +5,7 @@ from Function.updateGameplayBoss import updateGameplayBoss
 from Function.blitage import blitage
 from Function.settings import settings
 from Class.functionTrigger import functionTrigger
-from Function.functions import spawnMonster
+from Function.functions import spawnMonster,spawnObstacle,intro
 
 def mainfonction(screen):
 
@@ -32,6 +32,7 @@ def mainfonction(screen):
     ############# Création des fonctions à faire répéter ###############
     
     FunctionList.append(functionTrigger(game,2000,spawnMonster,game))
+    FunctionList.append(functionTrigger(game,4000,spawnObstacle,game))
 
     ################### Main Loop #####################################
 
@@ -46,16 +47,14 @@ def mainfonction(screen):
         blitage(game,screen,background,imageCount)
 
         updateGameplayNormal(game,screen)
-        for obstacle in game.all_obstacles :
-             if obstacle.text == "img/obstacle_turbine.png" :
-                  obstacle.animation()
+
+        if game.phase == 'intro':
+            intro(game, screen)
 
         if game.phase == 'normal' :
             for function in FunctionList :
                 function.updateTempClock(deltaTime)
                 function.checkTrigger()
-                bloublou = myFont.render("delta time: "+str(function.tempClock), 1, (255,255,255))
-                screen.blit(bloublou, (520, 500))
 
             for obstacle in game.all_obstacles :
              if obstacle.text == "img/obstacle_turbine.png" :
@@ -155,4 +154,3 @@ def mainfonction(screen):
 
         deltaTime = pygame.time.get_ticks() - startTime
         game.clock += deltaTime
-        game.clockV2 += deltaTime

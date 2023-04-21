@@ -28,8 +28,8 @@ class Player (pygame.sprite.Sprite):
         self.image = self.listSprite[self.animeStat]
 
         self.rect = self.image.get_rect()
-        self.rect.x = 8
-        self.rect.y = 8
+        self.rect.x = -200
+        self.rect.y = 300
 
 
     def launch_projectile(self):
@@ -62,6 +62,7 @@ class Player (pygame.sprite.Sprite):
         '''fonction qui anime le joueur principal'''
         self.animeStat = int((self.game.clock%self.animationDuration)/self.animationDuration*4) #Définition de l'image à afficher en fonction de la clock du jeu (si vous comprenez pas demandez à peter)
         self.image = self.listSprite[self.animeStat]
+
 
     def contact(self):
         #vérifier si le projectile touche un ennemni

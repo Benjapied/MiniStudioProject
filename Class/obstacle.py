@@ -71,7 +71,6 @@ class Obstacle (pygame.sprite.Sprite):
     
     def remove(self):
         self.game.all_obstacles.remove(self)
-        self.game.spawn_obstacle()
 
     def respawn(self):
         if self.rect.x < 0 :
