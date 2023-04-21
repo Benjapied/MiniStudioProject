@@ -6,11 +6,11 @@ pygame.init()
     
 ######################################################################## Fonctions ##################################################################################################################################
 
-
+SCREEN_SIZE = (1080, 720)
 
 # générer la fenetre de notre jeu
 pygame.display.set_caption("FLY OR DIE: Pigeon's last stand")
-screen = pygame.display.set_mode((1080, 720))
+screen = pygame.display.set_mode(SCREEN_SIZE)
 
 
 
@@ -27,6 +27,9 @@ play_button_rect = play_button.get_rect()
 play_button_rect.x = screen.get_width() / 3.33
 play_button_rect.y = screen.get_height() * (2/3)
 
+blackScreen = pygame.Surface(SCREEN_SIZE)               
+blackScreen.fill((0,0,0))
+
 is_playing = False
 
 
@@ -35,15 +38,22 @@ is_playing = False
 while True :
     if is_playing == True :
         mainfonction(screen)
+        is_playing = False
     else : 
         #Tout ce qu'il y a à afficher dans le menu de démarrage 
+        screen.blit(blackScreen, (0,0))
         screen.blit(play_button, play_button_rect)
         screen.blit(banner, banner_rect)
         pygame.display.flip()
 
     for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN :
+        if event.type == pygame.QUIT :
+            pygame.quit()
+        elif event.type == pygame.MOUSEBUTTONDOWN :
             #vérification si la souris touche le bouton
             if play_button_rect.collidepoint(event.pos):
                 #lancer le jeu
                 is_playing = True
+                
+
+    

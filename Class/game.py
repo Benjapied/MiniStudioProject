@@ -26,6 +26,7 @@ class Game (object):
     '''
     def __init__(self):
 
+        self.is_playing = True
         #On définit les differentes listes qui vont contenir les entités
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
@@ -100,4 +101,5 @@ class Game (object):
     def game_over(self):
         
         self.player.hp = 10
-        return False
+        self.is_playing = False
+        

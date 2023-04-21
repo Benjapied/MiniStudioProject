@@ -28,7 +28,7 @@ def mainfonction(screen):
 
     ################### Variables #####################################
 
-    while running :
+    while game.is_playing :
         
         startTime = pygame.time.get_ticks()
 
