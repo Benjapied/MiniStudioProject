@@ -5,3 +5,5 @@ def blitage (game,screen,background,imageCount) :
     screen.blit(background, (0-imageCount, 0))
     screen.blit(background, (1080-imageCount, 0))
     screen.blit(game.player.image, game.player.rect)
+
+    
