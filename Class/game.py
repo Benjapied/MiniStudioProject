@@ -5,6 +5,12 @@ from Class.monster import Piomber
 from Class.monster import Piank
 from Class.monster import Piasher
 from Class.monster import Piafle
+from Class.monster import Piaper
+from Class.monster import Piacon
+from Class.monster import Piapiaf
+from Class.monster import Piagenieur
+from Class.monster import Piagicien
+from Class.monster import Piade
 from Class.player import Player
 from Class.bonus import Bonus
 from Class.obstacle import Obstacle
@@ -28,6 +34,8 @@ class Game (object):
         self.all_projectiles = pygame.sprite.Group() #Prend en compte tous les projectiles des ennemis
 
         self.all_monsters = pygame.sprite.Group() #Liste de tous les monstres
+
+        self.list_monsters = [Piaf(self), Piomber(self), Piank(self), Piasher(self), Piafle(self), Piaper(self), Piacon(self), Piapiaf(self), Piagenieur(self), Piagicien(self), Piade(self)]
 
         self.all_obstacles = pygame.sprite.Group()#Liste de tous les obstacles
         self.spawn_obstacle()#A supprimer 
@@ -61,8 +69,8 @@ class Game (object):
 
     def spawn_monster(self):
         '''Instencie un objet monstre et le place dans une liste de tous les monstres'''
-        piaf = Piaf(self)
-        self.all_monsters.add(piaf)
+        ennemi = self.list_monsters[randint(0,10)]
+        self.all_monsters.add(ennemi)
 
     def spawn_obstacle(self):
         '''Instencie un objet obstacle et le place dans une liste de tous les obstacles'''
@@ -92,4 +100,4 @@ class Game (object):
     def game_over(self):
         
         self.player.hp = 10
-        self.is_playing = False
+        return False
