@@ -4,6 +4,8 @@ from Function.updateGameplayNormal import updateGameplayNormal
 from Function.updateGameplayBoss import updateGameplayBoss
 from Function.blitage import blitage
 from Function.settings import settings
+from Class.functionTrigger import functionTrigger
+from Function.functions import spawnMonster
 
 def mainfonction(screen):
 
@@ -18,15 +20,20 @@ def mainfonction(screen):
     cadre = pygame.transform.scale(cadre, (120, 50)) 
 
     game = Game()  #On instancie un objet de la classe Game
-    running = True
+    
     deltaTime = 1
 
     myFont = pygame.font.SysFont('arial', 18) #Pour mettre une font et print une variable
     FPS = 100
     fpsClock = pygame.time.Clock()
     imageCount = 0 #compteur qui va servir à faire défiler les images
+    FunctionList = [] #Liste qui va répertorier les objets functionTrigger
 
-    ################### Variables #####################################
+    ############# Création des fonctions à faire répéter ###############
+    
+    FunctionList.append(functionTrigger(game,2000,spawnMonster,game))
+
+    ################### Main Loop #####################################
 
     while game.is_playing :
         
@@ -41,8 +48,16 @@ def mainfonction(screen):
         updateGameplayNormal(game,screen)
 
         if game.phase == 'normal' :
-            game.spawn_monster_random()
-            
+            for function in FunctionList :
+                function.updateTempClock(deltaTime)
+                function.checkTrigger()
+                bloublou = myFont.render("delta time: "+str(function.tempClock), 1, (255,255,255))
+                screen.blit(bloublou, (520, 500))
+
+            for obstacle in game.all_obstacles :
+             if obstacle.text == "img/obstacle_turbine.png" :
+                  obstacle.animation()
+        
 
         if game.phase == 'boss':
             updateGameplayBoss(game,screen)
@@ -100,7 +115,7 @@ def mainfonction(screen):
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
-                    running = False
+                    
                     pygame.quit() 
             
             elif event.type == pygame.KEYDOWN:

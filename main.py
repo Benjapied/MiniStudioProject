@@ -1,5 +1,4 @@
 import pygame
-from Class.game import Game
 from Function.mainLoop import mainfonction
 
 pygame.init()

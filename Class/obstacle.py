@@ -7,33 +7,54 @@ class Obstacle (pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         # mise en place des informations 
         self.game = game
-        self.obstacle_number = randint (1,1)
-        self.text = "img/image_obstacle_" + str(self.obstacle_number)  # initialisation 
-        self.image = pygame.image.load(self.text +".png") # l'image de l'obstacle dépend du background
-        self.image = pygame.transform.scale(self.image, (32, 32))
-        self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
-        self.rect.x = 1080
-        self.rect.y = randint(0,712)
+        obstacle_number = randint (1,2)
+        if obstacle_number == 1 :
+            self.text = "img/obstacle_lamp.png" # initialisation 
+            self.image = pygame.image.load(self.text) # l'image de l'obstacle dépend du background
+            self.image = pygame.transform.scale(self.image, (130, 401))
+            self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
+            self.rect.x = 1080
+            self.rect.y = 340
+        if obstacle_number == 2 :
+            self.text = "img/obstacle_turbine.png"
+            self.image = pygame.image.load(self.text)
+            self.animationDuration = 1000 #temps de l'animation en millisecondes
+            self.animeStat = 0
+            self.listSprite = [] #Liste qui va contenir toutes les frames de l'animation
+            self.listSprite.append(self.image.subsurface(51,168,574,720))
+            self.listSprite.append(self.image.subsurface(684,23,706,862))
+            self.listSprite.append(self.image.subsurface(1433,54,627,834))
+            for i in range(3):
+                self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (312, 400))
+            self.image = self.listSprite[self.animeStat]
+            self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
+            self.rect.x = 1080
+            self.rect.y = 340
 
-        self.velocity = self.game.player.velocity # augemente avec celle du joueur / distance
-        self.coloral = randint(0,1) # choisit aléatoirement si l'obstacle est infusé par une élément ou non
-        self.color = "neutral" #dans tous les cas l'élément de base est neutre / "neutral"
-        if self.coloral == 1: # si l'obstacle est infusé par un élément
-            self.coloralForm() # alors on le modifie pour mettre en place l'infusion
+        self.velocity = 6 # augemente avec celle du joueur / distance
+        self.coloral = randint(0,0) # choisit aléatoirement si l'obstacle est coloré ou non
+        self.color = "neutral" #dans tous les cas la couleur de base est neutre / "neutral"
+        if self.coloral == 1: # si l'obstacle est à colorer :
+            self.coloralForm() # alors on le modifie pour mettre en place la coloration
     
+    def animation(self):
+        '''fonction qui anime l'obstacle (ici, l'éolienne)'''
+        self.animeStat = int((self.game.clock%self.animationDuration)/self.animationDuration*3) #Définition de l'image à afficher en fonction de la clock du jeu (si vous comprenez pas demandez à peter)
+        self.image = self.listSprite[self.animeStat]
+
     def coloralForm(self):
-        color = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 éléments
+        color = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 couleurs
         if color == 1 :
-            self.color = "air"
+            self.color = "green"
              
         elif color == 2 :
-            self.color = "fire"
+            self.color = "orange"
         
         elif color == 3 :
-            self.color = "earth"
+            self.color = "yellow"
         
         elif color == 4 :
-            self.color = "water"
+            self.color = "green"
 
         self.text += "_" + self.color
         self.image = pygame.image.load(self.text + ".png") # chargement de l'image de tel obstacle infusé par tel élément

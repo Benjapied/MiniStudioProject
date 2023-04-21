@@ -1,16 +1,6 @@
 import pygame
 from random import randint
-from Class.monster import Piaf
-from Class.monster import Piomber
-from Class.monster import Piank
-from Class.monster import Piasher
-from Class.monster import Piafle
-from Class.monster import Piaper
-from Class.monster import Piacon
-from Class.monster import Piapiaf
-from Class.monster import Piagenieur
-from Class.monster import Piagicien
-from Class.monster import Piade
+from Class.monster import Piaf, Piomber, Piank,Piasher, Piafle, Piaper, Piacon, Piapiaf, Piagenieur, Piagicien, Piade
 from Class.player import Player
 from Class.bonus import Bonus
 from Class.obstacle import Obstacle
@@ -70,8 +60,11 @@ class Game (object):
 
     def spawn_monster(self):
         '''Instencie un objet monstre et le place dans une liste de tous les monstres'''
-        ennemi = self.list_monsters[randint(0,10)]
-        self.all_monsters.add(ennemi)
+
+        # ennemi = self.list_monsters[randint(0,10)] Il faudrait créer une autre fonction qui s'appelle spawn monster spécial gwen si tu lis ça
+        # self.all_monsters.add(ennemi)
+
+        self.all_monsters.add(Piaf(self))
 
     def spawn_obstacle(self):
         '''Instencie un objet obstacle et le place dans une liste de tous les obstacles'''
