@@ -46,6 +46,9 @@ def mainfonction(screen):
         blitage(game,screen,background,imageCount)
 
         updateGameplayNormal(game,screen)
+        for obstacle in game.all_obstacles :
+             if obstacle.text == "img/obstacle_turbine.png" :
+                  obstacle.animation()
 
         if game.phase == 'normal' :
             for function in FunctionList :
