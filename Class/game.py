@@ -26,7 +26,9 @@ class Game (object):
 
         self.all_monsters = pygame.sprite.Group() #Liste de tous les monstres
 
-        self.list_monsters = [Piaf(self), Piomber(self), Piank(self), Piasher(self), Piafle(self), Piaper(self), Piacon(self), Piapiaf(self), Piagenieur(self), Piagicien(self), Piade(self)]
+        self.all_monsters_special = pygame.sprite.Group() #Liste de tous les monstres spéciaux
+
+        self.list_monsters = [Piomber(self), Piank(self), Piasher(self), Piafle(self), Piaper(self), Piacon(self), Piapiaf(self), Piagenieur(self), Piagicien(self), Piade(self)]
 
         self.all_obstacles = pygame.sprite.Group()#Liste de tous les obstacles 
 
@@ -58,11 +60,12 @@ class Game (object):
 
     def spawn_monster(self):
         '''Instencie un objet monstre et le place dans une liste de tous les monstres'''
-
-        # ennemi = self.list_monsters[randint(0,10)] Il faudrait créer une autre fonction qui s'appelle spawn monster spécial gwen si tu lis ça
-        # self.all_monsters.add(ennemi)
-
         self.all_monsters.add(Piaf(self))
+
+    def spawn_monster_special(self):
+        '''Instencie un objet monstre spécial et le place dans une liste de tous les monstres spéciaux'''
+        #monstre = self.list_monsters[randint(0,9)]
+        self.all_monsters_special.add(Piagenieur(self))
 
     def spawn_obstacle(self):
         '''Instencie un objet obstacle et le place dans une liste de tous les obstacles'''

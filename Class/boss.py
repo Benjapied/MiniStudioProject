@@ -1,5 +1,5 @@
 import pygame
-from Class.projectile import Ennemi_projectile
+from Class.projectile import Simple_ennemi_projectile
 
 #création de la classe boss
 class Boss (pygame.sprite.Sprite) :    

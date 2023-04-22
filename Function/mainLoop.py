@@ -5,7 +5,7 @@ from Function.updateGameplayBoss import updateGameplayBoss
 from Function.blitage import blitage
 from Function.settings import settings
 from Class.functionTrigger import functionTrigger
-from Function.functions import spawnMonster,spawnObstacle,intro
+from Function.functions import spawnMonster,spawnObstacle,intro, spawnMonsterSpecial
 
 def mainfonction(screen):
 
@@ -33,6 +33,7 @@ def mainfonction(screen):
     
     FunctionList.append(functionTrigger(game,2000,spawnMonster,game))
     FunctionList.append(functionTrigger(game,4000,spawnObstacle,game))
+    FunctionList.append(functionTrigger(game,4000,spawnMonsterSpecial,game))
 
     ################### Main Loop #####################################
 

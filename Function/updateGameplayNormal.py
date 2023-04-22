@@ -31,3 +31,10 @@ def updateGameplayNormal (game,screen) :
         monster.respawn()
     #appliquer l'ensemble des images de mon groupe de monstres
     game.all_monsters.draw(screen)
+
+    #Monstres spécial
+    for monster in game.all_monsters_special:
+        monster.forward()
+        monster.respawn()
+    #appliquer l'ensemble des images de mon groupe de monstres
+    game.all_monsters_special.draw(screen)
