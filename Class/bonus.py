@@ -8,7 +8,7 @@ class Bonus(pygame.sprite.Sprite):
         # mise en place des informations 
         self.game = game
         self.bonus_number = randint (1,1)
-        self.text = "img/image_bonus_" + str(self.bonus_number)  # initialisation 
+        self.text = "img/player/bonus/image_bonus_" + str(self.bonus_number)  # initialisation 
 
         #Image et position
         self.image = pygame.image.load(self.text +".png") # l'image du bonus

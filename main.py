@@ -14,13 +14,13 @@ screen = pygame.display.set_mode(SCREEN_SIZE)
 
 
 #importer charger notre bannière
-banner = pygame.image.load('img/banner.png')
+banner = pygame.image.load('img/interface/banner.png')
 banner = pygame.transform.scale(banner, (500, 500))
 banner_rect = banner.get_rect()
 banner_rect.x = screen.get_width() / 4
 
 #charger notre bouton
-play_button = pygame.image.load('img/button.png')
+play_button = pygame.image.load('img/interface/button.png')
 play_button = pygame.transform.scale(play_button, (400, 150))
 play_button_rect = play_button.get_rect()
 play_button_rect.x = screen.get_width() / 3.33
