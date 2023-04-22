@@ -58,7 +58,7 @@ class Simple_ennemi_projectile(pygame.sprite.Sprite):
         self.velocity = 5
         self.direction = "left"
         #Image et position
-        self.image = pygame.image.load('img/projectile_neutral.png')
+        self.image = pygame.image.load('img/player/projectiles/projectile_neutral.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.x = self.ennemi.rect.x 
