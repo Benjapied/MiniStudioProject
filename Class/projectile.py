@@ -40,6 +40,11 @@ class Projectile(pygame.sprite.Sprite):
             self.remove()
             monster.damage(5)
 
+        for boss in self.game.check_collision(self, self.game.all_boss):
+            self.remove()
+            boss.damage(5)
+
+
         #vérifier si le projectile n'est plus dans l'écran
         if self.rect.x > 1080:
             #supprimer le projectile

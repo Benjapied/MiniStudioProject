@@ -28,8 +28,13 @@ class Boss (pygame.sprite.Sprite) :
     def update_hp_bar(self, surface):
         '''Fonction qui modifie la barre de vie du boss'''
         bar_color = (111, 210, 46)
-        bar_position = [self.rect.x, self.rect.y, self.hp, 5]
+        back_bar_color = (60, 63, 60)
+        bar_position = [self.rect.x + 100, self.rect.y - 20, self.hp, 5]
+        back_bar_position = [self.rect.x + 100, self.rect.y - 20, 200, 5]
+        pygame.draw.rect(surface, back_bar_color, back_bar_position)
         pygame.draw.rect(surface, bar_color, bar_position)
+        
+
 
 
     
@@ -58,9 +63,9 @@ class Boss (pygame.sprite.Sprite) :
 
     def damage(self, amount):
         #infliger des dégats
-        self.health -= amount
+        self.hp -= amount
         #vérifier si le monstre est 0 
-        if self.health <=0:
+        if self.hp <=0:
             self.game.totalScore +=  self.point
             self.deleteBoss()
 
