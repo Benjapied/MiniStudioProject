@@ -33,7 +33,6 @@ class Game (object):
         self.all_obstacles = pygame.sprite.Group()#Liste de tous les obstacles 
 
         self.all_bonus = pygame.sprite.Group()#Liste des bonus 
-        self.spawn_bonus()#A supprimer
 
         self.all_boss = pygame.sprite.Group()#Liste des boss (au cas ou il y en a plusieurs)
         self.mainBoss = None #Variable qui prend en compte le seul boss du niveau

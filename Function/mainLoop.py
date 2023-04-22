@@ -38,6 +38,7 @@ def mainfonction(screen):
     FunctionList.append(functionTrigger(game,2000,game.spawn_monster))
     FunctionList.append(functionTrigger(game,4000,game.spawn_obstacle))
     FunctionList.append(functionTrigger(game,4000,game.spawn_monster_special))
+    FunctionList.append(functionTrigger(game,10000,game.spawn_bonus))
 
     ################### Main Loop #####################################
 
@@ -45,7 +46,8 @@ def mainfonction(screen):
         
         startTime = pygame.time.get_ticks()
 
-    
+        if game.totalScore > 10000 :
+            game.phase = 'boss'
 
         #Affichage du fond et du pigeon en animation
         game.player.animation()

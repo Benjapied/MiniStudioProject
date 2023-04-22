@@ -34,7 +34,7 @@ def outro (game,screen,outroObj) :
         game.phase = 'FinalStats'
     elif outroObj.tempClock > 1500 :
         outroscreen = pygame.image.load('img/interface/fin.png')
-        outroscreen = pygame.transform.scale(outroscreen, (100, 100))
-        screen.blit(outroscreen,(400,300))
+        outroscreen = pygame.transform.scale(outroscreen, (700, 250))
+        screen.blit(outroscreen,(200,100))
 
     
