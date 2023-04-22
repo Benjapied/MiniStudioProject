@@ -1,14 +1,5 @@
 import pygame
 
-def spawnMonster (object) :
-    object.spawn_monster()
-
-def spawnMonsterSpecial (object) :
-    object.spawn_monster_special()
-
-def spawnObstacle (object) :
-    object.spawn_obstacle()
-
 def intro (game, screen) :
 
     if game.player.rect.x < 80:

@@ -8,11 +8,10 @@ class functionTrigger () :
     Et une variable importante: 
     -variable temporaire qui stack les delta time de la main loop pour savoir quand déclancher la fonction (tempClock)'''
 
-    def __init__ (self,game,TimeTrigger, function, object):
+    def __init__ (self,game,TimeTrigger, function):
         self.game = game
         self.TimeTrigger = TimeTrigger
         self.function = function
-        self.object = object
         self.tempClock = 0
         
     def print_all (self) :
@@ -25,4 +24,4 @@ class functionTrigger () :
     def checkTrigger(self):
         if self.tempClock > self.TimeTrigger :
             self.tempClock = 0
-            self.function(self.object)
+            self.function()
