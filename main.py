@@ -1,5 +1,6 @@
 import pygame
 from Function.mainLoop import mainfonction
+from Function.mainMenu import mainMenu
 
 pygame.init()
     
@@ -17,14 +18,21 @@ myFont = pygame.font.SysFont('arial', 18)
 banner = pygame.image.load('img/interface/banner.png')
 banner = pygame.transform.scale(banner, (500, 500))
 banner_rect = banner.get_rect()
-banner_rect.x = screen.get_width() / 4
+banner_rect.x = 50
+banner_rect.y = 50
 
 #charger notre bouton
 play_button = pygame.image.load('img/interface/button.png')
 play_button = pygame.transform.scale(play_button, (400, 150))
 play_button_rect = play_button.get_rect()
-play_button_rect.x = screen.get_width() / 3.33
-play_button_rect.y = screen.get_height() * (2/3)
+play_button_rect.x = screen.get_width() / 2
+play_button_rect.y = 50
+
+play_button_menu = pygame.image.load('img/interface/button_menu.png')
+play_button_menu = pygame.transform.scale(play_button_menu, (200, 75))
+play_button_menu_rect = play_button_menu.get_rect()
+play_button_menu_rect.x = 200
+play_button_menu_rect.y = 400
 
 blackScreen = pygame.Surface(SCREEN_SIZE)               
 blackScreen.fill((0,0,0))
@@ -50,22 +58,21 @@ while True :
             screen.blit(timer, (200,50))
             screen.blit(score, (200,70))
             screen.blit(banner, (400,70))
-            screen.blit(play_button, (200,400))
+            screen.blit(play_button_menu, (200,400))
             pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT :
                     pygame.quit()
                 elif event.type == pygame.MOUSEBUTTONDOWN :
                     #vérification si la souris touche le bouton
-                    if play_button_rect.collidepoint(event.pos):
+                    if play_button_menu_rect.collidepoint(event.pos):
                         #lancer le jeu
                         is_playing = True
     else : 
         #Tout ce qu'il y a à afficher dans le menu de démarrage 
-        screen.blit(blackScreen, (0,0))
-        screen.blit(play_button, play_button_rect)
-        screen.blit(banner, banner_rect)
-        pygame.display.flip()
+        mainMenu(screen, blackScreen, play_button, banner)
+        
+    is_playing = False
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT :

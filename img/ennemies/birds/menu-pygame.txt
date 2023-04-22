@@ -1,0 +1,47 @@
+import pygame
+import sys
+
+# Initialisation de Pygame
+pygame.init()
+
+# Dimensions de la fenêtre
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+
+# Couleurs
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
+# Chargement des images pour les boutons
+jouer_img = pygame.image.load('jouer.gif')
+collection_img = pygame.image.load('collection.gif')
+parametres_img = pygame.image.load('parametres.gif')
+quitter_img = pygame.image.load('quitter.gif')
+
+# Redimensionnement des images pour les boutons
+jouer_img = pygame.transform.scale(jouer_img, (200, 50))
+collection_img = pygame.transform.scale(collection_img, (200, 50))
+parametres_img = pygame.transform.scale(parametres_img, (200, 50))
+quitter_img = pygame.transform.scale(quitter_img, (200, 50))
+
+# Création de la fenêtre
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption('Menu')
+
+clock = pygame.time.Clock()
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    # Affichage des boutons sur la fenêtre
+    screen.fill(WHITE)
+    screen.blit(jouer_img, (300, 200))
+    screen.blit(collection_img, (300, 270))
+    screen.blit(parametres_img, (300, 340))
+    screen.blit(quitter_img, (300, 410))
+
+    pygame.display.update()
+    clock.tick(60)
