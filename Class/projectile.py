@@ -10,7 +10,7 @@ class Projectile(pygame.sprite.Sprite):
         self.player = player
         self.color = color
         #Image et position
-        self.image = pygame.image.load('img/projectile_'+ self.color+'.png')
+        self.image = pygame.image.load('img/player/projectiles/projectile_'+ self.color+'.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.x = player.rect.x + 85

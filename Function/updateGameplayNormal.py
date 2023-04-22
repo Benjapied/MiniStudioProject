@@ -29,6 +29,7 @@ def updateGameplayNormal (game,screen) :
     for monster in game.all_monsters:
         monster.forward()
         monster.respawn()
+        monster.animation()
     #appliquer l'ensemble des images de mon groupe de monstres
     game.all_monsters.draw(screen)
 

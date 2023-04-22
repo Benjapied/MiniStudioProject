@@ -13,11 +13,11 @@ class Player (pygame.sprite.Sprite):
         self.shootingMode = "normal"
         self.all_projectiles = pygame.sprite.Group()
         self.all_bonus = pygame.sprite.Group()
-        self.animationDuration = 1000 #Le temps de l'animation de vol en mili seconde
+        self.animationDuration = 600 #Le temps de l'animation de vol en mili seconde
 
         #Image et position
         self.animeStat = 0 #Numero du sprite de l'animation
-        image = pygame.image.load("img/wazo_anim.png")
+        image = pygame.image.load("img/player/mc/wazo_anim.png")
         self.listSprite = [] #Liste qui va contenir toutes les frames de l'animation
         self.listSprite.append(image.subsurface(89,39,228,200)) #Subsurface va prendre une partie de la sprite sheet
         self.listSprite.append(image.subsurface(317,34,228,200))
