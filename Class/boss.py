@@ -14,7 +14,7 @@ class Boss (pygame.sprite.Sprite) :
         self.point = 500
 
         #Image et position
-        self.image = pygame.image.load("img/bird_boss.png")
+        self.image = pygame.image.load("img/ennemies/boss/bird_boss.png")
         self.image = pygame.transform.scale(self.image, (400, 400))
         self.rect = self.image.get_rect()
         self.rect.x = 1200

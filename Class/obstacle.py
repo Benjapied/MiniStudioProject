@@ -9,14 +9,14 @@ class Obstacle (pygame.sprite.Sprite):
         self.game = game
         obstacle_number = randint (1,2)
         if obstacle_number == 1 :
-            self.text = "img/obstacle_lamp.png" # initialisation 
+            self.text = "img/ennemies/obstacles/obstacle_lamp.png" # initialisation 
             self.image = pygame.image.load(self.text) # l'image de l'obstacle dépend du background
             self.image = pygame.transform.scale(self.image, (130, 401))
             self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
             self.rect.x = 1080
             self.rect.y = 340
         if obstacle_number == 2 :
-            self.text = "img/obstacle_turbine.png"
+            self.text = "img/ennemies/obstacles/obstacle_turbine.png"
             self.image = pygame.image.load(self.text)
             self.animationDuration = 1000 #temps de l'animation en millisecondes
             self.animeStat = 0

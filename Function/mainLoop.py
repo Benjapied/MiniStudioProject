@@ -13,11 +13,11 @@ def mainfonction(screen):
     ################# Définition des variables ########################
 
     #Génération de toutes les images de fond
-    background = pygame.image.load('img/fond.png')
+    background = pygame.image.load('img/background/fond.png')
     background = pygame.transform.scale(background, (1080, 720)) #On redimensionne l'image de fond (pas nécéssaire si l'image est déja dans les bonnes dims)
 
     #On génere le cadre pour mettre les infos dedans
-    cadre = pygame.image.load('img/frame.png')
+    cadre = pygame.image.load('img/interface/frame.png')
     cadre = pygame.transform.scale(cadre, (120, 50)) 
 
     game = Game()  #On instancie un objet de la classe Game
@@ -60,8 +60,9 @@ def mainfonction(screen):
                 function.checkTrigger()
 
             for obstacle in game.all_obstacles :
-             if obstacle.text == "img/obstacle_turbine.png" :
+             if obstacle.text == "img/ennemies/obstacles/obstacle_turbine.png" :
                   obstacle.animation()
+            
         
 
         if game.phase == 'boss':
@@ -143,7 +144,7 @@ def mainfonction(screen):
                         game.player.launch_special("air")
 
                     if event.key == pygame.K_ESCAPE:
-                        settings(game,screen)
+                        settings(game,screen,background,imageCount)
 
                     if game.pressed.get(pygame.K_m) and game.mainBoss == None :
                         game.phase = 'boss'
