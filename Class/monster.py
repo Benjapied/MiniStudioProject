@@ -77,10 +77,6 @@ class Ennemie(pygame.sprite.Sprite):
 class Piaf(Ennemie): 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.point = 100
@@ -109,10 +105,6 @@ class Piaf(Ennemie):
 class Piomber(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -130,10 +122,6 @@ class Piomber(Ennemie) :
 class Piank(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 15
         self.max_health = 15
         self.point = 100
@@ -155,10 +143,6 @@ class Piank(Ennemie) :
 class Piasher(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.point = 100
@@ -179,10 +163,6 @@ class Piasher(Ennemie) :
 class Piafle(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.attack = 5
@@ -205,10 +185,6 @@ class Piafle(Ennemie) :
 class Piaper(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -230,10 +206,6 @@ class Piaper(Ennemie) :
 class Piacon(Ennemie) : 
 
     def __init__(self, game):
-         #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.attack = 0
@@ -257,10 +229,6 @@ class Piacon(Ennemie) :
 class Piapiaf(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -282,10 +250,6 @@ class Piapiaf(Ennemie) :
 class Piagenieur(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -307,10 +271,6 @@ class Piagenieur(Ennemie) :
 class Piagicien(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -332,10 +292,6 @@ class Piagicien(Ennemie) :
 class Piade(Ennemie) : 
 
     def __init__(self, game):
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-        
         self.health = 5
         self.max_health = 5
         self.attack = 100
