@@ -4,6 +4,7 @@ from Class.projectile import Simple_ennemi_projectile
 from Class.projectile import Up_ennemi_projectile
 from Class.projectile import Down_ennemi_projectile
 
+
 # classe qui gere toute les variable et fonctions de base des ennemi
 
 class Ennemie(pygame.sprite.Sprite):
@@ -30,7 +31,10 @@ class Ennemie(pygame.sprite.Sprite):
             self.delete()
 
     def delete(self):
-        self.game.all_monsters.remove(self)
+        if self in self.game.all_monsters:
+            self.game.all_monsters.remove(self)
+        else :
+            self.game.all_monsters_special.remove(self)
 
     def respawn(self):
         if self.rect.x < 0 :
@@ -66,23 +70,30 @@ class Ennemie(pygame.sprite.Sprite):
 class Piaf(Ennemie): 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.point = 100
         self.velocity = 3
         self.attack_speed = 100 # cadence de l'attaque
         self.att_speed = 100 # cadence max 
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.shoot()
+
+        
+        
         
         
 # une classe qui represente un ennemi qui explose 
 class Piomber(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -91,47 +102,55 @@ class Piomber(Ennemie) :
         self.attack_speed = 1000 # cadence de l'attaque
         self.att_speed = 1000 # cadence max
 
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
+        
 
 # une classe qui represente un ennemi plus resistant
 class Piank(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 15
         self.max_health = 15
         self.point = 100
         self.velocity = 3 
         self.attack_speed = 150 # cadence de l'attaque
         self.att_speed = 150 # cadence max 
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.shoot()
+
+        
+        
         
         
 # une classe qui represente un ennemi plus rapide
 class Piasher(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.point = 100
         self.velocity = 13
         self.attack_speed = 1000 # cadence de l'attaque
         self.att_speed = 1000 # cadence max
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.shoot()
+
+        
+        
         
 # une classe qui represente un ennemi qui tire plus rapidement
 class Piafle(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.attack = 5
@@ -140,16 +159,19 @@ class Piafle(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 50 # cadence de l'attaque
         self.att_speed = 50 # cadence max 
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.shoot()
+
+        
+       
 
 # une classe qui represente un ennemi qui tire un laser
 class Piaper(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -157,16 +179,19 @@ class Piaper(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 200 # cadence de l'attaque
         self.att_speed = 200 # cadence max 
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.shoot()
+
+        
+        
 
 # une classe qui represente un ennemi qui ralenti le joueur
 class Piacon(Ennemie) : 
 
     def __init__(self, game):
+         #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.attack = 0
@@ -174,17 +199,20 @@ class Piacon(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 1000 # cadence de l'attaque
         self.att_speed = 1000 # cadence max
+        self.fire = self.shoot()
         
 
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
-        self.fire = self.shoot()
+       
+        
 
 # une classe qui represente un ennemi qui tire des gros projectile
 class Piapiaf(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -192,16 +220,19 @@ class Piapiaf(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 150 # cadence de l'attaque
         self.att_speed = 150 # cadence max 
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.shoot()
+
+        
+        
 
 # une classe qui represente un ennemi qui tire dans 3 direction
 class Piagenieur(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -209,16 +240,19 @@ class Piagenieur(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 100 # cadence de l'attaque
         self.att_speed = 100 # cadence max 
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.Vertical_shoot()
+
+        
+        
 
 # une classe qui represente un ennemi qui tire de different endroit
 class Piagicien(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -226,16 +260,19 @@ class Piagicien(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 150 # cadence de l'attaque
         self.att_speed = 150 # cadence max
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.shoot()
+
+        
+        
 
 # une classe qui represente un ennemi qui tire en cercle qui s'agrandit
 class Piade(Ennemie) : 
 
     def __init__(self, game):
+        #Image et position
+        self.image = pygame.image.load('img/mummy.png')
+        super().__init__(game)
+        
         self.health = 5
         self.max_health = 5
         self.attack = 100
@@ -243,8 +280,7 @@ class Piade(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 150 # cadence de l'attaque
         self.att_speed = 150 # cadence max 
-
-        #Image et position
-        self.image = pygame.image.load('img/mummy.png')
-        super().__init__(game)
         self.fire = self.shoot()
+
+        
+        
