@@ -68,6 +68,7 @@ class Boss (pygame.sprite.Sprite) :
         if self.hp <=0:
             self.game.totalScore +=  self.point
             self.deleteBoss()
+            self.game.phase = 'outro'
 
     def bossDemarche (self) :
         '''le boss va avancer jusqu'à sa place'''

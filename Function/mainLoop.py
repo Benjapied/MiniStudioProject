@@ -5,7 +5,7 @@ from Function.updateGameplayBoss import updateGameplayBoss
 from Function.blitage import blitage
 from Function.settings import settings
 from Class.functionTrigger import functionTrigger
-from Function.functions import intro
+from Function.functions import intro, outro
 from Class.boss import Boss
 
 def mainfonction(screen):
@@ -33,6 +33,8 @@ def mainfonction(screen):
 
     ############# Création des fonctions à faire répéter ###############
     
+    outroObj = functionTrigger(game,None,outro)
+
     FunctionList.append(functionTrigger(game,2000,game.spawn_monster))
     FunctionList.append(functionTrigger(game,4000,game.spawn_obstacle))
     FunctionList.append(functionTrigger(game,4000,game.spawn_monster_special))
@@ -68,7 +70,11 @@ def mainfonction(screen):
         if game.phase == 'boss':
             updateGameplayBoss(game, boss, screen)
             
-            
+        if game.phase == 'outro':
+            outroObj.updateTempClock(deltaTime)
+            outro(game,screen,outroObj)
+            if outroObj.tempClock > 3000 :
+                return game
 
 
         #CONTROLS
@@ -158,3 +164,5 @@ def mainfonction(screen):
 
         deltaTime = pygame.time.get_ticks() - startTime
         game.clock += deltaTime
+
+    return game

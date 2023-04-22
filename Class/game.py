@@ -89,3 +89,4 @@ class Game (object):
         self.player.hp = 10
         self.is_playing = False
         
+        

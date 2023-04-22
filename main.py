@@ -11,7 +11,7 @@ SCREEN_SIZE = (1080, 720)
 pygame.display.set_caption("FLY OR DIE: Pigeon's last stand")
 screen = pygame.display.set_mode(SCREEN_SIZE)
 
-
+myFont = pygame.font.SysFont('arial', 18)
 
 #importer charger notre bannière
 banner = pygame.image.load('img/interface/banner.png')
@@ -36,8 +36,30 @@ is_playing = False
 
 while True :
     if is_playing == True :
-        mainfonction(screen)
+        game = mainfonction(screen)
         is_playing = False
+
+        timer = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
+        score = myFont.render("Score: "+str(game.totalScore), 1, (255,255,255))
+        play_button = pygame.transform.scale(play_button, (200, 75))
+        play_button_rect = play_button.get_rect()
+        play_button_rect.x = 200
+        play_button_rect.y = 400
+        while is_playing == False :
+            screen.blit(blackScreen, (0,0))
+            screen.blit(timer, (200,50))
+            screen.blit(score, (200,70))
+            screen.blit(banner, (400,70))
+            screen.blit(play_button, (200,400))
+            pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT :
+                    pygame.quit()
+                elif event.type == pygame.MOUSEBUTTONDOWN :
+                    #vérification si la souris touche le bouton
+                    if play_button_rect.collidepoint(event.pos):
+                        #lancer le jeu
+                        is_playing = True
     else : 
         #Tout ce qu'il y a à afficher dans le menu de démarrage 
         screen.blit(blackScreen, (0,0))

@@ -7,7 +7,7 @@ class Player (pygame.sprite.Sprite):
         super().__init__()
         self.game = game #on met l'objet game dans toutes les classes pour qu'elles puissent interagir avec les autres objets
         self.velocity = 6 #vitesse du joueur
-        self.attack = 10 #points d'attaque du joueur
+        self.attack = 100 #points d'attaque du joueur
         self.attack_speed = 1
         self.hp = 10
         self.shootingMode = "normal"
