@@ -6,6 +6,7 @@ from Function.blitage import blitage
 from Function.settings import settings
 from Class.functionTrigger import functionTrigger
 from Function.functions import intro
+from Class.boss import Boss
 
 def mainfonction(screen):
 
@@ -20,6 +21,7 @@ def mainfonction(screen):
     cadre = pygame.transform.scale(cadre, (120, 50)) 
 
     game = Game()  #On instancie un objet de la classe Game
+    boss = Boss(game)
     
     deltaTime = 1
 
@@ -63,7 +65,7 @@ def mainfonction(screen):
         
 
         if game.phase == 'boss':
-            updateGameplayBoss(game,screen)
+            updateGameplayBoss(game, boss, screen)
             
             
 
@@ -145,7 +147,7 @@ def mainfonction(screen):
 
                     if game.pressed.get(pygame.K_m) and game.mainBoss == None :
                         game.phase = 'boss'
-                        game.spawn_boss()
+                        game.spawn_boss(screen)
                     
                     if game.pressed.get(pygame.K_o):
                         game.mainBoss.attack_pattern1()

@@ -25,6 +25,13 @@ class Boss (pygame.sprite.Sprite) :
         self.game.mainBoss = None
         self.game.all_boss.remove(self)
 
+    def update_hp_bar(self, surface):
+        '''Fonction qui modifie la barre de vie du boss'''
+        bar_color = (111, 210, 46)
+        bar_position = [self.rect.x, self.rect.y, self.hp, 5]
+        pygame.draw.rect(surface, bar_color, bar_position)
+
+
     
     def attack_pattern1(self):
         '''Pattern d'attaque 1'''
@@ -34,7 +41,7 @@ class Boss (pygame.sprite.Sprite) :
         self.attackSequence = 0
         
         
-        projectile = Ennemi_projectile(self,self.game)#Je crée un missile à partir du boss 
+        projectile = Simple_ennemi_projectile(self,self.game)#Je crée un missile à partir du boss 
         projectile.lunch_projec()# et le range dans la liste des projectiles ennemis
     
     # def attack_pattern2(self):

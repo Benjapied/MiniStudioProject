@@ -77,11 +77,12 @@ class Game (object):
         bonus = Bonus(self)
         self.all_bonus.add(bonus)
    
-    def spawn_boss(self):
+    def spawn_boss(self, screen):
         '''Instencie un objet boss et le place dans une liste de tous les boss'''
         boss = Boss(self)
         self.all_boss.add(boss)
         self.mainBoss = boss
+        
 
     def game_over(self):
         
