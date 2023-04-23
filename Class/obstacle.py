@@ -7,7 +7,7 @@ class Obstacle (pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         # mise en place des informations 
         self.game = game
-        obstacle_number = randint (1,2)
+        obstacle_number = randint (1,3)
         if obstacle_number == 1 :
             self.text = "img/ennemies/obstacles/obstacle_lamp.png" # initialisation 
             self.image = pygame.image.load(self.text) # l'image de l'obstacle dépend du background
@@ -30,12 +30,24 @@ class Obstacle (pygame.sprite.Sprite):
             self.rect = self.image.get_rect() #on définit la taille de l'obstacle (rectangle de longueur x et largeur y)
             self.rect.x = 1080
             self.rect.y = 340
-
-        self.velocity = 6 # augemente avec celle du joueur / distance
-        self.coloral = randint(0,0) # choisit aléatoirement si l'obstacle est coloré ou non
         self.color = "neutral" #dans tous les cas la couleur de base est neutre / "neutral"
-        if self.coloral == 1: # si l'obstacle est à colorer :
+        if obstacle_number == 3 :
+            self.text = "img/ennemies/obstacles/flying_vehicles.png"
+            self.image = pygame.image.load(self.text)
+            self.rect = self.image.get_rect()
+            self.rect.x = 1080
+            self.rect.y = randint(0,340)
+            self.animationDuration = 1000 #temps de l'animation en millisecondes
+            self.listSprite = [] #Liste qui va contenir toutes les frames de l'animation
+            self.listSprite.append(self.image.subsurface(54,129,394,292))
+            self.listSprite.append(self.image.subsurface(54,426,394,292))
+            self.listSprite.append(self.image.subsurface(598,129,370,286))
+            self.listSprite.append(self.image.subsurface(598,426,370,286))
+            for i in range(4):
+                self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (120,90))
+            self.coloral = randint(1,4) # choisit aléatoirement la coloration appliquée à l'obstacle
             self.coloralForm() # alors on le modifie pour mettre en place la coloration
+        self.velocity = 6 #vélocité de l'obstacle (statique : à faire évoluer par rapport à celle du joueur)
     
     def animation(self):
         '''fonction qui anime l'obstacle (ici, l'éolienne)'''
@@ -43,22 +55,18 @@ class Obstacle (pygame.sprite.Sprite):
         self.image = self.listSprite[self.animeStat]
 
     def coloralForm(self):
-        color = randint(1,4) #l'élément infusé est choisi aléatoirement entre les 4 couleurs
-        if color == 1 :
+        if self.coloral == 1 :
             self.color = "green"
-             
-        elif color == 2 :
+            self.image = self.listSprite[0]
+        elif self.coloral == 2 :
             self.color = "orange"
-        
-        elif color == 3 :
+            self.image = self.listSprite[1]
+        elif self.coloral == 3 :
             self.color = "yellow"
-        
-        elif color == 4 :
-            self.color = "green"
-
-        self.text += "_" + self.color
-        self.image = pygame.image.load(self.text + ".png") # chargement de l'image de tel obstacle infusé par tel élément
-        self.image = pygame.transform.scale(self.image, (32, 32))
+            self.image = self.listSprite[2]
+        elif self.coloral == 4 :
+            self.color = "blue"
+            self.image = self.listSprite[3]
 
     def forward(self):
         #le déplacement se fait que si il n'y a pas de collision

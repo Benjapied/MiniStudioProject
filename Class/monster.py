@@ -68,7 +68,7 @@ class Ennemie(pygame.sprite.Sprite):
         projectile_down.lunch_projec()
 
     def animation(self):
-        '''fonction qui anime le joueur principal'''
+        '''fonction qui anime l'ennemi'''
         self.animeStat = int((self.game.clock%self.animationDuration)/self.animationDuration*3) #Définition de l'image à afficher en fonction de la clock du jeu (si vous comprenez pas demandez à peter)
         self.image = self.listSprite[self.animeStat]
             
@@ -259,8 +259,15 @@ class Piagenieur(Ennemie) :
         self.att_speed = 100 # cadence max 
 
         #Image et position
-        self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
-        self.image = pygame.transform.scale(self.image, (50, 50))
+        self.animeStat = 0
+        image = pygame.image.load("img/ennemies/birds/oiseau_basic.png")
+        self.listSprite = [] #Liste qui va contenir toutes les frames de l'animation
+        self.listSprite.append(image.subsurface(56,15,350,350)) #Subsurface va prendre une partie de la sprite sheet
+        self.listSprite.append(image.subsurface(478,27,350,350))
+        self.listSprite.append(image.subsurface(938,23,350,350))
+        for i in range(3):
+            self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
+        self.image = self.listSprite[self.animeStat]
         super().__init__(game)
         self.fire = self.Vertical_shoot()
 
@@ -280,7 +287,7 @@ class Piagicien(Ennemie) :
         self.att_speed = 150 # cadence max
 
         #Image et position
-        self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
+        self.image = pygame.image.load('img/ennemies/birds/magicien.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
         self.fire = self.shoot()

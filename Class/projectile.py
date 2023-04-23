@@ -29,17 +29,26 @@ class Projectile(pygame.sprite.Sprite):
             self.remove()
             monster.damage(5)
 
+        #vérifier si le projectile touche un projectile ennemi
+        for projectile in self.game.check_collision(self,self.game.all_projectiles):
+            self.remove()
+            projectile.remove_ennemi()
+
+        #vérifier si le projectile touche un obstacle (volant)
         for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
+            #les obstacles volants sont colorés, alors on vérifie que c'est bien la même couleur qui touche
             if obstacle.color != "neutral" and self.color != "neutral" and self.color == obstacle.color :
                 self.remove()
                 obstacle.remove()
             else:
                 self.remove()
 
+        #vérifier si le projectile touche un ennemi spécial
         for monster in self.game.check_collision(self, self.game.all_monsters_special):
             self.remove()
             monster.damage(5)
 
+        #vérifier si le projectile touche un boss
         for boss in self.game.check_collision(self, self.game.all_boss):
             self.remove()
             boss.damage(5)
@@ -133,8 +142,10 @@ class Down_ennemi_projectile(Simple_ennemi_projectile):
         self.game.all_projectiles.remove(self)
 
     def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
         self.rect.y += self.velocity
 
+        #vérifier si le projectile (ennemi) touche le joueur
         if self.game.check_collision(self, self.game.all_players):
             self.remove_ennemi()
             self.game.player.damage(10)

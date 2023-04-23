@@ -142,13 +142,13 @@ def mainfonction(screen):
                     if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e) and event.key == pygame.K_SPACE: 
                         game.player.launch_special("fire")
                     
-                    if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :
+                    if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) and event.key == pygame.K_SPACE:
                         game.player.launch_special("water")
 
-                    if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) :
+                    if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) and event.key == pygame.K_SPACE:
                         game.player.launch_special("earth")
 
-                    if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) :
+                    if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) and event.key == pygame.K_SPACE:
                         game.player.launch_special("air")
 
                     if event.key == pygame.K_ESCAPE:
