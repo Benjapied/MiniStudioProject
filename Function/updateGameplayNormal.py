@@ -16,12 +16,14 @@ def updateGameplayNormal (game,screen) :
 
     #Projectiles
     for projectile in game.player.all_projectiles:
+        projectile.animation()
         projectile.move()
         #appliquer les images de mon groupe de projectiles
     game.player.all_projectiles.draw(screen)
 
     #Projectiles des monstres
     for projectile in game.all_projectiles:
+        projectile.animation()
         projectile.move()
     game.all_projectiles.draw(screen)
 

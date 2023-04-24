@@ -29,16 +29,32 @@ for i in range (6):
 play_button = pygame.image.load('img/interface/jouer.gif')
 play_button = pygame.transform.scale(play_button, (200,100))
 play_button_rect = play_button.get_rect()
-play_button_rect.x = screen.get_width() / 2
+play_button_rect.x = ((screen.get_width()) /2) + 50
 play_button_rect.y = 50
 
 play_button_menu = pygame.image.load('img/interface/button_menu.png')
 play_button_menu = pygame.transform.scale(play_button_menu, (200, 75))
 play_button_menu_rect = play_button_menu.get_rect()
-play_button_menu_rect.x = screen.get_width() /2
+play_button_menu_rect.x = ((screen.get_width()) /2) + 50
 play_button_menu_rect.y = 50
 
+collection_button = pygame.image.load('img/interface/collection.gif')
+collection_button = pygame.transform.scale(collection_button, (200, 100))
+collection_rect = collection_button.get_rect()
+collection_rect.x = ((screen.get_width()) /2) + 50
+collection_rect.y = 200
 
+options_button = pygame.image.load('img/interface/options.gif')
+options_button = pygame.transform.scale(options_button, (200, 100))
+options_rect = collection_button.get_rect()
+options_rect.x = ((screen.get_width()) /2) + 50
+options_rect.y = 350
+
+quit_button = pygame.image.load('img/interface/quitter.gif')
+quit_button = pygame.transform.scale(quit_button, (200, 100))
+quit_rect = quit_button.get_rect()
+quit_rect.x = ((screen.get_width()) /2) + 50
+quit_rect.y = 500
 
 blackScreen = pygame.Surface(SCREEN_SIZE)               
 blackScreen.fill((0,0,0))
@@ -63,7 +79,7 @@ while True :
             screen.blit(timer, (200,50))
             screen.blit(score, (200,70))
             screen.blit(banner, (50,100))
-            screen.blit(play_button_menu, ((screen.get_width() / 2),50))
+            screen.blit(play_button_menu, ((((screen.get_width()) /2) + 50),50))
             pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT :
@@ -76,7 +92,7 @@ while True :
 
     else : 
         #Tout ce qu'il y a à afficher dans le menu de démarrage 
-        mainMenu(screen, blackScreen, play_button, banner)
+        mainMenu(screen, blackScreen, play_button, collection_button, options_button, quit_button, banner)
         
     is_playing = False
 
