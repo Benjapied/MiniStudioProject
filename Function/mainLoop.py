@@ -52,9 +52,9 @@ def mainfonction(screen):
         
         startTime = pygame.time.get_ticks()
 
-        if game.totalScore > 10000 :
+        if game.totalScore > 10000 or game.distanceScore == 1000 :
             game.phase = 'boss'
-
+            
         #Affichage du fond et du pigeon en animation
         game.player.animation()
         blitage(game,screen,background,imageCount)
@@ -109,9 +109,7 @@ def mainfonction(screen):
         game.distanceScore = int(game.distance/10)
         game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
 
-        if game.distanceScore == 1000 :
-            game.phase = 'boss'
-            game.spawn_boss(screen)
+        
 
         multiplicator = int(game.totalScore/1000)
 
