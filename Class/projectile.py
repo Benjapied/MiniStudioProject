@@ -229,6 +229,8 @@ class Sniper_ennemi_projectile(Simple_ennemi_projectile):
         self.velocity = 10
         self.image = pygame.image.load('img/player/projectiles/projectile_neutral.png')
         self.image = pygame.transform.scale(self.image, (25, 25))
+        for i in range(4):
+            self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (25, 15))
 
     def move(self):
         '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
@@ -261,8 +263,8 @@ class Super_ennemi_projectile(Simple_ennemi_projectile):
     '''
     def __init__(self, ennemi, game):
         super().__init__(ennemi, game, 0)
-        self.image = pygame.image.load('img/player/projectiles/projectile_neutral.png')
-        self.image = pygame.transform.scale(self.image, (75, 75))
+        for i in range(4):
+            self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 45))
 
     def move(self):
         '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
@@ -318,4 +320,21 @@ class Back_diagonal_up_ennemi_projectile(Simple_ennemi_projectile):
         self.rect.x += self.velocity
 
         self.checkRemove()
+
+class Bomber_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game, 0)
+        for i in range(4):
+            self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (200, 150))
+
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.x -= self.velocity
+        print("move ok")
+        self.checkRemove()
+        #self.remove_ennemi()
             

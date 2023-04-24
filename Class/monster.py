@@ -1,6 +1,6 @@
 import pygame
 import random
-from Class.projectile import Simple_ennemi_projectile, Up_ennemi_projectile, Down_ennemi_projectile, Diagonal_down_ennemi_projectile, Diagonal_up_ennemi_projectile, Sniper_ennemi_projectile, Glacon_ennemi_projectile, Super_ennemi_projectile, Back_ennemi_projectile, Back_diagonal_up_ennemi_projectile, Back_diagonal_down_ennemi_projectile
+from Class.projectile import Simple_ennemi_projectile, Up_ennemi_projectile, Down_ennemi_projectile, Diagonal_down_ennemi_projectile, Diagonal_up_ennemi_projectile, Sniper_ennemi_projectile, Glacon_ennemi_projectile, Super_ennemi_projectile, Back_ennemi_projectile, Back_diagonal_up_ennemi_projectile, Back_diagonal_down_ennemi_projectile, Bomber_ennemi_projectile
 
 
 
@@ -111,6 +111,12 @@ class Ennemie(pygame.sprite.Sprite):
         projectile_diadown.lunch_projec()
         projectile_badiaup.lunch_projec()
         projectile_badiadown.lunch_projec()
+
+    def Bombe_shoot(self):
+        projectile = Bomber_ennemi_projectile(self, self.game)
+        projectile.lunch_projec()
+        print("bomb ok")
+        self.delete()
         
 
     def animation(self):
@@ -148,10 +154,11 @@ class Piomber(Ennemie) :
         self.attack = 100
         self.point = 100
         self.velocity = 3 
-        self.attack_speed = 1000 # cadence de l'attaque
-        self.att_speed = 1000 # cadence max
+        self.attack_speed = 200 # cadence de l'attaque
+        self.att_speed = 200 # cadence max
 
         super().__init__(game)
+        self.fire = self.Bombe_shoot
 
 # une classe qui represente un ennemi plus resistant
 class Piank(Ennemie) : 
