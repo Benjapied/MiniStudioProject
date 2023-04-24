@@ -47,7 +47,7 @@ class Ennemie(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
             if self.attack_speed == 0:
-                self.fire
+                self.fire()
                 self.attack_speed = self.att_speed
             self.attack_speed -= 1
 
@@ -95,7 +95,7 @@ class Piaf(Ennemie):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
         self.image = self.listSprite[self.animeStat]
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
 
         
         
@@ -133,7 +133,7 @@ class Piank(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
 
         
         
@@ -154,7 +154,7 @@ class Piasher(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
 
         
         
@@ -176,7 +176,7 @@ class Piafle(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
 
         
        
@@ -197,7 +197,7 @@ class Piaper(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
 
         
         
@@ -219,7 +219,7 @@ class Piacon(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
         
 
        
@@ -241,7 +241,7 @@ class Piapiaf(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
 
         
         
@@ -269,7 +269,7 @@ class Piagenieur(Ennemie) :
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
         self.image = self.listSprite[self.animeStat]
         super().__init__(game)
-        self.fire = self.Vertical_shoot()
+        self.fire = self.Vertical_shoot
 
         
         
@@ -290,7 +290,7 @@ class Piagicien(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/magicien.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
 
         
         
@@ -311,7 +311,7 @@ class Piade(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/oiseau_basic.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
         super().__init__(game)
-        self.fire = self.shoot()
+        self.fire = self.shoot
 
         
         
