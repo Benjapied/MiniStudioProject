@@ -64,7 +64,7 @@ class Game (object):
     def spawn_monster_special(self):
         '''Instencie un objet monstre spécial et le place dans une liste de tous les monstres spéciaux'''
         monstre = self.list_monsters[randint(0,9)]
-        self.all_monsters_special.add(Piagenieur(self))
+        self.all_monsters_special.add(monstre)
 
     def spawn_obstacle(self):
         '''Instencie un objet obstacle et le place dans une liste de tous les obstacles'''
