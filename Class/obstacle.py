@@ -59,7 +59,7 @@ class Obstacle (pygame.sprite.Sprite):
             self.color = "green"
             self.image = self.listSprite[0]
         elif self.coloral == 2 :
-            self.color = "orange"
+            self.color = "red"
             self.image = self.listSprite[1]
         elif self.coloral == 3 :
             self.color = "yellow"

@@ -139,17 +139,17 @@ def mainfonction(screen):
                     if event.key == pygame.K_SPACE:
                         game.player.launch_projectile()
                     
-                    if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e) and event.key == pygame.K_SPACE: 
-                        game.player.launch_special("fire")
+                    if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e): 
+                        game.player.launch_special("red")
                     
-                    if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) and event.key == pygame.K_SPACE:
-                        game.player.launch_special("water")
+                    if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :
+                        game.player.launch_special("blue")
 
-                    if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) and event.key == pygame.K_SPACE:
-                        game.player.launch_special("earth")
+                    if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) :
+                        game.player.launch_special("yellow")
 
-                    if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) and event.key == pygame.K_SPACE:
-                        game.player.launch_special("air")
+                    if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) :
+                        game.player.launch_special("green")
 
                     if event.key == pygame.K_ESCAPE:
                         settings(game,screen,background,imageCount)
