@@ -1,4 +1,5 @@
 import pygame
+import random
 
 class Projectile(pygame.sprite.Sprite):
     '''Class qui crée un projectile à partir de la pos du joueur
@@ -101,7 +102,7 @@ class Simple_ennemi_projectile(pygame.sprite.Sprite):
     '''Class qui crée un projectile à partir de la pos du joueur
     ce projectile peut être d'un certain élément'''
 
-    def __init__(self, ennemi, game):
+    def __init__(self, ennemi, game, type_ennemi):
         super().__init__() #définit que la classe hérite d'une autre
         self.game = game
         self.ennemi = ennemi
@@ -120,8 +121,12 @@ class Simple_ennemi_projectile(pygame.sprite.Sprite):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (50, 30))
         self.image = self.listSprite[self.animeStat]
         self.rect = self.image.get_rect()
-        self.rect.x = self.ennemi.rect.x
-        self.rect.y = self.ennemi.rect.y + (self.ennemi.rect.h / 3 )
+        if type_ennemi == 0:
+            self.rect.x = self.ennemi.rect.x
+            self.rect.y = self.ennemi.rect.y + (self.ennemi.rect.h / 3 )
+        elif type_ennemi == 1:
+            self.rect.x = self.ennemi.rect.x
+            self.rect.y = self.ennemi.rect.y + random.randint(0,self.ennemi.rect.h)
 
 
     def remove_ennemi(self):
@@ -157,7 +162,7 @@ class Up_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
 
 
     def move(self):
@@ -172,7 +177,7 @@ class Down_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
 
     def move(self):
         '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
@@ -187,7 +192,7 @@ class Diagonal_down_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
 
     def move(self):
         '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
@@ -204,7 +209,7 @@ class Diagonal_up_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
 
     def move(self):
         '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
@@ -220,7 +225,7 @@ class Sniper_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
         self.velocity = 10
         self.image = pygame.image.load('img/player/projectiles/projectile_neutral.png')
         self.image = pygame.transform.scale(self.image, (25, 25))
@@ -239,7 +244,7 @@ class Glacon_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
 
     def move(self):
         '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
@@ -255,7 +260,7 @@ class Super_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
         self.image = pygame.image.load('img/player/projectiles/projectile_neutral.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
 
@@ -272,7 +277,7 @@ class Back_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
 
     def move(self):
         self.rect.x += self.velocity
@@ -287,7 +292,7 @@ class Back_diagonal_down_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
 
 
     def move(self):
@@ -305,7 +310,7 @@ class Back_diagonal_up_ennemi_projectile(Simple_ennemi_projectile):
     les différences entre cette classe et la classe projectile sont:
     '''
     def __init__(self, ennemi, game):
-        super().__init__(ennemi, game)
+        super().__init__(ennemi, game, 0)
 
     def move(self):
         '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''

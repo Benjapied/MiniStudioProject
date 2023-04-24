@@ -109,6 +109,10 @@ def mainfonction(screen):
         game.distanceScore = int(game.distance/10)
         game.totalScore = game.totalScore + (game.distanceScore - lastDistance)
 
+        if game.distanceScore == 1000 :
+            game.phase = 'boss'
+            game.spawn_boss(screen)
+
         multiplicator = int(game.totalScore/1000)
 
     

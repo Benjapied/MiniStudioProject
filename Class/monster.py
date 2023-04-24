@@ -63,11 +63,11 @@ class Ennemie(pygame.sprite.Sprite):
             self.game.player.damage(10)
 
     def shoot(self):
-        projectile = Simple_ennemi_projectile(self, self.game)
+        projectile = Simple_ennemi_projectile(self, self.game, 0)
         projectile.lunch_projec()
 
     def Vertical_shoot(self):
-        projectile = Simple_ennemi_projectile(self, self.game)
+        projectile = Simple_ennemi_projectile(self, self.game, 0)
         projectile_up = Up_ennemi_projectile(self, self.game)
         projectile_down = Down_ennemi_projectile(self, self.game)
         projectile.lunch_projec()
@@ -75,7 +75,7 @@ class Ennemie(pygame.sprite.Sprite):
         projectile_down.lunch_projec()
 
     def Diagonal_shoot(self):
-        projectile = Simple_ennemi_projectile(self, self.game)
+        projectile = Simple_ennemi_projectile(self, self.game, 0)
         projectile_up = Diagonal_down_ennemi_projectile(self, self.game)
         projectile_down = Diagonal_up_ennemi_projectile(self, self.game)
         projectile.lunch_projec()
@@ -95,7 +95,7 @@ class Ennemie(pygame.sprite.Sprite):
         projectile.lunch_projec()
     
     def Every_shoot(self):
-        projectile = Simple_ennemi_projectile(self, self.game)
+        projectile = Simple_ennemi_projectile(self, self.game, 0)
         projectile_up = Up_ennemi_projectile(self, self.game)
         projectile_down = Down_ennemi_projectile(self, self.game)
         projectile_back =  Back_ennemi_projectile(self, self.game)
