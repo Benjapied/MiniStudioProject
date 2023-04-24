@@ -73,3 +73,10 @@ class Boss (pygame.sprite.Sprite) :
     def bossDemarche (self) :
         '''le boss va avancer jusqu'à sa place'''
         self.rect.x = self.rect.x - 5
+
+    def forward(self):
+        
+
+        if self.game.check_collision(self, self.game.all_players):
+            
+            self.game.player.damage(10)

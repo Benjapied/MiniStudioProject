@@ -5,6 +5,7 @@ def updateGameplayBoss(game, boss, screen):
     game.all_boss.draw(screen)
     for boss in game.all_boss :
         boss.update_hp_bar(screen)
+        boss.forward()
 
     #Pour faire avancer le boss jusqu'à sa position dès qu'il arrive
     if game.mainBoss.rect.x >= 600:
