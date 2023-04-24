@@ -1,4 +1,5 @@
 import pygame
+import sys
 from Function.mainLoop import mainfonction
 from Function.mainMenu import mainMenu
 
@@ -84,6 +85,7 @@ while True :
             for event in pygame.event.get():
                 if event.type == pygame.QUIT :
                     pygame.quit()
+                    sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN :
                     #vérification si la souris touche le bouton
                     if play_button_menu_rect.collidepoint(event.pos):
@@ -99,11 +101,14 @@ while True :
     for event in pygame.event.get():
         if event.type == pygame.QUIT :
             pygame.quit()
+            sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN :
             #vérification si la souris touche le bouton
             if play_button_rect.collidepoint(event.pos):
                 #lancer le jeu
                 is_playing = True
-                
+            if quit_rect.collidepoint(event.pos) :
+                pygame.quit()
+                sys.exit() 
 
     
