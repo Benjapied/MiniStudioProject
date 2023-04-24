@@ -149,11 +149,6 @@ class Simple_ennemi_projectile(pygame.sprite.Sprite):
         '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
         self.game.all_projectiles.add(self)
         
-    def animation (self) :
-        '''Fonction d'animation des projectiles qui pointent vers la gauche'''
-        self.animeStat = int((self.game.clock%self.animationDuration)/self.animationDuration*4) #Définition de l'image à afficher en fonction de la clock du jeu (si vous comprenez pas demandez à peter)
-        self.image = self.listSprite[self.animeStat]    
-
 class Up_ennemi_projectile(Simple_ennemi_projectile):
     '''Class enfant de la classe projectile
     Classe qui créer un objet projectile lancés par les ennemis
@@ -206,6 +201,264 @@ class Down_ennemi_projectile(Simple_ennemi_projectile):
 
         #vérifier si le projectile n'est plus dans l'écran
         if self.rect.y >= 1080:
+            #supprimer le projectile
+            self.remove_ennemi()
+            
+        
+    def lunch_projec(self):
+        '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
+        self.game.all_projectiles.add(self)
+
+class Diagonal_down_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game)
+
+    def remove_ennemi(self):
+        '''retire l'objet de la liste des projectiles'''
+        self.game.all_projectiles.remove(self)
+
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.y += self.velocity
+        self.rect.x -= self.velocity
+        
+
+        #vérifier si le projectile (ennemi) touche le joueur
+        if self.game.check_collision(self, self.game.all_players):
+            self.remove_ennemi()
+            self.game.player.damage(10)
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.y >= 720 or self.rect.x <= 0:
+            #supprimer le projectile
+            self.remove_ennemi()
+            
+        
+    def lunch_projec(self):
+        '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
+        self.game.all_projectiles.add(self)
+
+class Diagonal_up_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game)
+
+    def remove_ennemi(self):
+        '''retire l'objet de la liste des projectiles'''
+        self.game.all_projectiles.remove(self)
+
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.y -= self.velocity
+        self.rect.x -= self.velocity
+
+        #vérifier si le projectile (ennemi) touche le joueur
+        if self.game.check_collision(self, self.game.all_players):
+            self.remove_ennemi()
+            self.game.player.damage(10)
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.y <= 0 or self.rect.x <= 0:
+            #supprimer le projectile
+            self.remove_ennemi()
+            
+        
+    def lunch_projec(self):
+        '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
+        self.game.all_projectiles.add(self)
+
+class Sniper_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game)
+        self.velocity = 10
+        self.image = pygame.image.load('img/player/projectiles/projectile_neutral.png')
+        self.image = pygame.transform.scale(self.image, (25, 25))
+
+    def remove_ennemi(self):
+        '''retire l'objet de la liste des projectiles'''
+        self.game.all_projectiles.remove(self)
+
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.x -= self.velocity
+
+        #vérifier si le projectile (ennemi) touche le joueur
+        if self.game.check_collision(self, self.game.all_players):
+            self.remove_ennemi()
+            self.game.player.damage(10)
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.y <= 0 or self.rect.x <= 0:
+            #supprimer le projectile
+            self.remove_ennemi()
+            
+        
+    def lunch_projec(self):
+        '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
+        self.game.all_projectiles.add(self)
+
+class Glacon_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game)
+
+    def remove_ennemi(self):
+        '''retire l'objet de la liste des projectiles'''
+        self.game.all_projectiles.remove(self)
+
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.x -= self.velocity
+
+        #vérifier si le projectile (ennemi) touche le joueur
+        if self.game.check_collision(self, self.game.all_players):
+            self.remove_ennemi()
+            self.game.player.velocity -= 1
+            print(self.game.player.velocity)
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.y <= 0 or self.rect.x <= 0:
+            #supprimer le projectile
+            self.remove_ennemi()
+            
+        
+    def lunch_projec(self):
+        '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
+        self.game.all_projectiles.add(self)
+
+class Super_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game)
+        self.image = pygame.image.load('img/player/projectiles/projectile_neutral.png')
+        self.image = pygame.transform.scale(self.image, (75, 75))
+
+    def remove_ennemi(self):
+        '''retire l'objet de la liste des projectiles'''
+        self.game.all_projectiles.remove(self)
+
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.x -= self.velocity
+
+        #vérifier si le projectile (ennemi) touche le joueur
+        if self.game.check_collision(self, self.game.all_players):
+            self.remove_ennemi()
+            self.game.player.damage(10)
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.y <= 0 or self.rect.x <= 0:
+            #supprimer le projectile
+            self.remove_ennemi()
+            
+        
+    def lunch_projec(self):
+        '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
+        self.game.all_projectiles.add(self)
+
+class Back_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game)
+
+    def remove_ennemi(self):
+        '''retire l'objet de la liste des projectiles'''
+        self.game.all_projectiles.remove(self)
+
+    def move(self):
+        self.rect.x += self.velocity
+
+        if self.game.check_collision(self, self.game.all_players):
+            self.remove_ennemi()
+            self.game.player.damage(10)
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.y <= 0:
+            #supprimer le projectile
+            self.remove_ennemi()
+            
+        
+    def lunch_projec(self):
+        '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
+        self.game.all_projectiles.add(self)
+
+class Back_diagonal_down_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game)
+
+    def remove_ennemi(self):
+        '''retire l'objet de la liste des projectiles'''
+        self.game.all_projectiles.remove(self)
+
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.y += self.velocity
+        self.rect.x += self.velocity
+        
+
+        #vérifier si le projectile (ennemi) touche le joueur
+        if self.game.check_collision(self, self.game.all_players):
+            self.remove_ennemi()
+            self.game.player.damage(10)
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.y >= 720 or self.rect.x <= 0:
+            #supprimer le projectile
+            self.remove_ennemi()
+            
+        
+    def lunch_projec(self):
+        '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
+        self.game.all_projectiles.add(self)
+
+class Back_diagonal_up_ennemi_projectile(Simple_ennemi_projectile):
+    '''Class enfant de la classe projectile
+    Classe qui créer un objet projectile lancés par les ennemis
+    les différences entre cette classe et la classe projectile sont:
+    '''
+    def __init__(self, ennemi, game):
+        super().__init__(ennemi, game)
+
+    def remove_ennemi(self):
+        '''retire l'objet de la liste des projectiles'''
+        self.game.all_projectiles.remove(self)
+
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.y -= self.velocity
+        self.rect.x += self.velocity
+
+        #vérifier si le projectile (ennemi) touche le joueur
+        if self.game.check_collision(self, self.game.all_players):
+            self.remove_ennemi()
+            self.game.player.damage(10)
+
+        #vérifier si le projectile n'est plus dans l'écran
+        if self.rect.y <= 0 or self.rect.x <= 0:
             #supprimer le projectile
             self.remove_ennemi()
             
