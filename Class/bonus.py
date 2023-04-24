@@ -7,12 +7,12 @@ class Bonus(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         # mise en place des informations 
         self.game = game
-        self.bonus_number = randint (1,1)
+        self.bonus_number = randint (1,2)
         self.text = "img/player/bonus/image_bonus_" + str(self.bonus_number)  # initialisation 
 
         #Image et position
         self.image = pygame.image.load(self.text +".png") # l'image du bonus
-        self.image = pygame.transform.scale(self.image, (32, 32))
+        self.image = pygame.transform.scale(self.image, (45, 45))
         self.rect = self.image.get_rect() #on définit la taille du bonus
         self.rect.x = 1080
         self.rect.y = randint(0,712)
@@ -24,19 +24,20 @@ class Bonus(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
         else:
-            if self.game.player.velocity == 7 :
-                self.remove()
-            else : 
+            if self.bonus_number == 1 and self.game.player.velocity == 7: 
                 self.game.player.all_bonus.add(self)
                 self.game.player.velocity = self.game.player.velocity + 1
-                self.remove()
+            elif self.bonus_number == 2 and self.game.player.shield == False :
+                self.game.player.all_bonus.add(self)
+                self.game.player.shield = True
+            self.remove()
     
     def remove(self):
-        self.game.all_bonus.remove(self)
-        
+        self.game.all_bonus.remove(self)    
 
     def respawn(self):
         if self.rect.x < 0 :
-            self.rect.x = 1000 + randint(0, 300)
-            self.rect.y = randint (10, 500)  
+            self.remove()
+    
+
     

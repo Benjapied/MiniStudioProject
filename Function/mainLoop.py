@@ -44,7 +44,7 @@ def mainfonction(screen):
     FunctionList.append(functionTrigger(game,2000,game.spawn_monster))
     FunctionList.append(functionTrigger(game,4000,game.spawn_obstacle))
     FunctionList.append(functionTrigger(game,4000,game.spawn_monster_special))
-    FunctionList.append(functionTrigger(game,10000,game.spawn_bonus))
+    FunctionList.append(functionTrigger(game,5000,game.spawn_bonus))
 
     ################### Main Loop #####################################
 
@@ -57,10 +57,12 @@ def mainfonction(screen):
             
         #Affichage du fond et du pigeon en animation
         game.player.animation()
+        
         blitage(game,screen,background,imageCount)
 
         updateGameplayNormal(game,screen)
 
+        game.player.shieldVisual(screen)
         if game.phase == 'intro':
             intro(game, screen)
 

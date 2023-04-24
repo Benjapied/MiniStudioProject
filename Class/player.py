@@ -15,6 +15,10 @@ class Player (pygame.sprite.Sprite):
         self.all_bonus = pygame.sprite.Group()
         self.animationDuration = 600 #Le temps de l'animation de vol en mili seconde
 
+        self.shield = False
+        self.shield_image = pygame.image.load('img/player/bonus/shield.png')
+        self.shield_image = pygame.transform.scale(self.shield_image, (90, 90))
+
         #Image et position
         self.animeStat = 0 #Numero du sprite de l'animation
         image = pygame.image.load("img/player/mc/wazo_anim.png")
@@ -76,10 +80,19 @@ class Player (pygame.sprite.Sprite):
 
     def damage(self, amount):
  
+        if self.shield == True :
+            self.shield = False
+            return
+
         if self.hp - amount > amount :
             self.hp -= amount
 
         else :
             self.game.game_over()
         
+    
+    def shieldVisual(self,screen):
+        if self.shield == True:
+            screen.blit(self.shield_image,(self.rect.x,self.rect.y))
+            
     
