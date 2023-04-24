@@ -52,7 +52,11 @@ class Projectile(pygame.sprite.Sprite):
         '''retire l'objet de la liste des projectiles'''
         self.player.all_projectiles.remove(self)
 
-
+    def animation (self) :
+        '''Fonction d'animation des projectiles qui pointent vers la gauche'''
+        self.animeStat = int((self.game.clock%self.animationDuration)/self.animationDuration*4) #Définition de l'image à afficher en fonction de la clock du jeu (si vous comprenez pas demandez à peter)
+        self.image = self.listSprite[self.animeStat]
+        
     def move(self):
         self.rect.x += self.velocity
 
@@ -144,6 +148,11 @@ class Simple_ennemi_projectile(pygame.sprite.Sprite):
     def lunch_projec(self):
         '''Fonction qui crée un projectile ennemi et le place dans la liste des projec ennemis'''
         self.game.all_projectiles.add(self)
+        
+    def animation (self) :
+        '''Fonction d'animation des projectiles qui pointent vers la gauche'''
+        self.animeStat = int((self.game.clock%self.animationDuration)/self.animationDuration*4) #Définition de l'image à afficher en fonction de la clock du jeu (si vous comprenez pas demandez à peter)
+        self.image = self.listSprite[self.animeStat]    
 
 class Up_ennemi_projectile(Simple_ennemi_projectile):
     '''Class enfant de la classe projectile
