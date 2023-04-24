@@ -24,13 +24,16 @@ class Bonus(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
         else:
-            self.game.player.all_bonus.add(self)
-            self.game.player.velocity = self.game.player.velocity + 1
-            self.remove()
+            if self.game.player.velocity == 7 :
+                self.remove()
+            else : 
+                self.game.player.all_bonus.add(self)
+                self.game.player.velocity = self.game.player.velocity + 1
+                self.remove()
     
     def remove(self):
         self.game.all_bonus.remove(self)
-        self.game.spawn_bonus()
+        
 
     def respawn(self):
         if self.rect.x < 0 :
