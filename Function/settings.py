@@ -1,7 +1,7 @@
 import pygame
 from Function.blitage import blitage
 
-def settings (game,screen,background,imageCount) :
+def settings (game,screen,background,imageCount,goBack,goBack_rect) :
   '''Fonction qui ouvre les settings'''
   s = pygame.Surface((1080,720)) 
   s.set_alpha(128)                
@@ -19,6 +19,7 @@ def settings (game,screen,background,imageCount) :
     screen.blit(s, (0,0)) 
     screen.blit(pause, (50,200))
     screen.blit(play_button,((screen.get_width()) / 2,50))
+    screen.blit(goBack, (50,50))
     pygame.display.flip()
 
     for event in pygame.event.get():
@@ -36,3 +37,5 @@ def settings (game,screen,background,imageCount) :
             #vérification si la souris touche le bouton
             if play_rect.collidepoint(event.pos) :
                running = False
+            if goBack_rect.collidepoint(event.pos) :
+                return 

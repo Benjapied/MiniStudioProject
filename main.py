@@ -2,6 +2,7 @@ import pygame
 import sys
 from Function.mainLoop import mainfonction
 from Function.mainMenu import mainMenu
+from Function.collection import collection
 
 pygame.init()
     
@@ -57,6 +58,12 @@ quit_rect = quit_button.get_rect()
 quit_rect.x = ((screen.get_width()) /2) + 50
 quit_rect.y = 500
 
+goBack = pygame.image.load('img/interface/back_arrow.png')
+goBack = pygame.transform.scale(goBack, (50, 50))
+goBack_rect = goBack.get_rect()
+goBack_rect.x = 50
+goBack_rect.y = 50
+
 blackScreen = pygame.Surface(SCREEN_SIZE)               
 blackScreen.fill((0,0,0))
 
@@ -107,6 +114,8 @@ while True :
             if play_button_rect.collidepoint(event.pos):
                 #lancer le jeu
                 is_playing = True
+            if collection_rect.collidepoint(event.pos):
+                collection(screen, blackScreen,quit_button,quit_rect,goBack,goBack_rect)
             if quit_rect.collidepoint(event.pos) :
                 pygame.quit()
                 sys.exit() 

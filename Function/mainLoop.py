@@ -22,6 +22,12 @@ def mainfonction(screen):
 
     game = Game()  #On instancie un objet de la classe Game
     boss = Boss(game)
+
+    goBack = pygame.image.load('img/interface/back_arrow.png')
+    goBack = pygame.transform.scale(goBack, (50, 50))
+    goBack_rect = goBack.get_rect()
+    goBack_rect.x = 50
+    goBack_rect.y = 50
     
     deltaTime = 1
 
@@ -152,7 +158,7 @@ def mainfonction(screen):
                         game.player.launch_special("green")
 
                     if event.key == pygame.K_ESCAPE:
-                        settings(game,screen,background,imageCount)
+                        settings(game,screen,background,imageCount,goBack,goBack_rect)
 
                     if game.pressed.get(pygame.K_m) and game.mainBoss == None :
                         game.phase = 'boss'
