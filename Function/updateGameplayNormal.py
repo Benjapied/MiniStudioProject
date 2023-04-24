@@ -16,9 +16,9 @@ def updateGameplayNormal (game,screen) :
 
     #Projectiles
     for projectile in game.player.all_projectiles:
-        projectile.animation()
+        if projectile.color == "neutral" :
+            projectile.animation()
         projectile.move()
-        projectile.animation()
         #appliquer les images de mon groupe de projectiles
     game.player.all_projectiles.draw(screen)
 
@@ -26,7 +26,6 @@ def updateGameplayNormal (game,screen) :
     for projectile in game.all_projectiles:
         projectile.animation()
         projectile.move()
-        projectile.animation()
     game.all_projectiles.draw(screen)
 
     #Monstres
