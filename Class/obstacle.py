@@ -42,7 +42,7 @@ class Obstacle (pygame.sprite.Sprite):
             self.listSprite.append(self.image.subsurface(54,129,394,292))
             self.listSprite.append(self.image.subsurface(54,426,394,292))
             self.listSprite.append(self.image.subsurface(598,129,370,286))
-            self.listSprite.append(self.image.subsurface(598,426,370,286))
+            self.listSprite.append(pygame.image.load('img/ennemies/obstacles/blue_plane.png'))
             for i in range(4):
                 self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (120,90))
             self.coloral = randint(1,4) # choisit aléatoirement la coloration appliquée à l'obstacle

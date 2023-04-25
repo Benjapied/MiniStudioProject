@@ -17,12 +17,19 @@ class Ennemie(pygame.sprite.Sprite):
 
         #Image et position
         self.animeStat = 0 #Numero du sprite de l'animation
-        image = pygame.image.load("img/ennemies/birds/oiseau_basic.png")
+        tech_bird = random.randint(1,2)
         self.listSprite = [] #Liste qui va contenir toutes les frames de l'animation
-        self.listSprite.append(image.subsurface(56,15,350,350)) #Subsurface va prendre une partie de la sprite sheet
-        self.listSprite.append(image.subsurface(478,27,350,350))
-        self.listSprite.append(image.subsurface(938,23,350,350))
-        for i in range(3):
+        if tech_bird == 1 :
+            image = pygame.image.load("img/ennemies/birds/oiseau_basic.png")
+            self.listSprite.append(image.subsurface(56,15,350,350)) #Subsurface va prendre une partie de la sprite sheet
+            self.listSprite.append(image.subsurface(478,27,350,350))
+            self.listSprite.append(image.subsurface(938,23,350,350))
+        else : 
+            image = pygame.image.load('img/ennemies/birds/ninja.png')
+            self.listSprite.append(image.subsurface(383,161,313,203))
+            self.listSprite.append(image.subsurface(746,138,292,248))
+            self.listSprite.append(image.subsurface(36,162,274,204))
+        for i in range(len(self.listSprite)):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
         self.image = self.listSprite[self.animeStat]
         self.rect = self.image.get_rect()
@@ -156,8 +163,9 @@ class Piomber(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 200 # cadence de l'attaque
         self.att_speed = 200 # cadence max
-
         super().__init__(game)
+        self.image = pygame.image.load('img/ennemies/birds/kamikaze.png')
+        self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.Bombe_shoot
 
 # une classe qui represente un ennemi plus resistant
@@ -170,8 +178,10 @@ class Piank(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 150 # cadence de l'attaque
         self.att_speed = 150 # cadence max 
-
+        
         super().__init__(game)
+        self.image = pygame.image.load('img/ennemies/birds/tank.png')
+        self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.shoot
 
         
@@ -188,8 +198,11 @@ class Piasher(Ennemie) :
         self.velocity = 13
         self.attack_speed = 1000 # cadence de l'attaque
         self.att_speed = 1000 # cadence max
+       
 
         super().__init__(game)
+        self.image = pygame.image.load('img/ennemies/birds/flash.png')
+        self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.shoot
 
         
@@ -206,9 +219,11 @@ class Piafle(Ennemie) :
         self.point = 100
         self.velocity = 3 
         self.attack_speed = 50 # cadence de l'attaque
-        self.att_speed = 50 # cadence max 
+        self.att_speed = 50 # cadence max         
 
         super().__init__(game)
+        self.image = pygame.image.load('img/ennemies/birds/mitrailleur.png')
+        self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.shoot
 
         
@@ -227,6 +242,7 @@ class Piaper(Ennemie) :
         self.att_speed = 200 # cadence max 
 
         super().__init__(game)
+
         self.fire = self.Sniper_shoot
 
         
@@ -244,7 +260,10 @@ class Piacon(Ennemie) :
         self.attack_speed = 100 # cadence de l'attaque
         self.att_speed = 100 # cadence max
         
+
         super().__init__(game)
+        self.image = pygame.image.load('img/ennemies/birds/icy.png')
+        self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.Glacon_shoot
         
 
@@ -262,8 +281,11 @@ class Piapiaf(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 150 # cadence de l'attaque
         self.att_speed = 150 # cadence max 
+        
 
         super().__init__(game)
+        self.image = pygame.image.load('img/ennemies/birds/superpiaf.png')
+        self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.Super_shoot
 
         
@@ -282,6 +304,8 @@ class Piagenieur(Ennemie) :
         self.att_speed = 100 # cadence max 
 
         super().__init__(game)
+        self.image = pygame.image.load('img/ennemies/birds/engineer.png')
+        self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.Vertical_shoot
 
         
@@ -298,8 +322,15 @@ class Piagicien(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 150 # cadence de l'attaque
         self.att_speed = 150 # cadence max
-
+        
         super().__init__(game)
+        image = pygame.image.load('img/ennemies/birds/magicien.png')
+        self.listSprite[0] = image.subsurface(294,128,265,351)
+        self.listSprite[1] = image.subsurface(1078,130,265,351)
+        self.listSprite[2] = image.subsurface(683,128,267,351)
+        for i in range(len(self.listSprite)):
+            self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
+        self.image = self.listSprite[self.animeStat]
         self.fire = self.Diagonal_shoot
 
         
@@ -316,8 +347,14 @@ class Piade(Ennemie) :
         self.velocity = 3 
         self.attack_speed = 150 # cadence de l'attaque
         self.att_speed = 150 # cadence max 
-
+        
         super().__init__(game)
+        image= pygame.image.load('img/ennemies/birds/druide.png')
+        self.listSprite[0] = image.subsurface(1025,318,325,282)
+        self.listSprite[1] = image.subsurface(1551,318,327,282)
+        self.listSprite[2] = image.subsurface(2078,322,326,283)
+        for i in range(len(self.listSprite)):
+            self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
         self.fire = self.Every_shoot
         
         
