@@ -43,7 +43,7 @@ def mainfonction(screen):
 
     FunctionList.append(functionTrigger(game,2000,game.spawn_monster))
     FunctionList.append(functionTrigger(game,4000,game.spawn_obstacle))
-    FunctionList.append(functionTrigger(game,4000,game.spawn_monster_special))
+    FunctionList.append(functionTrigger(game,3500,game.spawn_monster_special))
     FunctionList.append(functionTrigger(game,5000,game.spawn_bonus))
 
     ################### Main Loop #####################################
