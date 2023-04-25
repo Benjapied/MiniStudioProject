@@ -79,16 +79,12 @@ while True :
 
         timer = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
         score = myFont.render("Score: "+str(game.totalScore), 1, (255,255,255))
-        play_button = pygame.transform.scale(play_button, (200, 100))
-        play_button_rect = play_button.get_rect()
-        play_button_rect.x = screen.get_width() /2
-        play_button_rect.y = 50
         while is_playing == False :
             screen.blit(blackScreen, (0,0))
             screen.blit(timer, (200,50))
             screen.blit(score, (200,70))
             screen.blit(banner, (50,100))
-            screen.blit(play_button_menu, ((((screen.get_width()) /2) + 50),50))
+            screen.blit(play_button_menu, ((((screen.get_width()) /2) + 150),50))
             pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT :
