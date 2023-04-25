@@ -1,4 +1,5 @@
 import pygame
+from random import randint
 from Class.projectile import Simple_ennemi_projectile
 
 #création de la classe boss
@@ -12,6 +13,12 @@ class Boss (pygame.sprite.Sprite) :
         self.maxHp = 200
         self.shooting_mode = "normal"
         self.point = 500
+        self.patternNumber = 1
+
+        self.attack1 = 10
+        self.attackSpeed1 = 0.2
+        self.speedAttack1 = 10
+        self.attackSequence = 0
 
         #Image et position
         self.image = pygame.image.load("img/ennemies/boss/bird_boss.png")
@@ -34,32 +41,36 @@ class Boss (pygame.sprite.Sprite) :
         pygame.draw.rect(surface, back_bar_color, back_bar_position)
         pygame.draw.rect(surface, bar_color, bar_position)
         
-
-
-
+    #################### LIste des attaques ########################
     
     def attack_pattern1(self):
-        '''Pattern d'attaque 1'''
-        self.attack1 = 10
-        self.attackSpeed1 = 0.2
-        self.speedAttack1 = 10
-        self.attackSequence = 0
+        randomNumber = randint(1,10)
+        for i in range (10) :
+            if randomNumber != i :
+                projectile = Simple_ennemi_projectile(self, self.game, 0)
+                projectile.rect.y = (720/10)*i
+                projectile.lunch_projec()
+
+    def attack_pattern2(self):
+        randomNumber = randint(1,10)
+        projectile = Simple_ennemi_projectile(self, self.game, 0)
+        projectile.rect.y = (720/10)*randomNumber
+        projectile.lunch_projec()
+
+    ##############################################################
+
         
-        
-        projectile = Simple_ennemi_projectile(self,self.game, 1)#Je crée un missile à partir du boss 
-        projectile.lunch_projec()# et le range dans la liste des projectiles ennemis
     
-    # def attack_pattern2(self):
-    #     self.imageAttack = pygame.image.load("images")
-    #     self.attack2 = 2
-    #     self.attackSpeed2 = 1
-    #     self.speedAttack2 = 30
-    
-    # def attack_pattern3(self):
-    #     self.imageAttack = pygame.image.load("images")
-    #     self.attack3 = 5
-    #     self.attackSpeed3 = 0.5
-    #     self.speedAttack3 = 20
+    def attack_pattern_choice(self):
+        self.patternNumber = randint (1,1)
+
+    def attack_pattern(self,BossAttList1,Dtime):
+        if self.patternNumber == 1:
+            for function in BossAttList1 :
+                function.updateTempClock(Dtime)
+                function.checkTrigger()
+        elif self.patternNumber == 2:
+            self.attack_pattern2()
 
     def damage(self, amount):
         #infliger des dégats
