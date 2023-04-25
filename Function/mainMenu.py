@@ -1,7 +1,8 @@
 import pygame
-
+from pygame import mixer
 
 def mainMenu (screen, back_settings, play_button, collection_button, options_button, quit_button, banner) :
+    mixer.music.stop()
     
     
     screen.blit(back_settings, (0,0))

@@ -1,7 +1,7 @@
 import pygame
 import random
 from Class.projectile import Simple_ennemi_projectile, Up_ennemi_projectile, Down_ennemi_projectile, Diagonal_down_ennemi_projectile, Diagonal_up_ennemi_projectile, Sniper_ennemi_projectile, Glacon_ennemi_projectile, Super_ennemi_projectile, Back_ennemi_projectile, Back_diagonal_up_ennemi_projectile, Back_diagonal_down_ennemi_projectile, Bomber_ennemi_projectile
-
+from pygame import mixer
 
 
 # classe qui gere toute les variable et fonctions de base des ennemi
@@ -67,7 +67,9 @@ class Ennemie(pygame.sprite.Sprite):
             self.attack_speed -= 1
 
         elif self.game.check_collision(self, self.game.all_players):
+           
             self.delete()
+            
             self.game.player.damage(10)
 
     def shoot(self):

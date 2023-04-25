@@ -1,6 +1,6 @@
 import pygame 
 from random import randint
-
+from pygame import mixer
 class Bonus(pygame.sprite.Sprite):
     
     def __init__(self,game):
@@ -24,11 +24,17 @@ class Bonus(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
         else:
-            if self.bonus_number == 1 and self.game.player.velocity < 9: 
+            if self.bonus_number == 1 and self.game.player.velocity < 9:
+                mixer.music.load("sounds/Item2.ogg")
+                mixer.music.set_volume(0.7)
+                mixer.music.play() 
                 
                 self.game.player.all_bonus.add(self)
                 self.game.player.velocity = self.game.player.velocity + 1
             elif self.bonus_number == 2 and self.game.player.shield == False :
+                mixer.music.load("sounds/Item3.ogg")
+                mixer.music.set_volume(0.7)
+                mixer.music.play()
                 self.game.player.all_bonus.add(self)
                 self.game.player.shield = True
             self.remove()
