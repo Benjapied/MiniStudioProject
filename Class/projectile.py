@@ -11,6 +11,7 @@ class Projectile(pygame.sprite.Sprite):
         self.player = player
         self.color = color
         self.animationDuration = 500
+        self.genre = 0
         #Image et position
         self.image = pygame.image.load('img/player/projectiles/vfx.png')
         if self.color == "neutral" :
@@ -34,12 +35,16 @@ class Projectile(pygame.sprite.Sprite):
                 self.listSprite[i] = pygame.transform.scale(self.listSprite[i],(50,10))
             if self.color == "blue" :
                 self.image = self.listSprite[0]
+                self.genre = 1
             elif self.color == "red" :
                 self.image = self.listSprite[1]
+                self.genre = 2
             elif self.color == "green" :
                 self.image = self.listSprite[2]
+                self.genre = 3
             elif self.color == "yellow" :
                 self.image = self.listSprite[3]
+                self.genre = 4
         self.rect = self.image.get_rect()
         self.rect.x = player.rect.x + 85
         self.rect.y = player.rect.y + 30
@@ -82,8 +87,9 @@ class Projectile(pygame.sprite.Sprite):
 
         #vérifier si le projectile touche un ennemi spécial
         for monster in self.game.check_collision(self, self.game.all_monsters_special):
-            self.remove()
-            monster.damage(5)
+            if self.genre == monster.genre : 
+                self.remove()
+                monster.damage(5)
 
         #vérifier si le projectile touche un boss
         for boss in self.game.check_collision(self, self.game.all_boss):

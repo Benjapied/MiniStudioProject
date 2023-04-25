@@ -19,6 +19,7 @@ class Ennemie(pygame.sprite.Sprite):
         self.animeStat = 0 #Numero du sprite de l'animation
         tech_bird = random.randint(1,2)
         self.listSprite = [] #Liste qui va contenir toutes les frames de l'animation
+        self.genre = 1
         if tech_bird == 1 :
             image = pygame.image.load("img/ennemies/birds/oiseau_basic.png")
             self.listSprite.append(image.subsurface(56,15,350,350)) #Subsurface va prendre une partie de la sprite sheet
@@ -147,6 +148,7 @@ class Piaf(Ennemie):
         
         super().__init__(game)
         self.fire = self.shoot
+        self.genre = 0
 
         
         
@@ -167,6 +169,7 @@ class Piomber(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/kamikaze.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.Bombe_shoot
+        self.genre = 2
 
 # une classe qui represente un ennemi plus resistant
 class Piank(Ennemie) : 
@@ -183,6 +186,7 @@ class Piank(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/tank.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.shoot
+        self.genre = 4
 
         
         
@@ -204,6 +208,7 @@ class Piasher(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/flash.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.shoot
+        self.genre = 3
 
         
         
@@ -225,6 +230,7 @@ class Piafle(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/mitrailleur.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.shoot
+        self.genre = 0
 
         
        
@@ -244,6 +250,7 @@ class Piaper(Ennemie) :
         super().__init__(game)
 
         self.fire = self.Sniper_shoot
+        self.genre = 0
 
         
         
@@ -265,6 +272,7 @@ class Piacon(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/icy.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.Glacon_shoot
+        self.genre = 1
         
 
        
@@ -287,6 +295,7 @@ class Piapiaf(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/superpiaf.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.Super_shoot
+        self.genre = 2
 
         
         
@@ -307,6 +316,7 @@ class Piagenieur(Ennemie) :
         self.image = pygame.image.load('img/ennemies/birds/engineer.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.Vertical_shoot
+        self.genre = 4
 
         
         
@@ -332,6 +342,7 @@ class Piagicien(Ennemie) :
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
         self.image = self.listSprite[self.animeStat]
         self.fire = self.Diagonal_shoot
+        self.genre = 3
 
         
         
@@ -356,5 +367,6 @@ class Piade(Ennemie) :
         for i in range(len(self.listSprite)):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
         self.fire = self.Every_shoot
+        self.genre = 0
         
         
