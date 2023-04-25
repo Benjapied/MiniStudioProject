@@ -36,6 +36,7 @@ def mainfonction(screen):
     fpsClock = pygame.time.Clock()
     imageCount = 0 #compteur qui va servir à faire défiler les images
     FunctionList = [] #Liste qui va répertorier les objets functionTrigger
+    BossFunctionList = []
 
     ############# Création des fonctions à faire répéter ###############
     
