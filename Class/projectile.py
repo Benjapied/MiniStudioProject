@@ -79,6 +79,9 @@ class Projectile(pygame.sprite.Sprite):
 
         #vérifier si le projectile touche un projectile ennemi
         for projectile in self.game.check_collision(self,self.game.all_projectiles):
+            mixer.music.load("sounds/Damage2.ogg")
+            mixer.music.set_volume(0.7)
+            mixer.music.play()
             self.remove()
             projectile.remove_ennemi()
 

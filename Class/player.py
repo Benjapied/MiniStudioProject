@@ -68,15 +68,7 @@ class Player (pygame.sprite.Sprite):
         self.image = self.listSprite[self.animeStat]
 
 
-    def contact(self):
-        #vérifier si le projectile touche un ennemni
-        for monster in self.game.check_collision(self, self.game.all_monsters):
-            #self.remove()
-            monster.remove()
-
-        for obstacle in self.game.check_collision(self, self.game.all_obstacles) :
-            #self.
-            obstacle.remove()
+    
 
     def damage(self, amount):
  

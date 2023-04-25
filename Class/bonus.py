@@ -25,6 +25,7 @@ class Bonus(pygame.sprite.Sprite):
             self.rect.x -= self.velocity
         else:
             if self.bonus_number == 1 and self.game.player.velocity < 9: 
+                
                 self.game.player.all_bonus.add(self)
                 self.game.player.velocity = self.game.player.velocity + 1
             elif self.bonus_number == 2 and self.game.player.shield == False :

@@ -154,15 +154,27 @@ def mainfonction(screen):
                         game.player.launch_projectile()
                     
                     if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e): 
+                        mixer.music.load("sounds/Flash2.ogg")
+                        mixer.music.set_volume(0.7)
+                        mixer.music.play()
                         game.player.launch_special("red")
                     
                     if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :
+                        mixer.music.load("sounds/Flash2.ogg")
+                        mixer.music.set_volume(0.7)
+                        mixer.music.play()
                         game.player.launch_special("blue")
 
                     if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) :
+                        mixer.music.load("sounds/Flash2.ogg")
+                        mixer.music.set_volume(0.7)
+                        mixer.music.play()
                         game.player.launch_special("yellow")
 
                     if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) :
+                        mixer.music.load("sounds/Flash2.ogg")
+                        mixer.music.set_volume(0.7)
+                        mixer.music.play()
                         game.player.launch_special("green")
 
                     if event.key == pygame.K_ESCAPE:
