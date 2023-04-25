@@ -165,10 +165,7 @@ class Up_ennemi_projectile(Simple_ennemi_projectile):
         super().__init__(ennemi, game, 0)
 
 
-    def move(self):
-        self.rect.y -= self.velocity
-
-        self.checkRemove()
+  
             
 
 class Down_ennemi_projectile(Simple_ennemi_projectile):
@@ -231,12 +228,6 @@ class Sniper_ennemi_projectile(Simple_ennemi_projectile):
         self.image = pygame.transform.scale(self.image, (25, 25))
         for i in range(4):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (25, 15))
-
-    def move(self):
-        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
-        self.rect.x -= self.velocity
-
-        self.checkRemove()
             
         
 
@@ -248,11 +239,6 @@ class Glacon_ennemi_projectile(Simple_ennemi_projectile):
     def __init__(self, ennemi, game):
         super().__init__(ennemi, game, 0)
 
-    def move(self):
-        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
-        self.rect.x -= self.velocity
-
-        self.checkRemove()
             
         
 
@@ -266,11 +252,7 @@ class Super_ennemi_projectile(Simple_ennemi_projectile):
         for i in range(4):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 45))
 
-    def move(self):
-        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
-        self.rect.x -= self.velocity
 
-        self.checkRemove()
 
 
 class Back_ennemi_projectile(Simple_ennemi_projectile):
@@ -331,10 +313,4 @@ class Bomber_ennemi_projectile(Simple_ennemi_projectile):
         for i in range(4):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (200, 150))
 
-    def move(self):
-        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
-        self.rect.x -= self.velocity
-        print("move ok")
-        self.checkRemove()
-        #self.remove_ennemi()
             

@@ -36,6 +36,8 @@ def mainfonction(screen):
     fpsClock = pygame.time.Clock()
     imageCount = 0 #compteur qui va servir à faire défiler les images
     FunctionList = [] #Liste qui va répertorier les objets functionTrigger
+    BossFunctionList = []
+    BossFunctionListAttack1 = []
 
     ############# Création des fonctions à faire répéter ###############
     
@@ -43,17 +45,20 @@ def mainfonction(screen):
 
     FunctionList.append(functionTrigger(game,2000,game.spawn_monster))
     FunctionList.append(functionTrigger(game,4000,game.spawn_obstacle))
-    FunctionList.append(functionTrigger(game,4000,game.spawn_monster_special))
+    FunctionList.append(functionTrigger(game,3500,game.spawn_monster_special))
     FunctionList.append(functionTrigger(game,5000,game.spawn_bonus))
+
 
     ################### Main Loop #####################################
 
     while game.is_playing :
-        
+    
+
         startTime = pygame.time.get_ticks()
 
         if game.totalScore > 10000 or game.distanceScore == 1000 :
             game.phase = 'boss'
+            game.spawn_boss()
             
         #Affichage du fond et du pigeon en animation
         game.player.animation()
@@ -74,13 +79,12 @@ def mainfonction(screen):
             for obstacle in game.all_obstacles :
              if obstacle.text == "img/ennemies/obstacles/obstacle_turbine.png" :
                   obstacle.animation()
-            
-        
 
-        if game.phase == 'boss':
-            updateGameplayBoss(game, boss, screen)
+        elif game.phase == 'boss' and game.mainBoss :
             
-        if game.phase == 'outro':
+            updateGameplayBoss(game, boss, screen,BossFunctionList,BossFunctionListAttack1,deltaTime,FunctionList)
+     
+        elif game.phase == 'outro':
             outroObj.updateTempClock(deltaTime)
             outro(game,screen,outroObj)
             if outroObj.tempClock > 3000 :
@@ -162,14 +166,14 @@ def mainfonction(screen):
                         game.player.launch_special("green")
 
                     if event.key == pygame.K_ESCAPE:
-                        settings(game,screen,background,imageCount,goBack,goBack_rect)
+                        settings(screen,goBack,goBack_rect,True,imageCount,game,background)
 
                     if game.pressed.get(pygame.K_m) and game.mainBoss == None :
                         game.phase = 'boss'
-                        game.spawn_boss(screen)
+                        game.spawn_boss()
                     
                     if game.pressed.get(pygame.K_o):
-                        game.mainBoss.attack_pattern1()
+                        game.mainBoss.attack_pattern1_1()
 
             elif event.type == pygame.KEYUP:
                     game.pressed[event.key] = False
