@@ -1,5 +1,6 @@
 import pygame
 from Function.blitage import blitage
+from pygame import mixer
 
 def settings (screen,goBack,goBack_rect,is_playing=True,imageCount = 0, game = None, background = None) :
   '''Fonction qui ouvre les settings'''
@@ -7,6 +8,7 @@ def settings (screen,goBack,goBack_rect,is_playing=True,imageCount = 0, game = N
   s.set_alpha(150)                
   s.fill((0,0,0)) 
   pause = pygame.image.load('img/interface/pause.png')
+  
 
   running = True
 

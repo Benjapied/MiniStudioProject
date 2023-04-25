@@ -6,6 +6,7 @@ from Class.bonus import Bonus
 from Class.obstacle import Obstacle
 from Class.boss import Boss
 
+
 class Game (object):
     '''C'est la classe qui stock toutes les infos de la partie
         elle se reset à chaque lancement du programme
@@ -47,6 +48,9 @@ class Game (object):
         
         #stocker les touches activées par le joueur 
         self.pressed = {}
+
+        
+        
 
 
     def check_collision(self, sprite, group):

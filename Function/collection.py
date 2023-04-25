@@ -1,5 +1,6 @@
 import pygame
 import sys
+from pygame import mixer
 
 def collection (screen, blackScreen,quit_button,quit_rect,goBack,goBack_rect) :
     '''Fonction qui indique tous les combots dévérouillés '''
@@ -21,8 +22,12 @@ def collection (screen, blackScreen,quit_button,quit_rect,goBack,goBack_rect) :
             elif event.type == pygame.MOUSEBUTTONDOWN :
                 #vérification si la souris touche le bouton
                 if quit_rect.collidepoint(event.pos) :
+                    
                     pygame.quit()
                     sys.exit() 
                 if goBack_rect.collidepoint(event.pos) :
+                    mixer.music.load("sounds/Cancel2.ogg")
+                    mixer.music.set_volume(0.7)
+                    mixer.music.play()
                     return 
 

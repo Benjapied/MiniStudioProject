@@ -7,7 +7,7 @@ from Function.settings import settings
 from Class.functionTrigger import functionTrigger
 from Function.functions import intro, outro
 from Class.boss import Boss
-
+from pygame import mixer
 def mainfonction(screen):
 
     ################# Définition des variables ########################
@@ -166,7 +166,11 @@ def mainfonction(screen):
                         game.player.launch_special("green")
 
                     if event.key == pygame.K_ESCAPE:
+                        mixer.music.load("sounds/Cancel2.ogg")
+                        mixer.music.set_volume(0.7)
+                        mixer.music.play()
                         settings(screen,goBack,goBack_rect,True,imageCount,game,background)
+                        
 
                     if game.pressed.get(pygame.K_m) and game.mainBoss == None :
                         game.phase = 'boss'

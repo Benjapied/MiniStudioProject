@@ -4,8 +4,10 @@ from Function.mainLoop import mainfonction
 from Function.mainMenu import mainMenu
 from Function.collection import collection
 from Function.settings import settings
+from pygame import mixer
 
 pygame.init()
+mixer.init()
     
 ######################################################################## Fonctions ##################################################################################################################################
 
@@ -77,6 +79,9 @@ is_playing = False
 
 while True :
     if is_playing == True :
+
+        
+        
         game = mainfonction(screen)
         is_playing = False
 
@@ -100,6 +105,7 @@ while True :
                         is_playing = True
 
     else : 
+        
         #Tout ce qu'il y a à afficher dans le menu de démarrage 
         mainMenu(screen, back_settings, play_button, collection_button, options_button, quit_button, banner)
         
