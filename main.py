@@ -3,6 +3,7 @@ import sys
 from Function.mainLoop import mainfonction
 from Function.mainMenu import mainMenu
 from Function.collection import collection
+from Function.settings import settings
 
 pygame.init()
     
@@ -31,31 +32,31 @@ for i in range (6):
 play_button = pygame.image.load('img/interface/jouer.gif')
 play_button = pygame.transform.scale(play_button, (200,100))
 play_button_rect = play_button.get_rect()
-play_button_rect.x = ((screen.get_width()) /2) + 50
+play_button_rect.x = ((screen.get_width()) /2) + 150
 play_button_rect.y = 50
 
 play_button_menu = pygame.image.load('img/interface/button_menu.png')
 play_button_menu = pygame.transform.scale(play_button_menu, (200, 75))
 play_button_menu_rect = play_button_menu.get_rect()
-play_button_menu_rect.x = ((screen.get_width()) /2) + 50
+play_button_menu_rect.x = ((screen.get_width()) /2) + 150
 play_button_menu_rect.y = 50
 
 collection_button = pygame.image.load('img/interface/collection.gif')
 collection_button = pygame.transform.scale(collection_button, (200, 100))
 collection_rect = collection_button.get_rect()
-collection_rect.x = ((screen.get_width()) /2) + 50
+collection_rect.x = ((screen.get_width()) /2) + 150
 collection_rect.y = 200
 
 options_button = pygame.image.load('img/interface/options.gif')
 options_button = pygame.transform.scale(options_button, (200, 100))
 options_rect = collection_button.get_rect()
-options_rect.x = ((screen.get_width()) /2) + 50
+options_rect.x = ((screen.get_width()) /2) + 150
 options_rect.y = 350
 
 quit_button = pygame.image.load('img/interface/quitter.gif')
 quit_button = pygame.transform.scale(quit_button, (200, 100))
 quit_rect = quit_button.get_rect()
-quit_rect.x = ((screen.get_width()) /2) + 50
+quit_rect.x = ((screen.get_width()) /2) + 150
 quit_rect.y = 500
 
 goBack = pygame.image.load('img/interface/back_arrow.png')
@@ -116,6 +117,8 @@ while True :
                 is_playing = True
             if collection_rect.collidepoint(event.pos):
                 collection(screen, blackScreen,quit_button,quit_rect,goBack,goBack_rect)
+            if options_rect.collidepoint(event.pos):
+                settings(screen,goBack,goBack_rect,is_playing)
             if quit_rect.collidepoint(event.pos) :
                 pygame.quit()
                 sys.exit() 

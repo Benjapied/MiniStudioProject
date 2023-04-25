@@ -162,7 +162,7 @@ def mainfonction(screen):
                         game.player.launch_special("green")
 
                     if event.key == pygame.K_ESCAPE:
-                        settings(game,screen,background,imageCount,goBack,goBack_rect)
+                        settings(screen,goBack,goBack_rect,True,imageCount,game,background)
 
                     if game.pressed.get(pygame.K_m) and game.mainBoss == None :
                         game.phase = 'boss'
