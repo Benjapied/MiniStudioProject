@@ -41,6 +41,9 @@ play_button_menu_rect = play_button_menu.get_rect()
 play_button_menu_rect.x = ((screen.get_width()) /2) + 150
 play_button_menu_rect.y = 50
 
+back_settings = pygame.image.load('img/background/fondsup.png')
+back_settings = pygame.transform.scale(back_settings, (1080, 720))
+
 collection_button = pygame.image.load('img/interface/collection.gif')
 collection_button = pygame.transform.scale(collection_button, (200, 100))
 collection_rect = collection_button.get_rect()
@@ -98,7 +101,7 @@ while True :
 
     else : 
         #Tout ce qu'il y a à afficher dans le menu de démarrage 
-        mainMenu(screen, blackScreen, play_button, collection_button, options_button, quit_button, banner)
+        mainMenu(screen, back_settings, play_button, collection_button, options_button, quit_button, banner)
         
     is_playing = False
 
@@ -112,7 +115,7 @@ while True :
                 #lancer le jeu
                 is_playing = True
             if collection_rect.collidepoint(event.pos):
-                collection(screen, blackScreen,quit_button,quit_rect,goBack,goBack_rect)
+                collection(screen, back_settings,quit_button,quit_rect,goBack,goBack_rect)
             if options_rect.collidepoint(event.pos):
                 settings(screen,goBack,goBack_rect,is_playing)
             if quit_rect.collidepoint(event.pos) :
