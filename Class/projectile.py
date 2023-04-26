@@ -102,6 +102,11 @@ class Projectile(pygame.sprite.Sprite):
                 mixer.music.play()
                 self.remove()
                 monster.damage(5)
+            else :
+                mixer.music.load('sounds/Damage2.ogg')
+                mixer.music.set_volume(0.7)
+                mixer.music.play()
+                self.remove()
 
         #vérifier si le projectile touche un boss
         for boss in self.game.check_collision(self, self.game.all_boss):
@@ -335,7 +340,13 @@ class Bomber_ennemi_projectile(Simple_ennemi_projectile):
     '''
     def __init__(self, ennemi, game):
         super().__init__(ennemi, game, 0)
-        for i in range(4):
+        image = pygame.image.load('img/ennemies/birds/explosion.png')
+        self.listSprite = []
+        self.listSprite.append(image.subsurface(98,78,107,128))
+        self.listSprite.append(image.subsurface(81,240,112,122))
+        self.listSprite.append(image.subsurface(84,407,117,114))
+        self.listSprite.append(image.subsurface(93,556,103,138))
+        for i in range(len(self.listSprite)):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (200, 150))
-
+        self.image = self.listSprite[self.animeStat]
             

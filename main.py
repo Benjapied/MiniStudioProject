@@ -87,7 +87,7 @@ while True :
             if game.win == True:
                 text = myFont.render("You Win GG EZ", 1, (255,255,255))
             else :
-                text = myFont.render(" You Loose XD", 1, (255,255,255))
+                text = myFont.render(" You Lose XD", 1, (255,255,255))
 
             screen.blit(blackScreen, (0,0))
             screen.blit(text, ((((screen.get_width()) /2) + 90),180))
