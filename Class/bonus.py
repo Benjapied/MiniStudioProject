@@ -1,6 +1,6 @@
 import pygame 
 from random import randint
-#from pygame import mixer
+from pygame import mixer
 
 class Bonus(pygame.sprite.Sprite):
     
@@ -26,16 +26,16 @@ class Bonus(pygame.sprite.Sprite):
             self.rect.x -= self.velocity
         else:
             if self.bonus_number == 1 and self.game.player.velocity < 9:
-                #mixer.music.load("sounds/Item2.ogg")
-                #mixer.music.set_volume(0.7)
-                #mixer.music.play() 
+                mixer.music.load("sounds/Item2.ogg")
+                mixer.music.set_volume(0.7)
+                mixer.music.play() 
                 
                 self.game.player.all_bonus.add(self)
                 self.game.player.velocity = self.game.player.velocity + 1
             elif self.bonus_number == 2 and self.game.player.shield == False :
-                #mixer.music.load("sounds/Item3.ogg")
-                #mixer.music.set_volume(0.7)
-                #mixer.music.play()
+                mixer.music.load("sounds/Item3.ogg")
+                mixer.music.set_volume(0.7)
+                mixer.music.play()
                 self.game.player.all_bonus.add(self)
                 self.game.player.shield = True
             self.remove()
