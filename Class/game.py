@@ -42,6 +42,7 @@ class Game (object):
         self.distanceScore = 0
         self.totalScore = 0
         self.speed = 3
+        self.win = False
 
         self.phase = 'intro' #Peut etre normal ou boss ou plus si on ajoute d'autres phases
         self.clock = 0 #Timer global du jeu  

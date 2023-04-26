@@ -7,7 +7,7 @@ from Function.settings import settings
 from Class.functionTrigger import functionTrigger
 from Function.functions import intro, outro
 from Class.boss import Boss
-from pygame import mixer
+#from pygame import mixer
 def mainfonction(screen):
 
     ################# Définition des variables ########################
@@ -18,7 +18,7 @@ def mainfonction(screen):
 
     #On génere le cadre pour mettre les infos dedans
     cadre = pygame.image.load('img/interface/frame.png')
-    cadre = pygame.transform.scale(cadre, (120, 50)) 
+    cadre = pygame.transform.scale(cadre, (150, 50)) 
 
     game = Game()  #On instancie un objet de la classe Game
     boss = Boss(game)
@@ -154,33 +154,33 @@ def mainfonction(screen):
                         game.player.launch_projectile()
                     
                     if game.pressed.get(pygame.K_q) and game.pressed.get(pygame.K_e): 
-                        mixer.music.load("sounds/Flash2.ogg")
-                        mixer.music.set_volume(0.7)
-                        mixer.music.play()
+                        #mixer.music.load("sounds/Flash2.ogg")
+                        #mixer.music.set_volume(0.7)
+                        #mixer.music.play()
                         game.player.launch_special("red")
                     
                     if game.pressed.get(pygame.K_z) and game.pressed.get(pygame.K_q) :
-                        mixer.music.load("sounds/Flash2.ogg")
-                        mixer.music.set_volume(0.7)
-                        mixer.music.play()
+                        #mixer.music.load("sounds/Flash2.ogg")
+                        #mixer.music.set_volume(0.7)
+                        #mixer.music.play()
                         game.player.launch_special("blue")
 
                     if game.pressed.get(pygame.K_a) and game.pressed.get(pygame.K_c) :
-                        mixer.music.load("sounds/Flash2.ogg")
-                        mixer.music.set_volume(0.7)
-                        mixer.music.play()
+                        #mixer.music.load("sounds/Flash2.ogg")
+                        #mixer.music.set_volume(0.7)
+                        #mixer.music.play()
                         game.player.launch_special("yellow")
 
                     if game.pressed.get(pygame.K_r) and game.pressed.get(pygame.K_t) :
-                        mixer.music.load("sounds/Flash2.ogg")
-                        mixer.music.set_volume(0.7)
-                        mixer.music.play()
+                        #mixer.music.load("sounds/Flash2.ogg")
+                        #mixer.music.set_volume(0.7)
+                        #mixer.music.play()
                         game.player.launch_special("green")
 
                     if event.key == pygame.K_ESCAPE:
-                        mixer.music.load("sounds/Cancel2.ogg")
-                        mixer.music.set_volume(0.7)
-                        mixer.music.play()
+                        #mixer.music.load("sounds/Cancel2.ogg")
+                        #mixer.music.set_volume(0.7)
+                        #mixer.music.play()
                         settings(screen,goBack,goBack_rect,True,imageCount,game,background)
                         
 

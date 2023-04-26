@@ -4,10 +4,10 @@ from Function.mainLoop import mainfonction
 from Function.mainMenu import mainMenu
 from Function.collection import collection
 from Function.settings import settings
-from pygame import mixer
+#from pygame import mixer
 
 pygame.init()
-mixer.init()
+#mixer.init()
     
 ######################################################################## Fonctions ##################################################################################################################################
 
@@ -17,7 +17,7 @@ SCREEN_SIZE = (1080, 720)
 pygame.display.set_caption("FLY OR DIE: Pigeon's last stand")
 screen = pygame.display.set_mode(SCREEN_SIZE)
 
-myFont = pygame.font.SysFont('arial', 18)
+myFont = pygame.font.SysFont('arial', 58)
 
 #importer charger notre bannière
 banner = pygame.image.load('img/interface/banner.png')
@@ -85,12 +85,18 @@ while True :
         game = mainfonction(screen)
         is_playing = False
 
-        timer = myFont.render("timer: "+str(game.print_clock()), 1, (255,255,255))
-        score = myFont.render("Score: "+str(game.totalScore), 1, (255,255,255))
+        timer = myFont.render("Timer : "+str(game.print_clock()), 1, (255,255,255))
+        score = myFont.render("Score : "+str(game.totalScore), 1, (255,255,255))
         while is_playing == False :
+            if game.win == True:
+                text = myFont.render("You Win GG EZ", 1, (255,255,255))
+            else :
+                text = myFont.render("You Loose XD", 1, (255,255,255))
+
             screen.blit(blackScreen, (0,0))
-            screen.blit(timer, (200,50))
-            screen.blit(score, (200,70))
+            screen.blit(text, ((((screen.get_width()) /2) + 110),180))
+            screen.blit(timer, ((((screen.get_width()) /2) + 110),260))
+            screen.blit(score, ((((screen.get_width()) /2) + 110),340))
             screen.blit(banner, (50,100))
             screen.blit(play_button_menu, ((((screen.get_width()) /2) + 150),50))
             pygame.display.flip()
