@@ -1,6 +1,6 @@
 import pygame
 from Class.projectile import Projectile
-#from pygame import mixer
+from pygame import mixer
 
 class Player (pygame.sprite.Sprite):    
     '''classe qui créer le joueur principal'''
@@ -81,9 +81,9 @@ class Player (pygame.sprite.Sprite):
             self.hp -= amount
 
         else :
-            #mixer.music.load("sounds/Gameover2.ogg")
-            #mixer.music.set_volume(0.7)
-            #mixer.music.play()
+            mixer.music.load("sounds/Gameover2.ogg")
+            mixer.music.set_volume(0.7)
+            mixer.music.play()
             self.game.game_over()
         
     

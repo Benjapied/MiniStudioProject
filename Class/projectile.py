@@ -1,7 +1,7 @@
 import pygame
 import random
-#from pygame import mixer
-#mixer.init()
+from pygame import mixer
+mixer.init()
 
 
 class Projectile(pygame.sprite.Sprite):
@@ -71,17 +71,17 @@ class Projectile(pygame.sprite.Sprite):
 
         #vérifier si le projectile touche un ennemni
         for monster in self.game.check_collision(self, self.game.all_monsters):
-            #mixer.music.load("sounds/Damage1.ogg")
-            #mixer.music.set_volume(0.7)
-            #mixer.music.play()
+            mixer.music.load("sounds/Damage1.ogg")
+            mixer.music.set_volume(0.7)
+            mixer.music.play()
             self.remove()
             monster.damage(5)
 
         #vérifier si le projectile touche un projectile ennemi
         for projectile in self.game.check_collision(self,self.game.all_projectiles):
-            #mixer.music.load("sounds/Damage2.ogg")
-            #mixer.music.set_volume(0.7)
-            #mixer.music.play()
+            mixer.music.load("sounds/Damage2.ogg")
+            mixer.music.set_volume(0.7)
+            mixer.music.play()
             self.remove()
             projectile.remove_ennemi()
 
@@ -97,17 +97,17 @@ class Projectile(pygame.sprite.Sprite):
         #vérifier si le projectile touche un ennemi spécial
         for monster in self.game.check_collision(self, self.game.all_monsters_special):
             if self.genre == monster.genre : 
-                #mixer.music.load("sounds/Damage1.ogg")
-                #mixer.music.set_volume(0.7)
-                #mixer.music.play()
+                mixer.music.load("sounds/Damage1.ogg")
+                mixer.music.set_volume(0.7)
+                mixer.music.play()
                 self.remove()
                 monster.damage(5)
 
         #vérifier si le projectile touche un boss
         for boss in self.game.check_collision(self, self.game.all_boss):
-            #mixer.music.load("sounds/Damage1.ogg")
-            #mixer.music.set_volume(0.7)
-            #mixer.music.play()
+            mixer.music.load("sounds/Damage1.ogg")
+            mixer.music.set_volume(0.7)
+            mixer.music.play()
             self.remove()
             boss.damage(5)
 

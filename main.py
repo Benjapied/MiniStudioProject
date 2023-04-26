@@ -4,10 +4,10 @@ from Function.mainLoop import mainfonction
 from Function.mainMenu import mainMenu
 from Function.collection import collection
 from Function.settings import settings
-#from pygame import mixer
+from pygame import mixer
 
 pygame.init()
-#mixer.init()
+mixer.init()
     
 ######################################################################## Fonctions ##################################################################################################################################
 

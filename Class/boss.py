@@ -1,7 +1,7 @@
 import pygame
 from random import randint
 from Class.projectile import Simple_ennemi_projectile
-#from pygame import mixer
+from pygame import mixer
 
 #création de la classe boss
 class Boss (pygame.sprite.Sprite) :    
@@ -34,11 +34,11 @@ class Boss (pygame.sprite.Sprite) :
         self.game.mainBoss = None
         self.game.all_boss.remove(self)
         
-        #mixer.music.load("sounds/Victory1.ogg")
+        mixer.music.load("sounds/Victory1.ogg")
   
-        #mixer.music.set_volume(0.7)
+        mixer.music.set_volume(0.7)
   
-        #mixer.music.play()
+        mixer.music.play()
 
     def update_hp_bar(self, surface):
         '''Fonction qui modifie la barre de vie du boss'''
