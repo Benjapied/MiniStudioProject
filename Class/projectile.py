@@ -190,6 +190,8 @@ class Up_ennemi_projectile(Simple_ennemi_projectile):
         self.rect.y -= self.velocity
 
         self.checkRemove()
+  
+            
 
 class Down_ennemi_projectile(Simple_ennemi_projectile):
     '''Class enfant de la classe projectile

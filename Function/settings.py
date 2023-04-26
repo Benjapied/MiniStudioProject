@@ -15,7 +15,7 @@ def settings (screen,goBack,goBack_rect,is_playing=True,imageCount = 0, game = N
   myFont = pygame.font.SysFont('arial', 30)
 
   b1 = myFont.render(("Commandes: "), 1, (255,255,255))
-  b2 = myFont.render (("Flèches directionnelles pour le déplacement "), 1, (255,255,255))
+  b2 = myFont.render (("Flèches directionnelles pour le déplacement (← ↑ ↓ →) "), 1, (255,255,255))
   b3 = myFont.render (("Tirer: Espace "), 1, (255,255,255))
   b4 = myFont.render (("Tir rouge: Q + E "), 1, (255,255,255))
   b5 = myFont.render (("Tir bleu: Z + Q "), 1, (255,255,255))
