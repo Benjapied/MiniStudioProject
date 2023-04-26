@@ -125,7 +125,7 @@ class Ennemie(pygame.sprite.Sprite):
     def Bombe_shoot(self):
         projectile = Bomber_ennemi_projectile(self, self.game)
         projectile.lunch_projec()
-        print("bomb ok")
+        #print("bomb ok")
         self.delete()
         
 
@@ -229,7 +229,7 @@ class Piafle(Ennemie) :
         self.att_speed = 50 # cadence max         
 
         super().__init__(game)
-        self.image = pygame.image.load('img/ennemies/birds/mitrailleur.png')
+        self.image = pygame.image.load('img/ennemies/birds/machine_gunner.png')
         self.image = pygame.transform.scale(self.image, (75, 75))
         self.fire = self.shoot
         self.genre = 0
@@ -250,7 +250,8 @@ class Piaper(Ennemie) :
         self.att_speed = 200 # cadence max 
 
         super().__init__(game)
-
+        self.image = pygame.image.load('img/ennemies/birds/sniper.png')
+        self.image = pygame.transform.scale(self.image, (75,75))
         self.fire = self.Sniper_shoot
         self.genre = 0
 
@@ -337,9 +338,10 @@ class Piagicien(Ennemie) :
         
         super().__init__(game)
         image = pygame.image.load('img/ennemies/birds/magicien.png')
-        self.listSprite[0] = image.subsurface(294,128,265,351)
-        self.listSprite[1] = image.subsurface(1078,130,265,351)
-        self.listSprite[2] = image.subsurface(683,128,267,351)
+        self.listSprite = []
+        self.listSprite.append(image.subsurface(294,128,265,351))
+        self.listSprite.append(image.subsurface(1078,130,265,351))
+        self.listSprite.append(image.subsurface(683,128,267,351))
         for i in range(len(self.listSprite)):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
         self.image = self.listSprite[self.animeStat]
@@ -363,11 +365,13 @@ class Piade(Ennemie) :
         
         super().__init__(game)
         image= pygame.image.load('img/ennemies/birds/druide.png')
-        self.listSprite[0] = image.subsurface(1025,318,325,282)
-        self.listSprite[1] = image.subsurface(1551,318,327,282)
-        self.listSprite[2] = image.subsurface(2078,322,326,283)
+        self.listSprite = []
+        self.listSprite.append(image.subsurface(1025,318,325,282))
+        self.listSprite.append(image.subsurface(1551,318,327,282))
+        self.listSprite.append(image.subsurface(2078,322,326,283))
         for i in range(len(self.listSprite)):
             self.listSprite[i] = pygame.transform.scale(self.listSprite[i], (75, 75))
+        self.image = self.listSprite[self.animeStat]
         self.fire = self.Every_shoot
         self.genre = 0
         

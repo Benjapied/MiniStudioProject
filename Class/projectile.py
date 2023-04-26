@@ -185,7 +185,11 @@ class Up_ennemi_projectile(Simple_ennemi_projectile):
     def __init__(self, ennemi, game):
         super().__init__(ennemi, game, 0)
 
+    def move(self):
+        '''Fonction qui fait se déplacer le projectile ennemi vers la gauche (le côté du joueur)'''
+        self.rect.y -= self.velocity
 
+        self.checkRemove()
   
             
 
