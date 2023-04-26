@@ -25,16 +25,14 @@ def intro (game, screen) :
         screen.blit(intro,(400, 300))
 
 
-def outro (game,screen,outroObj) :
+def outro (game,outroObj) :
 
     if game.player.rect.x < 1500:
         game.player.moveRight()
 
-    if outroObj.tempClock > 3000 :
+    if outroObj.tempClock > 1500 :
         game.phase = 'FinalStats'
-    elif outroObj.tempClock > 1500 :
-        outroscreen = pygame.image.load('img/interface/fin.png')
-        outroscreen = pygame.transform.scale(outroscreen, (700, 250))
-        screen.blit(outroscreen,(200,100))
+        game.win = True
+        game.is_playing = False
 
     

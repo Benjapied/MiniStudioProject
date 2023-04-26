@@ -86,7 +86,7 @@ def mainfonction(screen):
      
         elif game.phase == 'outro':
             outroObj.updateTempClock(deltaTime)
-            outro(game,screen,outroObj)
+            outro(game,outroObj)
             if outroObj.tempClock > 3000 :
                 return game
 
